@@ -46,10 +46,9 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
   }
 
-  /* ---------------- quote form: pre-select + submit ---------------- */
-  var form = $('[data-quote-form]');
-  var select = form && form.querySelector('select[name="service_needed"]');
-  var notes = form && form.querySelector('textarea[name="job_notes"]');
+  /* ---------------- quote forms: pre-select + submit ---------------- */
+  var forms = $$('[data-quote-form]');
+  var mainForm = $('#quote [data-quote-form]') || forms[0];
   var SERVICE_KEYS = {
     'lawn-care-programs': 'Lawn Care Programs (Good, Great & Amazing)',
     'lawn-mowing': 'Lawn Mowing & Overgrown Lawn Cuts',
@@ -59,7 +58,9 @@
     'lawn-renovation': 'Lawn Renovation & Aeration',
     'other': 'Other'
   };
-  var preselect = function (label, tier) {
+  var preselect = function (f, label, tier) {
+    var select = f && f.querySelector('select[name="service_needed"]');
+    var notes = f && f.querySelector('textarea[name="job_notes"]');
     if (!select || !label) return;
     for (var i = 0; i < select.options.length; i++) {
       if (select.options[i].text === label) { select.selectedIndex = i; break; }
@@ -67,24 +68,44 @@
     select.dispatchEvent(new Event('change', { bubbles: true }));
     if (tier && notes && !notes.value) notes.value = 'Interested in: ' + tier + '\n';
   };
+  // Scroll-to-form buttons (tier cards, service pages, CTA bands)
   $$('[data-quote]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var target = $('#quote');
       if (!target) return; // falls through to /#quote style link
       e.preventDefault();
-      preselect(a.getAttribute('data-service'), a.getAttribute('data-tier'));
+      preselect(mainForm, a.getAttribute('data-service'), a.getAttribute('data-tier'));
       target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-      var first = form && form.querySelector('input[name="full_name"]');
+      var first = mainForm && mainForm.querySelector('input[name="full_name"]');
       if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, reduce ? 0 : 450);
       if (history.replaceState) history.replaceState(null, '', '#quote');
     });
   });
+  // Pop-up form (header + hero buttons)
+  var modal = $('#quote-modal');
+  var modalForm = modal && modal.querySelector('[data-quote-form]');
+  var openModal = function (service) {
+    if (!modal || typeof modal.showModal !== 'function') { var t = $('#quote'); if (t) t.scrollIntoView(); return; }
+    // carry over the service already chosen on the page, if any
+    var pageSel = mainForm && mainForm.querySelector('select[name="service_needed"]');
+    preselect(modalForm, service || (pageSel && pageSel.value) || '');
+    modal.showModal();
+    var first = modalForm.querySelector('input[name="full_name"]');
+    if (first && window.matchMedia('(min-width: 600px)').matches) first.focus();
+  };
+  $$('[data-quote-modal]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); openModal(a.getAttribute('data-service')); });
+  });
+  if (modal) {
+    $('[data-close-modal]', modal).addEventListener('click', function () { modal.close(); });
+    modal.addEventListener('click', function (e) { if (e.target === modal) modal.close(); });
+  }
   try {
     var qp = new URLSearchParams(location.search).get('service');
-    if (qp && SERVICE_KEYS[qp]) preselect(SERVICE_KEYS[qp]);
+    if (qp && SERVICE_KEYS[qp]) forms.forEach(function (f) { preselect(f, SERVICE_KEYS[qp]); });
   } catch (e) { /* old browsers */ }
 
-  if (form) {
+  forms.forEach(function (form) {
     var validate = function (field) {
       var wrap = field.closest('.field');
       var ok = field.checkValidity();
@@ -107,7 +128,7 @@
       // fields. Give its request a moment to leave before moving to the thank-you page.
       setTimeout(function () { window.location.href = '/thank-you/'; }, 900);
     });
-  }
+  });
 
   /* ---------------- before / after sliders ---------------- */
   $$('.ba-frame').forEach(function (f) {
@@ -266,15 +287,21 @@
     });
     if (!route || !mower) return;
     var L = route.getTotalLength();
-    // distance along the route where the mower reaches each suburb
-    var marks = subs.map(function (g) {
-      var x = +g.getAttribute('data-x'), y = +g.getAttribute('data-y'), best = 0, bd = 1e9;
-      for (var d = 0; d <= L; d += 4) {
-        var p = route.getPointAtLength(d), dd2 = (p.x - x) * (p.x - x) + (p.y - y) * (p.y - y);
-        if (dd2 < bd) { bd = dd2; best = d; }
-      }
-      return { g: g, at: best };
-    });
+    // Sample the route once (a few hundred points) instead of thousands of
+    // getPointAtLength calls per suburb; computed lazily when the map first nears the screen.
+    var marks = null;
+    var computeMarks = function () {
+      var STEP = 6, pts = [];
+      for (var d = 0; d <= L; d += STEP) pts.push(route.getPointAtLength(d));
+      marks = subs.map(function (g) {
+        var x = +g.getAttribute('data-x'), y = +g.getAttribute('data-y'), best = 0, bd = 1e9;
+        for (var i = 0; i < pts.length; i++) {
+          var dd2 = (pts[i].x - x) * (pts[i].x - x) + (pts[i].y - y) * (pts[i].y - y);
+          if (dd2 < bd) { bd = dd2; best = i * STEP; }
+        }
+        return { g: g, at: best };
+      });
+    };
     var place = function (d) {
       var p = route.getPointAtLength(d), q = route.getPointAtLength(Math.min(L, d + 2));
       var a = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI;
@@ -282,7 +309,7 @@
       mower.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + a.toFixed(1) + ') scale(1 ' + flip + ')');
     };
     if (reduce) {
-      marks.forEach(function (m) { if (!m.g.classList.contains('base')) m.g.classList.add('lit'); });
+      subs.forEach(function (g) { if (!g.classList.contains('base')) g.classList.add('lit'); });
       place(0);
       return;
     }
@@ -301,9 +328,9 @@
     };
     var io = new IntersectionObserver(function (en) {
       var vis = en[0].isIntersecting;
-      if (vis && !running) { running = true; start = null; raf = requestAnimationFrame(tick); }
+      if (vis && !running) { if (!marks) computeMarks(); running = true; start = null; raf = requestAnimationFrame(tick); }
       if (!vis && running) { running = false; cancelAnimationFrame(raf); }
-    }, { threshold: .15 });
+    }, { threshold: .15, rootMargin: '200px' });
     io.observe(wrap);
   });
 })();

@@ -1,7 +1,8 @@
 import { SITE } from './data.mjs';
-import { header, footer, esc, businessSchema, breadcrumbSchema } from './ui.mjs';
+import { header, footer, quoteModal, esc, businessSchema, breadcrumbSchema } from './ui.mjs';
 
-// The GHL tracking snippet, exactly as supplied by the client.
+// The GHL tracking snippet, exactly as supplied by the client. Placed at the end of <body>
+// so it doesn't block rendering; it captures form submissions the same way from there.
 const TRACKING = `<script
   src="https://link.msgsndr.com/js/external-tracking.js"
   data-tracking-id="tk_19d668aabd334c46b09cdc8c3191e2a6">
@@ -41,7 +42,6 @@ ${noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="robo
 ${preload}
 <link rel="stylesheet" href="/css/site.css">
 ${graphs.map((g) => `<script type="application/ld+json">${JSON.stringify(g)}</script>`).join('\n')}
-${TRACKING}
 </head>
 <body>
 ${header(path)}
@@ -49,7 +49,9 @@ ${header(path)}
 ${body}
 </main>
 ${footer()}
+${quoteModal()}
 <script src="/js/site.js" defer></script>
+${TRACKING}
 </body>
 </html>
 `;

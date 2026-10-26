@@ -50,6 +50,28 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   ok('Valid submit redirects to /thank-you/', d.url().endsWith('/thank-you/'));
   ok('Thank-you page is noindex', (await d.$eval('meta[name=robots]', (m) => m.content)).includes('noindex'));
 
+  // quote pop-up (header + hero buttons)
+  await d.goto(BASE + '/');
+  await d.click('.nav-actions [data-quote-modal]'); await d.waitForTimeout(400);
+  ok('Header Get a Quote opens pop-up form', await d.$eval('#quote-modal', (x) => x.open));
+  await d.keyboard.press('Escape'); await d.waitForTimeout(200);
+  ok('Pop-up closes on Escape', !(await d.$eval('#quote-modal', (x) => x.open)));
+  await d.click('.hero [data-quote-modal]'); await d.waitForTimeout(400);
+  ok('Hero Get a Free Quote opens pop-up form', await d.$eval('#quote-modal', (x) => x.open));
+  await d.click('#quote-modal [data-close-modal]'); await d.waitForTimeout(200);
+  ok('Pop-up closes on X', !(await d.$eval('#quote-modal', (x) => x.open)));
+  await d.goto(BASE + '/lawn-renovation/');
+  await d.click('.nav-actions [data-quote-modal]'); await d.waitForTimeout(300);
+  ok('Pop-up pre-selects the page service', (await d.$eval('#quote-form-modal select', (s) => s.value)) === 'Lawn Renovation & Aeration');
+  await d.fill('#quote-form-modal [name=full_name]', 'Test'); await d.fill('#quote-form-modal [name=phone]', '0400000000');
+  await d.fill('#quote-form-modal [name=email]', 't@example.com'); await d.fill('#quote-form-modal [name=property_address]', 'Eltham VIC');
+  await Promise.all([d.waitForURL('**/thank-you/', { timeout: 5000 }), d.click('#quote-form-modal button[type=submit]')]);
+  ok('Pop-up submit redirects to /thank-you/', d.url().endsWith('/thank-you/'));
+  // page-ready time: main thread must not be blocked by the map pre-computation
+  await d.goto(BASE + '/');
+  const dcl = await d.evaluate(() => Math.round(performance.getEntriesByType('navigation')[0].domContentLoadedEventEnd));
+  ok('Homepage DOMContentLoaded under 1s (local)', dcl < 1000, dcl + 'ms');
+
   // service-page pre-select on load
   await d.goto(BASE + '/lawn-renovation/');
   ok('Service page form pre-selects its service', (await d.$eval('#quote-form select', (s) => s.value)) === 'Lawn Renovation & Aeration');
@@ -122,9 +144,9 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   await m.waitForTimeout(200);
   const pos = await fr.evaluate((e) => e.style.getPropertyValue('--pos'));
   ok('Before/after slider drags on touch', pos && parseFloat(pos) < 40, pos);
-  await m.tap('.mbar [data-quote]');
-  await m.waitForTimeout(2500);
-  ok('Mobile quote button scrolls to form', await m.$eval('#quote', (e) => { const r = e.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }));
+  await m.tap('.mbar [data-quote-modal]');
+  await m.waitForTimeout(600);
+  ok('Mobile bar quote button opens pop-up', await m.$eval('#quote-modal', (x) => x.open));
   await mc.close();
   await b.close();
 })();

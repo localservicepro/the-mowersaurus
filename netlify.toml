@@ -5,12 +5,24 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Long cache for fingerprint-free but rarely changing assets
+# Rarely-changing assets: cache for a month (images, video) or a year (fonts).
 [[headers]]
   for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+[[headers]]
+  for = "/video/*"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
 [[headers]]
   for = "/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

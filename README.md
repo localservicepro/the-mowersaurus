@@ -1,6 +1,6 @@
 # The Mowersaurus website
 
-Rebuild of themowersaurus.com.au (previously Wix) as a fast static site. No frameworks and no runtime dependencies: `node build.mjs` writes plain HTML to `dist/`.
+Rebuild of themowersaurus.com.au (previously Wix) as a fast static site. No frameworks and no runtime dependencies: `node build.mjs` writes plain HTML to `dist/` (run `npm install` once first; esbuild minifies the CSS and JS at build time).
 
 ## Commands
 
@@ -9,7 +9,7 @@ Rebuild of themowersaurus.com.au (previously Wix) as a fast static site. No fram
 | `node build.mjs` | Builds every page into `dist/`, plus `sitemap.xml`, `robots.txt`, `_redirects` and `vercel.json` |
 | `node scripts/serve.mjs` | Local server on :8080 that applies the 301s like Netlify does |
 | `python3 scripts/process_media.py <raw-folder>` | Re-exports the client photos to WebP (needs Pillow and `scripts/media-sources.local.json`) |
-| `node scripts/check.cjs` | Browser checks: nav, quote form → thank-you, sliders (touch), gallery, lightbox, map, reduced motion |
+| `node scripts/check.cjs` | Browser checks: nav, quote form and pop-up → thank-you, sliders (touch), gallery, lightbox, map, reduced motion, page-ready time |
 | `node scripts/weight.cjs /projects/` | Page weight, first view vs fully scrolled |
 
 The last two need Playwright and a running `serve.mjs`.
@@ -45,6 +45,10 @@ Kept at the same path: `/lawn-mowing`, `/types-of-turf`, `/weed-control`, `/fert
 | `/hedging`, `/gardening-x-landscaping` | `/gardening/` |
 | `/book-online`, `/service-page/*`, `/inquiry-services-page` | `/contact/` |
 | `/terms-conditions` | `/privacy-policy/` |
+
+## Quote forms
+
+Two forms share the same GHL field names: the in-page form (`#quote`, on every page) and a pop-up (`#quote-modal`) opened by the header, hero and mobile-bar "Get a Quote" buttons. Tier cards and service CTAs scroll to the in-page form and pre-select the service; the pop-up pre-selects whatever the page's form has chosen. Both redirect to `/thank-you/` on submit. The GHL tracking script sits at the end of `<body>` so it never blocks rendering.
 
 ## Highlight reel
 

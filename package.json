@@ -9,5 +9,10 @@
     "media": "python3 scripts/process_media.py",
     "serve": "node scripts/serve.mjs"
   },
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
 }

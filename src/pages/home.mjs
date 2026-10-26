@@ -33,7 +33,7 @@ export default function home() {
       <span class="eyebrow">Lawn care · Garden maintenance · Since ${SITE.founded}</span>
       <h1>Lawn Care in Melbourne's North East, Built by Horticulturalists</h1>
       <p class="lead">Looking for lawn care in Melbourne that looks after the whole lawn, not just the mow? Our qualified horticulturalists run all-inclusive lawn and garden programs across the north east, from Watsonia North to Doncaster and Templestowe. You pick the result. We handle the rest.</p>
-      <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote>Get a Free Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
+      <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote-modal>Get a Free Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
       <p class="hero-watch">${reelSoundButton('btn-link-light')}</p>
     </div>
   </div>

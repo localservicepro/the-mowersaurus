@@ -494,3 +494,17 @@ h4{font-size:1.1rem}
 .trust-list strong{display:block;font-size:.98rem;color:var(--green-deep)}
 .trust-list span{font-size:.88rem;color:var(--muted);line-height:1.35}
 @media(max-width:1023px){.hero.solo .wrap{min-height:0;padding-top:24px;padding-bottom:72px}}
+
+/* Quote pop-up */
+.quote-modal{border:0;padding:0;background:transparent;max-width:min(680px,94vw);width:100%;overflow:visible}
+.quote-modal::backdrop{background:rgba(10,20,12,.72);backdrop-filter:blur(3px)}
+.quote-modal .quote-card{max-height:88vh;overflow:auto;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.quote-modal[open]{animation:qm-in .28s ease}
+@keyframes qm-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.qm-close{position:absolute;top:-16px;right:-12px;z-index:2;width:44px;height:44px;border-radius:50%;border:3px solid #fff;background:var(--orange);color:#1B1206;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.qm-close:hover{background:var(--orange-2)}
+@media(max-width:600px){
+  .quote-modal{max-width:100vw;max-height:100dvh;margin:0;height:100dvh}
+  .quote-modal .quote-card{max-height:100dvh;border-radius:0;padding-top:64px}
+  .qm-close{top:12px;right:12px}
+}

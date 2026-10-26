@@ -1,5 +1,6 @@
 // Static site build: node build.mjs → dist/
 import { mkdirSync, writeFileSync, rmSync, cpSync, readFileSync } from 'node:fs';
+import { transformSync } from 'esbuild';
 import { dirname, join } from 'node:path';
 import { layout } from './src/layout.mjs';
 import { SITE } from './src/data.mjs';
@@ -30,6 +31,12 @@ export const REDIRECTS = [
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 cpSync('public', OUT, { recursive: true });
+
+// Minify the hand-written CSS and JS (sources stay readable in public/).
+for (const [file, loader] of [['css/site.css', 'css'], ['js/site.js', 'js']]) {
+  const src = readFileSync(join('public', file), 'utf8');
+  writeFileSync(join(OUT, file), transformSync(src, { loader, minify: true, target: ['es2017'] }).code);
+}
 
 const pages = [home, ...services, ...other].map((fn) => fn());
 for (const p of pages) {

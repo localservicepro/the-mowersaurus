@@ -113,13 +113,13 @@ export function header(path) {
     <nav class="nav-main" aria-label="Main navigation">${links}</nav>
     <div class="nav-actions">
       <a href="${SITE.phoneHref}" class="nav-phone" data-track="call">${icon('phone')}<span class="num">${SITE.phone}</span><span class="sr-only">Call ${SITE.phone}</span></a>
-      <a href="#quote" class="btn btn-primary" data-quote>Get a Quote</a>
+      <a href="#quote" class="btn btn-primary" data-quote-modal>Get a Quote</a>
     </div>
     <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 <nav class="mobile-panel" id="mobile-menu" aria-label="Mobile navigation">${mobile}
-  <a class="btn btn-primary" href="#quote" data-quote>Get a Quote</a>
+  <a class="btn btn-primary" href="#quote" data-quote-modal>Get a Quote</a>
   <a class="btn btn-ghost" href="${SITE.phoneHref}">${icon('phone')} Call ${SITE.phone}</a>
 </nav>`;
 }
@@ -167,17 +167,17 @@ export function footer() {
     <span><a href="/privacy-policy/">Privacy policy</a></span>
   </div>
 </footer>
-<div class="mbar"><a class="btn btn-ghost" href="${SITE.phoneHref}" data-track="call">${icon('phone')}Call</a><a class="btn btn-primary" href="#quote" data-quote>Get a Quote</a></div>`;
+<div class="mbar"><a class="btn btn-ghost" href="${SITE.phoneHref}" data-track="call">${icon('phone')}Call</a><a class="btn btn-primary" href="#quote" data-quote-modal>Get a Quote</a></div>`;
 }
 
 // ------------------------------------------------------------------ quote form
-export function quoteForm({ preselect = '', title = 'Get a free quote', idPrefix = 'q' } = {}) {
+export function quoteForm({ preselect = '', title = 'Get a free quote', idPrefix = 'q', formId = 'quote-form' } = {}) {
   const opts = SERVICE_OPTIONS.map((o) => `<option${o === preselect ? ' selected' : ''}>${esc(o)}</option>`).join('');
   const f = (id) => `${idPrefix}-${id}`;
   return `<div class="quote-card">
   <h2>${title}</h2>
   <p class="note">Tell us about your property and we'll be in touch, usually within 2 hours on business days.</p>
-  <form class="qf" id="quote-form" action="/thank-you/" method="post" novalidate data-quote-form>
+  <form class="qf" id="${formId}" action="/thank-you/" method="post" novalidate data-quote-form>
     <div class="field"><label for="${f('name')}">Name <span class="req">*</span></label><input id="${f('name')}" name="full_name" autocomplete="name" required><p class="err">Please enter your name.</p></div>
     <div class="field"><label for="${f('phone')}">Phone <span class="req">*</span></label><input id="${f('phone')}" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="[0-9 +()-]{8,}"><p class="err">Please enter a phone number we can call.</p></div>
     <div class="field full"><label for="${f('email')}">Email <span class="req">*</span></label><input id="${f('email')}" name="email" type="email" autocomplete="email" required><p class="err">Please enter a valid email.</p></div>
@@ -433,4 +433,14 @@ export function reelSchema() {
   return { '@context': 'https://schema.org', '@type': 'VideoObject', name: REEL.name, description: REEL.description,
     thumbnailUrl: [`${SITE.url}${REEL.poster[1280]}`], uploadDate: REEL.uploadDate, duration: REEL.duration,
     contentUrl: `${SITE.url}${REEL.full.mp4}`, publisher: { '@id': `${SITE.url}/#business` } };
+}
+
+// ------------------------------------------------------------------ quote pop-up
+// One per page, opened by the header / hero "Get a Quote" buttons. Same fields as the
+// in-page form, so the GHL tracking script captures it the same way.
+export function quoteModal() {
+  return `<dialog class="quote-modal" id="quote-modal" aria-labelledby="mq-title">
+  <button type="button" class="qm-close" data-close-modal aria-label="Close">×</button>
+  ${quoteForm({ title: 'Get a free quote', idPrefix: 'mq', formId: 'quote-form-modal' }).replace('<h2>', '<h2 id="mq-title">')}
+</dialog>`;
 }
