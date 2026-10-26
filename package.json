@@ -1,0 +1,13 @@
+{
+  "name": "the-mowersaurus",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The Mowersaurus website: static build, no runtime dependencies.",
+  "scripts": {
+    "build": "node build.mjs",
+    "media": "python3 scripts/process_media.py",
+    "serve": "node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=22" }
+}

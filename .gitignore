@@ -1,0 +1,4 @@
+node_modules/
+dist/
+# maps output images to the client's original file names (contain customer names)
+scripts/media-sources.local.json

@@ -1,0 +1,123 @@
+{
+  "cleanUrls": false,
+  "trailingSlash": true,
+  "outputDirectory": "dist",
+  "buildCommand": "node build.mjs",
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/home/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/copy-of-lawn-mowing",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/copy-of-lawn-mowing/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/copy-of-pressure-washing-x-window-was-1",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/copy-of-pressure-washing-x-window-was-1/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/copy-of-pressure-washing-x-window-was",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/copy-of-pressure-washing-x-window-was/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/hedging",
+      "destination": "/gardening/",
+      "statusCode": 301
+    },
+    {
+      "source": "/hedging/",
+      "destination": "/gardening/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gardening-x-landscaping",
+      "destination": "/gardening/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gardening-x-landscaping/",
+      "destination": "/gardening/",
+      "statusCode": 301
+    },
+    {
+      "source": "/book-online",
+      "destination": "/contact/",
+      "statusCode": 301
+    },
+    {
+      "source": "/book-online/",
+      "destination": "/contact/",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-page/quote-request",
+      "destination": "/contact/",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-page/quote-request/",
+      "destination": "/contact/",
+      "statusCode": 301
+    },
+    {
+      "source": "/service-page/:path*",
+      "destination": "/contact/",
+      "statusCode": 301
+    },
+    {
+      "source": "/inquiry-services-page",
+      "destination": "/contact/",
+      "statusCode": 301
+    },
+    {
+      "source": "/inquiry-services-page/",
+      "destination": "/contact/",
+      "statusCode": 301
+    },
+    {
+      "source": "/terms-conditions",
+      "destination": "/privacy-policy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/terms-conditions/",
+      "destination": "/privacy-policy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blank",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blank/",
+      "destination": "/",
+      "statusCode": 301
+    }
+  ]
+}
