@@ -197,7 +197,14 @@
     if (v) {
       buildLb(); lbList = [];
       $$('.lb-nav', lb).forEach(function (n) { n.hidden = true; });
-      lbBody.innerHTML = '<video controls autoplay playsinline src="' + v.getAttribute('data-video-lightbox') + '"></video>';
+      var vid = document.createElement('video');
+      vid.controls = true; vid.autoplay = true; vid.playsInline = true;
+      var webm = v.getAttribute('data-video-webm');
+      vid.src = (webm && vid.canPlayType('video/webm; codecs="vp9, opus"')) ? webm : v.getAttribute('data-video-lightbox');
+      lbBody.innerHTML = ''; lbBody.appendChild(vid);
+      // pause the silent background loops while the sound version plays
+      $$('video[data-reel-video]').forEach(function (r) { r.pause(); });
+      lb.addEventListener('close', function resume() { lb.removeEventListener('close', resume); $$('video[data-reel-video]').forEach(function (r) { if (r.dataset.visible === '1' && r.src) r.play().catch(function () {}); }); });
       lbCap.textContent = v.getAttribute('data-caption') || '';
       lb.showModal();
     }
@@ -214,6 +221,27 @@
       if (en[0].isIntersecting) { io.disconnect(); load(); }
     }, { rootMargin: '300px' });
     io.observe(v);
+  });
+
+  /* ---------------- highlight reel: silent autoplay loop ---------------- */
+  var saveData = navigator.connection && navigator.connection.saveData;
+  $$('video[data-reel-video]').forEach(function (v) {
+    if (reduce || saveData) return; // poster image stays; "Watch with sound" still works
+    var size = window.matchMedia('(min-width: 768px)').matches ? '720' : '360';
+    var fmt = v.canPlayType('video/webm; codecs="vp9"') ? 'webm' : 'mp4';
+    var load = function () {
+      if (v.src) return;
+      v.src = v.getAttribute('data-' + size + '-' + fmt);
+      v.addEventListener('playing', function () { v.classList.add('playing'); });
+    };
+    var io = 'IntersectionObserver' in window && new IntersectionObserver(function (en) {
+      var on = en[0].isIntersecting;
+      v.dataset.visible = on ? '1' : '0';
+      if (on) { load(); v.play().catch(function () {}); } else if (v.src) { v.pause(); }
+    }, { threshold: 0.2 });
+    // start after the page has loaded so the poster (LCP) isn't held up
+    var start = function () { if (io) io.observe(v); else { load(); v.play().catch(function () {}); } };
+    if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
   });
 
   /* ---------------- reveal on scroll ---------------- */

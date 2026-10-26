@@ -1,4 +1,4 @@
-import { SITE, SERVICES, SERVICE_OPTIONS, SUBURBS, MAP_ROUTE, TIER_SCOPE, LAWN_PRICING, svc } from './data.mjs';
+import { SITE, SERVICES, SERVICE_OPTIONS, SUBURBS, MAP_ROUTE, TIER_SCOPE, LAWN_PRICING, REEL, svc } from './data.mjs';
 import media from './media.json' with { type: 'json' };
 
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -416,4 +416,21 @@ export function faqSchema(items) {
 }
 export function breadcrumbSchema(trail) {
   return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: trail.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, item: `${SITE.url}${t.href}` })) };
+}
+
+// ------------------------------------------------------------------ highlight reel
+// Poster image paints first (LCP); site.js then attaches the right-sized silent loop and
+// autoplays it while on screen. Skipped for reduced motion and Save-Data.
+export function reelMedia({ eager = false, alt = 'The Mowersaurus team mowing, edging and hedge trimming on local jobs' } = {}) {
+  const p = REEL.poster;
+  return `<img class="reel-poster" src="${p[1280]}" srcset="${p[640]} 640w, ${p[1280]} 1280w" sizes="100vw" width="1280" height="720" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+    <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-reel-video
+      data-720-webm="${REEL.loop[720].webm}" data-720-mp4="${REEL.loop[720].mp4}" data-360-webm="${REEL.loop[360].webm}" data-360-mp4="${REEL.loop[360].mp4}"></video>`;
+}
+export const reelSoundButton = (cls = 'btn-light') =>
+  `<button type="button" class="btn ${cls}" data-video-lightbox="${REEL.full.mp4}" data-video-webm="${REEL.full.webm}" data-caption="${esc(REEL.name)}">${icon('play')}Watch with sound</button>`;
+export function reelSchema() {
+  return { '@context': 'https://schema.org', '@type': 'VideoObject', name: REEL.name, description: REEL.description,
+    thumbnailUrl: [`${SITE.url}${REEL.poster[1280]}`], uploadDate: REEL.uploadDate, duration: REEL.duration,
+    contentUrl: `${SITE.url}${REEL.full.mp4}`, publisher: { '@id': `${SITE.url}/#business` } };
 }

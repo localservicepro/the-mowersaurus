@@ -1,18 +1,9 @@
-import { SITE, SERVICES, SUBURBS, svc } from '../data.mjs';
-import { icon, picture, workImg, baSlider, quoteSection, faqBlock, faqSchema, pageHero, related, suburbList, areaMap, ctaBand, esc, grassEdge } from '../ui.mjs';
+import { SITE, SERVICES, SUBURBS, REEL, svc } from '../data.mjs';
+import { icon, picture, workImg, baSlider, quoteSection, faqBlock, faqSchema, pageHero, related, suburbList, areaMap, ctaBand, esc, grassEdge, crumbs, reelMedia, reelSoundButton, reelSchema } from '../ui.mjs';
 import { HOME_FAQ } from './home.mjs';
 import media from '../media.json' with { type: 'json' };
 
 const HOME = { name: 'Home', href: '/' };
-
-// The highlight reel is not built yet: the client's clips could not be transferred.
-// When it exists, fill this in and the page switches from placeholder to the real reel
-// (and emits VideoObject schema).
-export const REEL = null; /* {
-  mp4: '/video/mowersaurus-highlight-reel.mp4', webm: '/video/mowersaurus-highlight-reel.webm',
-  poster: '/video/mowersaurus-highlight-reel-poster.webp', duration: 'PT1M10S', uploadDate: '2026-11-01',
-  clips: [{ mp4, webm, poster, caption }]
-} */
 
 const CATS = [
   ['all', 'All'], ['lawn-programs', 'Lawn Programs'], ['lawn-renovation', 'Lawn Renovation'], ['mowing', 'Mowing'],
@@ -29,27 +20,18 @@ function projects() {
   const items = media.gallery.filter((g) => !g.slug.startsWith('hero')).concat(extra);
   const gallery = items.map((g) => `<figure class="g-item" data-cat="${g.cat}"><button type="button" data-lightbox="${g.img[0].src}" data-caption="${esc(g.alt)}" aria-label="Enlarge photo: ${esc(g.alt)}">${picture(g.img, g.alt, { sizes: '(min-width:1200px) 290px, (min-width:520px) 34vw, 46vw' })}</button><figcaption>${esc(CATS.find((c) => c[0] === g.cat)[1])}${g.suburb ? ` · ${esc(g.suburb)}` : ''}</figcaption></figure>`).join('');
 
-  const reel = REEL
-    ? `<div class="reel" data-reel><video muted loop playsinline preload="none" poster="${REEL.poster}" data-lazy-video><source data-src="${REEL.webm}" type="video/webm"><source data-src="${REEL.mp4}" type="video/mp4"></video>
-        <button class="btn btn-primary play" data-video-lightbox="${REEL.mp4}">${icon('play')}Watch with sound</button></div>`
-    : `<div class="reel"><div class="reel-placeholder"><div>
-        <img src="/img/brand/logo-on-dark.webp" alt="" width="340" height="243" loading="lazy">
-        <span class="pending">Video placeholder: highlight reel in production</span>
-        <p>A 60-second, sound-optional highlight reel of real Mowersaurus jobs (mowing stripes, edging lines, hedges and renovations) will play here.</p>
-        <p class="note" style="color:#B8CDB3">Prefer to talk now? Call <a href="${SITE.phoneHref}" style="color:#fff">${SITE.phone}</a></p>
-      </div></div></div>`;
-
   const body = `
-${pageHero({ trail, h1: 'Our Lawn &amp; Garden Projects', lead: 'Real jobs from across Melbourne\'s north east: lawn programs, renovations, hedging, garden makeovers and commercial grounds. No stock photos.', img: 'lush-front-lawn-great-lawn-program', byline: false })}
-
-<section class="video-band" aria-labelledby="reel-h">
+<section class="reel-hero" aria-labelledby="reel-h">
   <div class="wrap">
-    <span class="eyebrow" style="color:var(--tan)">Highlight reel</span>
-    <h2 id="reel-h">See The Mowersaurus at work</h2>
-    <p class="lead">Stripes going in, edges getting sharp, hedges taking shape, all on real north-east properties.</p>
-    ${reel}
-    ${REEL && REEL.clips ? `<div class="clip-grid">${REEL.clips.map((c) => `<figure class="g-item"><button type="button" data-video-lightbox="${c.mp4}" data-caption="${esc(c.caption)}"><img src="${c.poster}" alt="${esc(c.caption)}" loading="lazy"></button><figcaption>${esc(c.caption)}</figcaption></figure>`).join('')}</div>` : ''}
+    ${crumbs(trail)}
+    <h1 id="reel-h">Our Lawn &amp; Garden Projects</h1>
+    <p class="lead">Real jobs from across Melbourne's north east: lawn programs, renovations, hedging, garden makeovers and commercial grounds. No stock photos. Here's the team at work.</p>
+    <div class="reel reel-main">
+      ${reelMedia({ eager: true })}
+      <div class="reel-actions">${reelSoundButton('btn-primary')}</div>
+    </div>
   </div>
+  <div class="hero-edge">${grassEdge('#fff')}</div>
 </section>
 
 <section class="section" aria-labelledby="ba-h">
@@ -73,8 +55,8 @@ ${pageHero({ trail, h1: 'Our Lawn &amp; Garden Projects', lead: 'Real jobs from 
 ${ctaBand({ heading: 'Want results like these?', text: 'Get a free quote for your lawn or garden, or call us to talk it through.' })}
 ${quoteSection({ heading: 'Start your own before &amp; after' })}
 `;
-  const schema = REEL ? [{ '@context': 'https://schema.org', '@type': 'VideoObject', name: 'The Mowersaurus highlight reel', description: 'Real lawn and garden jobs across Melbourne\'s north east: mowing stripes, edging, hedging, renovations and finished lawns.', thumbnailUrl: [`${SITE.url}${REEL.poster}`], uploadDate: REEL.uploadDate, duration: REEL.duration, contentUrl: `${SITE.url}${REEL.mp4}` }] : [];
-  return { path: '/projects/', title: 'Lawn & Garden Projects | Before & After | The Mowersaurus', description: 'Real before & after lawn and garden projects across Melbourne\'s north east: lawn programs, renovations, hedging, mulching & commercial grounds.', body, trail, schema };
+  const schema = [reelSchema()];
+  return { preload: `<link rel="preload" as="image" href="${REEL.poster[1280]}" imagesrcset="${REEL.poster[640]} 640w, ${REEL.poster[1280]} 1280w" imagesizes="100vw" fetchpriority="high">`, path: '/projects/', title: 'Lawn & Garden Projects | Before & After | The Mowersaurus', description: 'Real before & after lawn and garden projects across Melbourne\'s north east: lawn programs, renovations, hedging, mulching & commercial grounds.', body, trail, schema };
 }
 
 // ------------------------------------------------------------------ service areas

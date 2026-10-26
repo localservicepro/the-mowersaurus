@@ -123,3 +123,18 @@ export const TIER_SCOPE = {
 
 // Indicative monthly pricing published on the client's current site (350 m² average lawn).
 export const LAWN_PRICING = { good: '$300 – $350', great: '$375 – $425', amazing: '$650 – $700' };
+
+// Highlight reel supplied by the client (house numbers blurred at 0:15–0:21).
+// loop = silent autoplay versions for heroes; full = with sound, loaded only on "Watch with sound".
+export const REEL = {
+  name: 'The Mowersaurus highlight reel',
+  description: "Real Mowersaurus jobs in Melbourne's north east: mowing, edging, weed spraying, hedge trimming and a wave from the team.",
+  duration: 'PT22S',
+  uploadDate: '2026-10-26',
+  poster: { 1280: '/video/mowersaurus-reel-poster-1280.webp', 640: '/video/mowersaurus-reel-poster-640.webp' },
+  loop: {
+    720: { webm: '/video/mowersaurus-reel-loop-720.webm', mp4: '/video/mowersaurus-reel-loop-720.mp4' },
+    360: { webm: '/video/mowersaurus-reel-loop-360.webm', mp4: '/video/mowersaurus-reel-loop-360.mp4' },
+  },
+  full: { webm: '/video/mowersaurus-highlight-reel.webm', mp4: '/video/mowersaurus-highlight-reel.mp4' },
+};

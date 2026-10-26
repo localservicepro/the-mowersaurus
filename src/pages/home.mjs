@@ -1,6 +1,6 @@
-import { SITE, SERVICES, svc } from '../data.mjs';
+import { SITE, SERVICES, REEL, svc } from '../data.mjs';
 import { layout } from '../layout.mjs';
-import { icon, picture, work, workImg, baSlider, quoteForm, tierSection, areaMap, suburbList, faqBlock, faqSchema, ctaBand, grassEdge, esc } from '../ui.mjs';
+import { icon, picture, work, workImg, baSlider, quoteForm, tierSection, areaMap, suburbList, faqBlock, faqSchema, ctaBand, grassEdge, esc, reelMedia, reelSoundButton, reelSchema } from '../ui.mjs';
 import media from '../media.json' with { type: 'json' };
 
 export const HOME_FAQ = [
@@ -26,14 +26,15 @@ export default function home() {
   const cardImg = { 'lawn-mowing': 'front-lawn-mow-and-edge-in-progress', 'gardening': 'front-lawn-and-clipped-hedge', 'mulching-landscaping': 'mulched-garden-beds-front-lawn-rosanna', 'lawn-renovation': 'dethatching-backyard-lawn-renovation' };
 
   const body = `
-<section class="hero">
-  <div class="hero-media">${picture(hero.img, hero.alt, { sizes: '100vw', eager: true })}</div>
+<section class="hero has-reel">
+  <div class="hero-media">${reelMedia({ eager: true })}</div>
   <div class="wrap">
     <div>
       <span class="eyebrow">Lawn care · Garden maintenance · Since ${SITE.founded}</span>
       <h1>Lawn Care in Melbourne's North East, Built by Horticulturalists</h1>
       <p class="lead">Looking for lawn care in Melbourne that looks after the whole lawn, not just the mow? Our qualified horticulturalists run all-inclusive lawn and garden programs across the north east, from Watsonia North to Doncaster and Templestowe. You pick the result. We handle the rest.</p>
       <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote>Get a Free Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
+      <p class="hero-watch">${reelSoundButton('btn-link-light')}</p>
       <ul class="trust">
         <li>${icon('cap')}Qualified horticulturalists</li>
         <li>${icon('shield')}Fully insured</li>
@@ -91,13 +92,17 @@ export default function home() {
       ${baSlider('backyard-lawn-transformation-mill-park')}
     </div>
     <div class="reel teaser" style="margin-top:36px">
-      <div class="reel-placeholder">
+      <div class="teaser-video">
         <div>
-          <span class="pending">Highlight reel coming soon</span>
-          <p style="font-family:var(--head);font-size:1.6rem;color:#fff">Stripes, edges, hedges and big transformations</p>
-          <p>Our job-site highlight reel is on its way. In the meantime, browse the full project gallery.</p>
-          <a class="btn btn-light" href="/projects/" style="margin-top:12px">See our work</a>
+          <span class="eyebrow" style="color:var(--tan)">Highlight reel</span>
+          <p style="font-family:var(--head);font-size:1.7rem;color:#fff;line-height:1.15;margin:0 0 10px">Stripes, edges, hedges and a wave from the team</p>
+          <p style="color:#D6E6D1">22 seconds of real Mowersaurus jobs. Turn the sound on.</p>
+          <a class="btn btn-light" href="/projects/">See all our projects</a>
         </div>
+        <button type="button" class="reel-tile" data-video-lightbox="${REEL.full.mp4}" data-video-webm="${REEL.full.webm}" data-caption="${esc(REEL.name)}" aria-label="Play the highlight reel with sound">
+          <img src="${REEL.poster[640]}" srcset="${REEL.poster[640]} 640w, ${REEL.poster[1280]} 1280w" sizes="(min-width:900px) 560px, 100vw" width="1280" height="720" alt="" loading="lazy">
+          <span class="play-badge">${icon("play")}</span>
+        </button>
       </div>
     </div>
   </div>
@@ -165,7 +170,7 @@ ${ctaBand({ heading: 'Want a lawn like these?', text: `Get a free quote from a q
     title: 'Lawn Care Melbourne North East | The Mowersaurus',
     description: 'Lawn care Melbourne homeowners rate 9/10. Horticulturalist-run lawn & garden programs from Watsonia North to Doncaster & Templestowe. Get a free quote.',
     body,
-    schema: [faqSchema(HOME_FAQ)],
-    preload: `<link rel="preload" as="image" href="${hero.img[1].src}" imagesrcset="${hero.img.map((s) => `${s.src} ${s.w}w`).join(', ')}" imagesizes="100vw" fetchpriority="high">`,
+    schema: [faqSchema(HOME_FAQ), reelSchema()],
+    preload: `<link rel="preload" as="image" href="${REEL.poster[1280]}" imagesrcset="${REEL.poster[640]} 640w, ${REEL.poster[1280]} 1280w" imagesizes="100vw" fetchpriority="high">`,
   };
 }

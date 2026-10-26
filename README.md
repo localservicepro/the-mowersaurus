@@ -46,6 +46,15 @@ Kept at the same path: `/lawn-mowing`, `/types-of-turf`, `/weed-control`, `/fert
 | `/book-online`, `/service-page/*`, `/inquiry-services-page` | `/contact/` |
 | `/terms-conditions` | `/privacy-policy/` |
 
+## Highlight reel
+
+`public/video/` holds the client-supplied 22-second reel, configured as `REEL` in `src/data.mjs`. House numbers visible at 0:15–0:21 are blurred.
+
+- **Silent loops** (`*-loop-720` and `*-loop-360`, WebM and MP4) autoplay in the homepage hero and the Projects hero. They load after the page does, only while on screen, and never under reduced motion or Save-Data.
+- **The full version with sound** (`mowersaurus-highlight-reel.*`) loads only when someone presses "Watch with sound".
+- **The poster frame** paints first.
+- The Projects page carries VideoObject schema.
+
 ## Privacy rules baked into the build
 
 - No street address anywhere. Schema is a service-area business (`Watsonia North VIC 3087`, no `streetAddress`, no `geo`).
@@ -54,7 +63,7 @@ Kept at the same path: `/lawn-mowing`, `/types-of-turf`, `/weed-control`, `/fert
 
 ## Open items
 
-- **Highlight reel:** the client clips are 29–180 MB and couldn't be transferred into the build environment. `/projects/` shows a marked placeholder. To switch it on, fill in `REEL` in `src/pages/other.mjs`, which also enables the VideoObject schema.
+- **More video clips:** the individual raw clips in Drive (29–180 MB) are still untransferred. The site currently uses the 22-second highlight reel supplied separately.
 - **Per-tier inclusions:** marked "Awaiting client confirmation" on every tier card.
 - **Indicative pricing** ($300–$700/month for 350 m²) is copied from the current site and needs the client's confirmation.
 - **Privacy policy:** a draft for client review.
