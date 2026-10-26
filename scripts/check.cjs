@@ -125,8 +125,11 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   await m.goto(BASE + '/');
   const heroFit = await m.evaluate(() => { const r = document.querySelector('.hero .lead').getBoundingClientRect(); const h = document.querySelector('.hero h1').getBoundingClientRect(); return { h1Top: Math.round(h.top), leadBottom: Math.round(r.bottom), vh: innerHeight }; });
   ok('Mobile hero: H1 and lead visible on first screen', heroFit.h1Top >= 0 && heroFit.leadBottom <= heroFit.vh, JSON.stringify(heroFit));
-  ok('Mobile sticky call/quote bar visible', await m.$eval('.mbar', (e) => getComputedStyle(e).display !== 'none' && getComputedStyle(e).position === 'fixed'));
-  ok('Mobile bar call link', (await m.$eval('.mbar a[href^="tel:"]', (a) => a.href)) === 'tel:+61459960501');
+  ok('No sticky bottom bar on mobile', !(await m.$('.mbar')));
+  ok('Mobile header shows call button', await m.$eval('.nav-actions .nav-phone', (a) => a.href === 'tel:+61459960501' && a.getBoundingClientRect().width > 0));
+  ok('Mobile header shows Get a Quote', await m.$eval('.nav-actions [data-quote-modal]', (a) => a.getBoundingClientRect().width > 0));
+  ok('Hero buttons side by side on mobile', await m.evaluate(() => { const [a, b] = document.querySelectorAll('.hero .btn-row .btn'); return Math.abs(a.getBoundingClientRect().top - b.getBoundingClientRect().top) < 2; }));
+  ok('Mobile hero: buttons visible on first screen too', await m.evaluate(() => document.querySelector('.hero .btn-row').getBoundingClientRect().bottom <= innerHeight));
   ok('No horizontal scroll on mobile', await m.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   await m.tap('.nav-burger');
   await m.waitForTimeout(400);
@@ -146,9 +149,9 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   await m.waitForTimeout(200);
   const pos = await fr.evaluate((e) => e.style.getPropertyValue('--pos'));
   ok('Before/after slider drags on touch', pos && parseFloat(pos) < 40, pos);
-  await m.tap('.mbar [data-quote-modal]');
+  await m.tap('.nav-actions [data-quote-modal]');
   await m.waitForTimeout(600);
-  ok('Mobile bar quote button opens pop-up', await m.$eval('#quote-modal', (x) => x.open));
+  ok('Mobile header quote button opens pop-up', await m.$eval('#quote-modal', (x) => x.open));
   await mc.close();
   await b.close();
 })();

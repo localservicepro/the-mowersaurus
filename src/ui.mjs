@@ -166,8 +166,7 @@ export function footer() {
     <span>© ${new Date().getFullYear()} The Mowersaurus · ABN ${SITE.abn}</span>
     <span><a href="/privacy-policy/">Privacy policy</a></span>
   </div>
-</footer>
-<div class="mbar"><a class="btn btn-ghost" href="${SITE.phoneHref}" data-track="call">${icon('phone')}Call</a><a class="btn btn-primary" href="#quote" data-quote-modal>Get a Quote</a></div>`;
+</footer>`;
 }
 
 // ------------------------------------------------------------------ quote form
