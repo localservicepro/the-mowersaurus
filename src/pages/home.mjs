@@ -7,13 +7,13 @@ export const HOME_FAQ = [
   ['How much does lawn care cost in Melbourne\'s north east?',
     '<p>Every property is quoted on its size, condition and access. As a guide, our indicative pricing for an average 350 m² lawn is around <strong>$300–$350 a month</strong> on the Good Lawn Program, <strong>$375–$425</strong> on the Great Lawn Program and <strong>$650–$700</strong> on the Amazing Lawn Program. <a href="#quote">Request a quote</a> for an exact figure for your place.</p>'],
   ['What\'s the difference between the Good, Great and Amazing lawn programs?',
-    '<p>All three are all-inclusive lawn care programs. The difference is the result you want. <strong>Good</strong> keeps a lawn at a healthy, tidy 7/10 on a sensible budget. <strong>Great</strong> is our specialty, a 9/10 lawn for house-proud homeowners. <strong>Amazing</strong> is golf-course quality, which we jokingly call a "12 out of 10". The higher the level, the more attention and treatment your lawn gets through the year.</p>'],
+    '<p>Each one is an all-inclusive lawn care program. The difference is the result you want. <strong>Good</strong> keeps a lawn at a healthy, tidy 7/10 on a sensible budget. <strong>Great</strong> is our specialty, a 9/10 lawn for house-proud homeowners. <strong>Amazing</strong> is golf-course quality, which we jokingly call a "12 out of 10". The higher the level, the more attention and treatment your lawn gets through the year.</p>'],
   ['Do you service Doncaster, Templestowe and Lower Templestowe?',
     '<p>Yes. Lower Templestowe, Templestowe, Doncaster East and Doncaster are some of our busiest suburbs for lawn care in Melbourne\'s north east, alongside the rest of Melbourne\'s north east, from Epping and Mill Park through to Eltham, Diamond Creek and Rosanna. See every suburb on our <a href="/service-areas/">service areas</a> page.</p>'],
   ['When is the best time to renovate a lawn in Melbourne?',
     '<p>For the warm-season grasses most Melbourne homes have (couch, kikuyu, buffalo and zoysia), the best window is mid-spring into early summer, once the lawn is actively growing and can recover quickly. We don\'t renovate in winter, when the grass is dormant. Read more about <a href="/lawn-renovation/">lawn renovation</a>.</p>'],
   ['Can I combine a lawn program with a garden maintenance program in Eltham or Greensborough?',
-    '<p>Absolutely, and lots of our clients do. Lawn and garden programs are chosen separately, so you can mix and match levels. A popular combination is the Great Lawn Program with the Good Garden Program. This works anywhere we service, including Eltham and Greensborough.</p>'],
+    '<p>Absolutely, and lots of our clients do. A lawn care program and a garden maintenance program are chosen separately, so you can mix and match levels. A popular combination is the Great Lawn Program with the Good Garden Program. This works anywhere we service, including Eltham and Greensborough.</p>'],
   ['Do you look after commercial and body corporate gardens in Doncaster?',
     '<p>Yes. We\'re fully insured and maintain commercial, strata and body corporate grounds as well as homes, in Doncaster and right across our service area. Our programs suit commercial sites well because the grounds are looked after on a schedule without anyone needing to chase it.</p>'],
 ];
@@ -141,7 +141,7 @@ export default function home() {
         <span class="eyebrow">Service areas</span>
         <h2 id="areas-h">Lawn care across Melbourne's north east</h2>
       </div>
-      <p class="lead">From our base in Watsonia North we provide lawn care in Melbourne's north east across roughly a 10 km radius, with regular rounds through Lower Templestowe, Templestowe, Doncaster East and Doncaster. Watch the mower do its rounds.</p>
+      <p class="lead">From our base in Watsonia North we provide lawn care in Melbourne's north east across roughly a 10 km radius, with regular rounds through Lower Templestowe, Templestowe, Doncaster East and Doncaster, and lawn mowing in Epping, Mill Park and South Morang to the north. Watch the mower do its rounds.</p>
     </div>
     <div style="margin-top:28px">${areaPanel()}</div>
     <p style="margin-top:22px"><a class="link-arrow" href="/service-areas/">View all service areas</a></p>

@@ -67,7 +67,7 @@ function areas() {
 ${pageHero({ trail, h1: 'Lawn Care &amp; Garden Maintenance Service Areas', lead: 'Based in Watsonia North and working within about a 10 km radius across Melbourne\'s north east.', img: 'nature-strip-mowing-eltham', byline: false })}
 <section class="section"><div class="wrap">
   ${areaPanel({ listHeading: 'Suburbs we service' })}
-  <p class="note" style="margin-top:14px">Listed in order of where we're busiest. Orange marks our priority suburbs.</p>
+  <p class="note" style="margin-top:14px">Listed in order of where we're busiest. Orange marks our priority suburbs. Lawn programs are busiest in Templestowe, Lower Templestowe and Doncaster; lawn mowing in Epping, Mill Park and South Morang; garden maintenance in Eltham and Montmorency.</p>
   <div class="grid-2 top" style="margin-top:48px">
     <div>
       <h2>Local lawn care pages</h2>
@@ -140,22 +140,22 @@ const lowerTemplestowe = () => suburbPage({
 
 const doncaster = () => suburbPage({
   name: 'Doncaster', path: '/service-areas/doncaster/',
-  title: 'Lawn Care Doncaster | Garden Maintenance | The Mowersaurus',
-  description: 'Lawn care, lawn mowing, garden maintenance & landscaping in Doncaster by qualified horticulturalists. Homes, townhouses & commercial. Free quote.',
-  h1: 'Lawn Care &amp; Garden Maintenance in Doncaster',
+  title: 'Landscaping & Lawn Care Doncaster | The Mowersaurus',
+  description: 'Landscaping Doncaster, lawn mowing & garden maintenance in Doncaster by qualified horticulturalists. Homes, townhouses & commercial. Free quote.',
+  h1: 'Lawn Care, Garden Maintenance &amp; Landscaping in Doncaster',
   lead: 'From family homes to townhouse courtyards and commercial grounds, we keep Doncaster lawns and gardens in top shape.',
   heroImg: 'commercial-lawn-maintenance-doncaster', eyebrow: 'Lawn care Doncaster',
   h2: 'Big blocks, small courtyards, and everything between',
   copy: `<p>Doncaster has changed a lot. Established family homes with big front lawns now sit alongside subdivided blocks, townhouses with compact courtyard gardens, and apartments and commercial sites around Doncaster Hill. We look after all of them.</p>
 <p>For houses with a proper lawn, our <a href="/lawn-care-programs/">lawn care programs</a> handle everything: lawn mowing in Doncaster, edging, fertilising, weed and grub control and soil amendments, on a schedule. For smaller townhouse gardens, a <a href="/garden-maintenance-programs/">garden maintenance program</a> keeps hedges, beds and courtyard lawns neat without you lifting a finger.</p>
-<p>We also take on landscaping in Doncaster, from fresh mulch and new garden beds to planting and footpaths through our <a href="/mulching-landscaping/">mulching and small landscaping</a> service. For one-off jobs, our <a href="/gardening/">gardeners</a> handle weeding, pruning and hedge trimming.</p>
+<p>We also take on landscaping in Doncaster, from fresh mulch and new garden beds to planting and footpaths, through our <a href="/mulching-landscaping/">mulching and small landscaping</a> service. Small landscaping in Doncaster is a good fit for the newer townhouse blocks, where a tidy, low-maintenance garden adds a lot. For one-off jobs, our <a href="/gardening/">gardeners</a> handle weeding, pruning and hedge trimming, and we offer regular garden maintenance in Doncaster for anyone who'd rather not think about it.</p>
 <p>We're fully insured and maintain commercial and body corporate grounds in Doncaster too. Our commercial clients like that the grounds simply stay looked after, without needing to be chased.</p>`,
   pair: 'commercial-grounds-tidy-up-doncaster',
   popular: [['lawn-care-programs', 'all-inclusive lawn care'], ['garden-maintenance-programs', 'townhouse & body corporate gardens'], ['mulching-landscaping', 'mulch, planting & paths']],
   nearby: 'We also service <a href="/service-areas/doncaster-east/">Doncaster East</a>, <a href="/service-areas/lower-templestowe/">Lower Templestowe</a>, <a href="/lawn-care-programs/">Templestowe</a> and the wider north east.',
   faqs: [
     ['Do you maintain body corporate gardens in Doncaster?', '<p>Yes. We\'re fully insured and maintain strata, body corporate and commercial grounds on a regular schedule.</p>'],
-    ['Do you mow small townhouse lawns?', '<p>Yes. Small lawns and courtyards are a big part of what we do in Doncaster, often as part of a garden program.</p>'],
+    ['Do you mow small townhouse lawns?', '<p>Yes. Lawn mowing in Doncaster covers everything from big family front lawns to small courtyards, often as part of a garden program.</p>'],
     ['Do you do landscaping in Doncaster?', '<p>We do small landscaping: mulching, planting, garden bed rejuvenation and footpaths.</p>'],
   ],
 });
@@ -287,7 +287,7 @@ const turf = () => tip({
   description: 'Common types of turf in Australian yards (buffalo, zoysia, couch and kikuyu) and how to look after each one. Yard tips from a horticulturalist.',
   h1: 'Common Types of Turf in Australian Yards', lead: 'Buffalo, zoysia, couch or kikuyu? How to recognise your lawn and look after it.', img: 'dense-healthy-lawn-beside-stone-wall',
   cta: 'Not sure what grass you have? We\'ll identify it and recommend the right care when we quote.',
-  html: `<p>Australian residential yards suit a handful of hardy, mostly warm-season grasses. Knowing which one you have makes a big difference to how you mow, water and feed it.</p>
+  html: `<p>The most common types of turf in Australia are a handful of hardy, mostly warm-season grasses. Knowing which one you have makes a big difference to how you mow, water and feed it. The couch vs kikuyu question comes up most, so we've covered that below.</p>
 <h2>Buffalo grass</h2><p>A warm-season favourite with a soft, luxurious feel and good tolerance of dry conditions. Buffalo does best in well-drained soil and doesn't like being overwatered. Mow it at roughly 5–7.5 cm (2–3 inches) to keep it tidy and prevent thatch. Feed it in spring and aerate occasionally to keep the soil healthy.</p>
 <h2>Zoysia grass</h2><p>Another warm-season option, prized for its dense turf and adaptability. Mowing at about 2.5–5 cm (1–2 inches) encourages sideways growth and discourages thatch. Water consistently but let it dry out between waterings to reduce the risk of disease. Fertilise in late spring and early summer, and dethatch occasionally.</p>
 <h2>Couch grass</h2><p>Also known as Bermuda grass, couch is popular for its fine texture and toughness. Mow it at about 2.5–5 cm for a manicured look and good thatch control. It's drought-tolerant, but regular watering keeps it looking its best. Fertilise in late spring and early summer for strong colour, and aerate to keep it vigorous.</p>
@@ -301,7 +301,7 @@ const weeds = () => tip({
   description: 'Practical mulching and weed control tips for Melbourne gardens and lawns: mulching, hand weeding, herbicides, soil health and watering.',
   h1: 'Mulching &amp; Weed Control Tips', lead: 'Keeping a garden and lawn weed-free comes down to a few good habits.', img: 'mulched-garden-beds-front-lawn-rosanna',
   cta: 'We handle weed control as part of every lawn and garden program, and mulch beds through our mulching service.',
-  html: `<p>Keeping your garden and lawn weed-free is crucial for their health and appearance. Here's how we approach it.</p>
+  html: `<p>Keeping your garden and lawn weed-free is crucial for their health and appearance. Mulching and weed control go hand in hand, so here's how we approach both.</p>
 <h2>Mulching</h2><p>Apply a thick layer of natural mulch such as wood chips, bark or straw to garden beds. Mulch is a barrier against weeds: it stops seeds reaching the soil and sprouting. It also holds moisture in and keeps soil temperatures even, which makes life harder for weeds. See our <a href="/mulching-landscaping/">mulching service</a>.</p>
 <h2>Know your weeds</h2><p>Learn the common weeds in your area so you can deal with them early. Removing weeds before they set seed is the key to keeping them under control. Inspect the garden regularly and act quickly.</p>
 <h2>Plant placement</h2><p>Space plants so there are fewer gaps for weeds to take root. A healthy, well-planted garden shades the soil and naturally outcompetes weeds for light and nutrients.</p>

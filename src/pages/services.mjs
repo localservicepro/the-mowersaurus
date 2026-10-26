@@ -89,7 +89,7 @@ const lawnCare = () => servicePage({
   intro: `<p>Most lawns in Templestowe don't need more mowing. They need a plan. Our lawn care programs look after everything that decides how a lawn looks and feels: soil health, feeding, weeds, grubs, pests and disease, as well as the regular cut and a sharp edge.</p>
 <p>That's what makes our approach to lawn care in Templestowe different. ${SITE.founder}, our founder, is a qualified horticulturalist. The whole team works the same way: work out why a lawn is thin, patchy or weedy, then fix the cause instead of mowing over it.</p>
 <p>You choose one of three levels. <strong>Good</strong> keeps things healthy and tidy at a 7/10. <strong>Great</strong>, our specialty, is a 9/10 lawn for house-proud homeowners. <strong>Amazing</strong> is golf-course quality, our "12 out of 10". Whichever you pick, we schedule the visits and treatments so you don't have to think about it.</p>
-<p>Already happy with your lawn mowing in Templestowe but want more from the lawn itself? A program covers the mowing too, so you only deal with one team.</p>`,
+<p>Already happy with your lawn mowing in Templestowe but want more from the lawn itself? A program covers the mowing too, so you only deal with one team. If regular lawn mowing in Templestowe is all you need for now, that's fine as well. Many clients start there.</p>`,
   sideImg: 'freshly-striped-front-lawn-mowing',
   included: ['Mowing and edging on a regular schedule', 'Fertilising to suit your turf and the season', 'Weed control', 'Grub control', 'Soil amendments to fix the soil underneath', 'Pest and disease control'],
   includedH: 'Covered across our lawn programs',
