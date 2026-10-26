@@ -1,5 +1,5 @@
 import { SITE, SERVICES, SUBURBS, REEL, svc } from '../data.mjs';
-import { icon, picture, workImg, baSlider, quoteSection, faqBlock, faqSchema, pageHero, related, suburbList, areaMap, ctaBand, esc, grassEdge, crumbs, reelMedia, reelSoundButton, reelSchema } from '../ui.mjs';
+import { icon, picture, workImg, baSlider, quoteSection, faqBlock, faqSchema, pageHero, related, suburbList, areaPanel, ctaBand, esc, grassEdge, crumbs, reelMedia, reelSoundButton, reelSchema } from '../ui.mjs';
 import { HOME_FAQ } from './home.mjs';
 import media from '../media.json' with { type: 'json' };
 
@@ -66,13 +66,9 @@ function areas() {
   const body = `
 ${pageHero({ trail, h1: 'Lawn Care &amp; Garden Maintenance Service Areas', lead: 'Based in Watsonia North and working within about a 10 km radius across Melbourne\'s north east.', img: 'nature-strip-mowing-eltham', byline: false })}
 <section class="section"><div class="wrap">
-  ${areaMap()}
+  ${areaPanel({ listHeading: 'Suburbs we service' })}
+  <p class="note" style="margin-top:14px">Listed in order of where we're busiest. Orange marks our priority suburbs.</p>
   <div class="grid-2 top" style="margin-top:48px">
-    <div>
-      <h2>Suburbs we service</h2>
-      <p class="lead">Listed in order of where we're busiest. Orange dots mark our priority suburbs.</p>
-      ${suburbList()}
-    </div>
     <div>
       <h2>Local lawn care pages</h2>
       <div class="related">${pages.map((s) => `<a href="${s.page}"><span class="dd-icon">${icon('pin')}</span>Lawn care ${s.name}</a>`).join('')}
@@ -81,7 +77,9 @@ ${pageHero({ trail, h1: 'Lawn Care &amp; Garden Maintenance Service Areas', lead
         <a href="/garden-maintenance-programs/"><span class="dd-icon">${icon('pin')}</span>Garden maintenance Eltham</a>
         <a href="/gardening/"><span class="dd-icon">${icon('pin')}</span>Gardener Doncaster</a>
       </div>
-      <div class="callout"><strong>Just outside the list?</strong> If you're close to one of these suburbs, ask anyway. If your property is in range, we'll happily quote.</div>
+    </div>
+    <div>
+      <div class="callout" style="margin-top:0"><strong>Just outside the list?</strong> If you're close to one of these suburbs, ask anyway. If your property is in range, we'll happily quote.</div>
     </div>
   </div>
 </div></section>

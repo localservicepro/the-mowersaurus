@@ -444,3 +444,21 @@ export function quoteModal() {
   ${quoteForm({ title: 'Get a free quote', idPrefix: 'mq', formId: 'quote-form-modal' }).replace('<h2>', '<h2 id="mq-title">')}
 </dialog>`;
 }
+
+// Map + suburb list side by side. The list is kept in sync with the map by site.js:
+// each suburb highlights (and scrolls into view) as the mower reaches it.
+export function areaPanel({ listHeading = 'Every suburb we service' } = {}) {
+  const items = SUBURBS.map((s, i) => `<li data-name="${s.name}" class="${s.base ? 'base' : ''}${i < 4 ? ' prio' : ''}" tabindex="0">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="name">${s.page ? `<a href="${s.page}">${s.name}</a>` : s.name}</span>
+      ${s.base ? '<span class="tag">Home base</span>' : i < 4 ? '<span class="tag prio">Priority</span>' : ''}
+    </li>`).join('');
+  return `<div class="area-section" data-area-section>
+    <div class="area-col-map">${areaMap()}</div>
+    <div class="area-col-list">
+      <h3 class="area-list-h">${listHeading}</h3>
+      <ol class="area-list" data-area-list aria-label="Suburbs we service">${items}</ol>
+      <p class="note area-list-note">Lights up as the mower reaches each suburb. Click a suburb to find it on the map.</p>
+    </div>
+  </div>`;
+}

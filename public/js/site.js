@@ -280,10 +280,43 @@
   $$('[data-area-map]').forEach(function (wrap) {
     var svg = $('svg', wrap), route = $('#route', svg), mower = $('#map-mower', svg);
     var subs = $$('.sub', svg);
+    // Suburb list beside the map (areaPanel): kept in sync with the mower.
+    var section = wrap.closest('[data-area-section]');
+    var list = section && $('[data-area-list]', section);
+    var items = list ? $$('li', list) : [];
+    var byName = function (arr, name) { for (var i = 0; i < arr.length; i++) if (arr[i].getAttribute('data-name') === name) return arr[i]; return null; };
+    var setActive = function (name, scroll) {
+      subs.forEach(function (g) { g.classList.toggle('active', g.getAttribute('data-name') === name); });
+      items.forEach(function (li) {
+        var on = li.getAttribute('data-name') === name;
+        li.classList.toggle('active', on);
+        if (on) {
+          li.classList.add('lit');
+          if (scroll && list) {
+            var top = li.offsetTop - list.clientHeight / 2 + li.offsetHeight / 2;
+            if (reduce) list.scrollTop = top; else list.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        }
+      });
+    };
+    var clearAll = function () {
+      subs.forEach(function (g) { g.classList.remove('lit', 'active'); });
+      items.forEach(function (li) { li.classList.remove('lit', 'active'); });
+    };
     subs.forEach(function (g) {
-      var toggle = function () { g.classList.toggle('show'); };
-      g.addEventListener('click', toggle);
-      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+      var pick = function () { g.classList.toggle('show'); setActive(g.getAttribute('data-name'), true); };
+      g.addEventListener('click', pick);
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+    });
+    items.forEach(function (li) {
+      var pick = function (e) {
+        if (e.target.closest('a')) return; // let suburb page links work
+        var name = li.getAttribute('data-name'), g = byName(subs, name);
+        if (g) g.classList.add('show');
+        setActive(name, false);
+      };
+      li.addEventListener('click', pick);
+      li.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(e); } });
     });
     if (!route || !mower) return;
     var L = route.getTotalLength();
@@ -310,6 +343,7 @@
     };
     if (reduce) {
       subs.forEach(function (g) { if (!g.classList.contains('base')) g.classList.add('lit'); });
+      items.forEach(function (li) { if (!li.classList.contains('base')) li.classList.add('lit'); });
       place(0);
       return;
     }
@@ -318,12 +352,16 @@
       if (!running) return;
       if (start === null) start = t;
       var el = t - start;
-      if (el > DUR + PAUSE) { start = t; el = 0; marks.forEach(function (m) { m.g.classList.remove('lit'); }); }
+      if (el > DUR + PAUSE) { start = t; el = 0; clearAll(); if (list) list.scrollTo({ top: 0, behavior: 'smooth' }); }
       var k = Math.min(1, el / DUR);
       var e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; // ease in-out
       var d = e * L;
       place(d);
-      marks.forEach(function (m) { if (!m.g.classList.contains('base') && d >= m.at - 2) m.g.classList.add('lit'); });
+      marks.forEach(function (m) {
+        if (!m.g.classList.contains('base') && d >= m.at - 2 && !m.g.classList.contains('lit')) {
+          m.g.classList.add('lit'); setActive(m.g.getAttribute('data-name'), true);
+        }
+      });
       raf = requestAnimationFrame(tick);
     };
     var io = new IntersectionObserver(function (en) {

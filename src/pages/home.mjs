@@ -1,6 +1,6 @@
 import { SITE, SERVICES, REEL, svc } from '../data.mjs';
 import { layout } from '../layout.mjs';
-import { icon, picture, work, workImg, baSlider, quoteSection, tierSection, areaMap, suburbList, faqBlock, faqSchema, ctaBand, grassEdge, esc, reelMedia, reelSoundButton, reelSchema } from '../ui.mjs';
+import { icon, picture, work, workImg, baSlider, quoteSection, tierSection, areaPanel, suburbList, faqBlock, faqSchema, ctaBand, grassEdge, esc, reelMedia, reelSoundButton, reelSchema } from '../ui.mjs';
 import media from '../media.json' with { type: 'json' };
 
 export const HOME_FAQ = [
@@ -158,10 +158,8 @@ export default function home() {
       </div>
       <p class="lead">From our base in Watsonia North we provide lawn care in Melbourne's north east across roughly a 10 km radius, with regular rounds through Lower Templestowe, Templestowe, Doncaster East and Doncaster. Watch the mower do its rounds.</p>
     </div>
-    <div style="margin-top:28px">${areaMap()}</div>
-    <h3 style="margin-top:40px">Every suburb we service</h3>
-    ${suburbList({ wide: true })}
-    <p style="margin-top:18px"><a class="link-arrow" href="/service-areas/">View all service areas</a></p>
+    <div style="margin-top:28px">${areaPanel()}</div>
+    <p style="margin-top:22px"><a class="link-arrow" href="/service-areas/">View all service areas</a></p>
   </div>
 </section>
 
