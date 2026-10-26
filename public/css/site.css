@@ -457,10 +457,21 @@ h4{font-size:1.1rem}
 .reel-video.playing{opacity:1}
 .hero.has-reel::before{background:linear-gradient(100deg,rgba(20,42,23,.9) 0%,rgba(20,42,23,.72) 34%,rgba(20,42,23,.28) 62%,rgba(20,42,23,.12) 100%)}
 @media(max-width:1023px){
-  .hero.has-reel::before{display:none}
-  .hero.has-reel .hero-media{position:relative;inset:auto;aspect-ratio:16/9;width:100%}
-  .hero.has-reel .wrap{padding-top:28px}
+  /* Text over the video so the H1 and lead are readable on the first screen */
+  .hero.has-reel::before{display:block;background:linear-gradient(180deg,rgba(20,42,23,.18) 0%,rgba(20,42,23,.5) 30%,rgba(20,42,23,.88) 58%,rgba(20,42,23,.97) 100%)}
+  .hero.has-reel .hero-media{position:absolute;inset:0;aspect-ratio:auto;width:auto}
+  .hero.has-reel .hero-media img,.hero.has-reel .hero-media video{object-position:50% 30%}
+  .hero.has-reel .wrap{display:grid;align-content:end;min-height:min(calc(100svh - 108px),640px);padding-top:150px;padding-bottom:64px}
+  .hero .eyebrow{font-size:.68rem;letter-spacing:.1em;margin-bottom:8px}
+  .hero h1{font-size:clamp(1.85rem,7.6vw,2.5rem);max-width:none;margin-bottom:.4em}
+  .hero .lead{font-size:clamp(.95rem,3.9vw,1.05rem);line-height:1.5;margin-bottom:.6em}
+  .hero .btn-row{margin-top:14px;gap:10px}
+  .hero .btn{min-height:46px;padding:0 20px;font-size:.95rem}
+  .hero-watch{margin-top:10px}
 }
+@media(max-width:380px){.hero.has-reel .wrap{padding-top:120px}.hero h1{font-size:1.7rem}}
+.hide-sm{display:inline}
+@media(max-width:480px){.hide-sm{display:none}}
 .hero-watch{margin:14px 0 0}
 .btn-link-light{min-height:44px;padding:0;background:none;color:#fff;border:0;text-decoration:underline;text-underline-offset:4px;font-weight:800}
 .btn-link-light svg{width:16px;height:16px;padding:6px;box-sizing:content-box;border-radius:50%;background:var(--orange);color:#1B1206}

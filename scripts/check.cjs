@@ -123,6 +123,8 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   const mc = await b.newContext({ ...devices['iPhone 13'] });
   const m = await mc.newPage(); await block(m);
   await m.goto(BASE + '/');
+  const heroFit = await m.evaluate(() => { const r = document.querySelector('.hero .lead').getBoundingClientRect(); const h = document.querySelector('.hero h1').getBoundingClientRect(); return { h1Top: Math.round(h.top), leadBottom: Math.round(r.bottom), vh: innerHeight }; });
+  ok('Mobile hero: H1 and lead visible on first screen', heroFit.h1Top >= 0 && heroFit.leadBottom <= heroFit.vh, JSON.stringify(heroFit));
   ok('Mobile sticky call/quote bar visible', await m.$eval('.mbar', (e) => getComputedStyle(e).display !== 'none' && getComputedStyle(e).position === 'fixed'));
   ok('Mobile bar call link', (await m.$eval('.mbar a[href^="tel:"]', (a) => a.href)) === 'tel:+61459960501');
   ok('No horizontal scroll on mobile', await m.evaluate(() => document.documentElement.scrollWidth <= innerWidth));

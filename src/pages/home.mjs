@@ -30,7 +30,7 @@ export default function home() {
   <div class="hero-media">${reelMedia({ eager: true })}</div>
   <div class="wrap">
     <div>
-      <span class="eyebrow">Lawn care · Garden maintenance · Since ${SITE.founded}</span>
+      <span class="eyebrow">Lawn care · Garden maintenance<span class="hide-sm"> · Since ${SITE.founded}</span></span>
       <h1>Lawn Care in Melbourne's North East, Built by Horticulturalists</h1>
       <p class="lead">Looking for lawn care in Melbourne that looks after the whole lawn, not just the mow? Our qualified horticulturalists run all-inclusive lawn and garden programs across the north east, from Watsonia North to Doncaster and Templestowe. You pick the result. We handle the rest.</p>
       <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote-modal>Get a Free Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
