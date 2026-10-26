@@ -1,0 +1,15 @@
+{
+ "hero-striped-front-lawn": {
+  "file": "<original camera file>.jpg"
+ },
+ "dry-lawn-revival-watsonia": {
+  "before": "<before file>.jpg",
+  "after": "<after file>.jpg"
+ },
+ "_logo_light": {
+  "file": "<logo on white>.jpg"
+ },
+ "_logo_dark": {
+  "file": "<logo on black, transparent>.png"
+ }
+}

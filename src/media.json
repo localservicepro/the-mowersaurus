@@ -1,0 +1,1293 @@
+{
+ "pairs": [
+  {
+   "slug": "dry-lawn-revival-watsonia",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "lawn-care-programs",
+   "suburb": "Watsonia",
+   "title": "Dry front lawn & nature strip brought back to green",
+   "alt": "front lawn and nature strip either side of a concrete path",
+   "before_img": [
+    {
+     "w": 811,
+     "h": 608,
+     "src": "/img/ba/dry-lawn-revival-watsonia-before-811.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/dry-lawn-revival-watsonia-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/dry-lawn-revival-watsonia-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/dry-lawn-revival-watsonia-after-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/dry-lawn-revival-watsonia-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/dry-lawn-revival-watsonia-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "backyard-lawn-transformation-templestowe",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "lawn-care-programs",
+   "suburb": "Templestowe",
+   "title": "Backyard lawn transformation",
+   "alt": "narrow backyard lawn between a rendered retaining wall and a brick house",
+   "before_img": [
+    {
+     "w": 653,
+     "h": 490,
+     "src": "/img/ba/backyard-lawn-transformation-templestowe-before-653.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/backyard-lawn-transformation-templestowe-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/backyard-lawn-transformation-templestowe-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 735,
+     "h": 551,
+     "src": "/img/ba/backyard-lawn-transformation-templestowe-after-735.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/backyard-lawn-transformation-templestowe-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/backyard-lawn-transformation-templestowe-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "nature-strip-renovation-templestowe",
+   "aspect": [
+    16,
+    9
+   ],
+   "service": "lawn-renovation",
+   "suburb": "Templestowe",
+   "title": "Nature strip renovation",
+   "alt": "nature strip lawn beside a footpath",
+   "before_img": [
+    {
+     "w": 665,
+     "h": 374,
+     "src": "/img/ba/nature-strip-renovation-templestowe-before-665.webp"
+    },
+    {
+     "w": 640,
+     "h": 360,
+     "src": "/img/ba/nature-strip-renovation-templestowe-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 236,
+     "src": "/img/ba/nature-strip-renovation-templestowe-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 537,
+     "h": 302,
+     "src": "/img/ba/nature-strip-renovation-templestowe-after-537.webp"
+    },
+    {
+     "w": 420,
+     "h": 236,
+     "src": "/img/ba/nature-strip-renovation-templestowe-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "dry-front-lawn-recovery-watsonia-north",
+   "aspect": [
+    1,
+    1
+   ],
+   "service": "lawn-renovation",
+   "suburb": "Watsonia North",
+   "title": "Dry front lawn recovery",
+   "alt": "front lawn and nature strip along a curved concrete path",
+   "before_img": [
+    {
+     "w": 810,
+     "h": 810,
+     "src": "/img/ba/dry-front-lawn-recovery-watsonia-north-before-810.webp"
+    },
+    {
+     "w": 640,
+     "h": 640,
+     "src": "/img/ba/dry-front-lawn-recovery-watsonia-north-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 420,
+     "src": "/img/ba/dry-front-lawn-recovery-watsonia-north-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 540,
+     "h": 540,
+     "src": "/img/ba/dry-front-lawn-recovery-watsonia-north-after-540.webp"
+    },
+    {
+     "w": 420,
+     "h": 420,
+     "src": "/img/ba/dry-front-lawn-recovery-watsonia-north-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "commercial-grounds-tidy-up-doncaster",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "lawn-mowing",
+   "suburb": "Doncaster",
+   "title": "Commercial grounds tidy-up",
+   "alt": "commercial property lawn bordered by a concrete driveway",
+   "before_img": [
+    {
+     "w": 811,
+     "h": 608,
+     "src": "/img/ba/commercial-grounds-tidy-up-doncaster-before-811.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/commercial-grounds-tidy-up-doncaster-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/commercial-grounds-tidy-up-doncaster-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 810,
+     "h": 608,
+     "src": "/img/ba/commercial-grounds-tidy-up-doncaster-after-810.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/commercial-grounds-tidy-up-doncaster-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/commercial-grounds-tidy-up-doncaster-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "backyard-lawn-transformation-mill-park",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "lawn-care-programs",
+   "suburb": "Mill Park",
+   "title": "Backyard lawn transformation",
+   "alt": "large backyard lawn with trees along the back fence",
+   "before_img": [
+    {
+     "w": 810,
+     "h": 608,
+     "src": "/img/ba/backyard-lawn-transformation-mill-park-before-810.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/backyard-lawn-transformation-mill-park-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/backyard-lawn-transformation-mill-park-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/backyard-lawn-transformation-mill-park-after-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/backyard-lawn-transformation-mill-park-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/backyard-lawn-transformation-mill-park-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "front-lawn-garden-bed-refresh-watsonia-north",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "garden-maintenance-programs",
+   "suburb": "Watsonia North",
+   "title": "Front lawn & garden bed refresh",
+   "alt": "corner front lawn with a native garden bed and rock edging",
+   "before_img": [
+    {
+     "w": 811,
+     "h": 608,
+     "src": "/img/ba/front-lawn-garden-bed-refresh-watsonia-north-before-811.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/front-lawn-garden-bed-refresh-watsonia-north-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/front-lawn-garden-bed-refresh-watsonia-north-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/front-lawn-garden-bed-refresh-watsonia-north-after-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/front-lawn-garden-bed-refresh-watsonia-north-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/front-lawn-garden-bed-refresh-watsonia-north-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "front-lawn-makeover-briar-hill",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "lawn-care-programs",
+   "suburb": "Briar Hill",
+   "title": "Front lawn makeover",
+   "alt": "front lawn of a weatherboard home beside a concrete driveway",
+   "before_img": [
+    {
+     "w": 810,
+     "h": 608,
+     "src": "/img/ba/front-lawn-makeover-briar-hill-before-810.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/front-lawn-makeover-briar-hill-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/front-lawn-makeover-briar-hill-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/front-lawn-makeover-briar-hill-after-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/front-lawn-makeover-briar-hill-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/front-lawn-makeover-briar-hill-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "hedge-and-lawn-tidy-rosanna",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "gardening",
+   "suburb": "Rosanna",
+   "title": "Hedge trim & lawn tidy",
+   "alt": "tall clipped hedge along a fence above a backyard lawn",
+   "before_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/hedge-and-lawn-tidy-rosanna-before-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/hedge-and-lawn-tidy-rosanna-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/hedge-and-lawn-tidy-rosanna-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/hedge-and-lawn-tidy-rosanna-after-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/hedge-and-lawn-tidy-rosanna-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/hedge-and-lawn-tidy-rosanna-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "hedge-trimming-footpath-rosanna",
+   "aspect": [
+    3,
+    4
+   ],
+   "service": "gardening",
+   "suburb": "Rosanna",
+   "title": "Overgrown hedge cut back off the footpath",
+   "alt": "hedge growing over a front fence beside a footpath",
+   "before_img": [
+    {
+     "w": 502,
+     "h": 669,
+     "src": "/img/ba/hedge-trimming-footpath-rosanna-before-502.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/ba/hedge-trimming-footpath-rosanna-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 502,
+     "h": 669,
+     "src": "/img/ba/hedge-trimming-footpath-rosanna-after-502.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/ba/hedge-trimming-footpath-rosanna-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "side-courtyard-lawn-doncaster-east",
+   "aspect": [
+    1,
+    1
+   ],
+   "service": "gardening",
+   "suburb": "Doncaster East",
+   "title": "Side courtyard lawn clean-up",
+   "alt": "small courtyard lawn with a young tree beside a white fence",
+   "before_img": [
+    {
+     "w": 540,
+     "h": 540,
+     "src": "/img/ba/side-courtyard-lawn-doncaster-east-before-540.webp"
+    },
+    {
+     "w": 420,
+     "h": 420,
+     "src": "/img/ba/side-courtyard-lawn-doncaster-east-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 810,
+     "h": 810,
+     "src": "/img/ba/side-courtyard-lawn-doncaster-east-after-810.webp"
+    },
+    {
+     "w": 640,
+     "h": 640,
+     "src": "/img/ba/side-courtyard-lawn-doncaster-east-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 420,
+     "src": "/img/ba/side-courtyard-lawn-doncaster-east-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "backyard-lawn-edges-rosanna",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "lawn-mowing",
+   "suburb": "Rosanna",
+   "title": "Backyard mow, edge & tidy",
+   "alt": "backyard lawn bordered by a gravel path and paved area",
+   "before_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/backyard-lawn-edges-rosanna-before-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/backyard-lawn-edges-rosanna-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/backyard-lawn-edges-rosanna-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/backyard-lawn-edges-rosanna-after-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/backyard-lawn-edges-rosanna-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/backyard-lawn-edges-rosanna-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "under-stair-lawn-edging-rosanna",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "lawn-mowing",
+   "suburb": "Rosanna",
+   "title": "Lawn edging under the back stairs",
+   "alt": "lawn edge and garden bed beneath white timber stairs",
+   "before_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/under-stair-lawn-edging-rosanna-before-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/under-stair-lawn-edging-rosanna-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/under-stair-lawn-edging-rosanna-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/under-stair-lawn-edging-rosanna-after-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/under-stair-lawn-edging-rosanna-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/under-stair-lawn-edging-rosanna-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "nature-strip-mow-rosanna",
+   "aspect": [
+    1,
+    1
+   ],
+   "service": "lawn-mowing",
+   "suburb": "Rosanna",
+   "title": "Nature strip mow & edge",
+   "alt": "long nature strip between the footpath and the kerb",
+   "before_img": [
+    {
+     "w": 634,
+     "h": 634,
+     "src": "/img/ba/nature-strip-mow-rosanna-before-634.webp"
+    },
+    {
+     "w": 420,
+     "h": 420,
+     "src": "/img/ba/nature-strip-mow-rosanna-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 634,
+     "h": 634,
+     "src": "/img/ba/nature-strip-mow-rosanna-after-634.webp"
+    },
+    {
+     "w": 420,
+     "h": 420,
+     "src": "/img/ba/nature-strip-mow-rosanna-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "front-lawn-and-garden-rosanna",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "garden-maintenance-programs",
+   "suburb": "Rosanna",
+   "title": "Front lawn & native garden upkeep",
+   "alt": "front lawn with clumping native grasses along the garden bed",
+   "before_img": [
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/ba/front-lawn-and-garden-rosanna-before-720.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/front-lawn-and-garden-rosanna-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/front-lawn-and-garden-rosanna-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 810,
+     "h": 608,
+     "src": "/img/ba/front-lawn-and-garden-rosanna-after-810.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/front-lawn-and-garden-rosanna-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/front-lawn-and-garden-rosanna-after-420.webp"
+    }
+   ]
+  }
+ ],
+ "gallery": [
+  {
+   "slug": "freshly-striped-front-lawn-mowing",
+   "cat": "mowing",
+   "alt": "Freshly mown front lawn with straight mowing stripes and crisp driveway edges",
+   "img": [
+    {
+     "w": 1200,
+     "h": 900,
+     "src": "/img/work/freshly-striped-front-lawn-mowing-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/freshly-striped-front-lawn-mowing-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/freshly-striped-front-lawn-mowing-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "front-lawn-mowing-stripes-in-progress",
+   "cat": "mowing",
+   "alt": "Mowersaurus team mowing stripes into a front lawn beside a rose garden",
+   "img": [
+    {
+     "w": 1200,
+     "h": 900,
+     "src": "/img/work/front-lawn-mowing-stripes-in-progress-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/front-lawn-mowing-stripes-in-progress-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/front-lawn-mowing-stripes-in-progress-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "front-lawn-mow-and-edge-in-progress",
+   "cat": "mowing",
+   "alt": "Front lawn being mowed and edged along a concrete path",
+   "img": [
+    {
+     "w": 1200,
+     "h": 900,
+     "src": "/img/work/front-lawn-mow-and-edge-in-progress-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/front-lawn-mow-and-edge-in-progress-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/front-lawn-mow-and-edge-in-progress-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "corner-front-lawn-mowing",
+   "cat": "mowing",
+   "alt": "Corner front lawn mid-mow with rose bushes along the garden bed",
+   "img": [
+    {
+     "w": 1200,
+     "h": 900,
+     "src": "/img/work/corner-front-lawn-mowing-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/corner-front-lawn-mowing-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/corner-front-lawn-mowing-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "lush-front-lawn-great-lawn-program",
+   "cat": "lawn-programs",
+   "alt": "Lush, evenly green front lawn after a Great Lawn Program visit",
+   "img": [
+    {
+     "w": 960,
+     "h": 720,
+     "src": "/img/work/lush-front-lawn-great-lawn-program-960.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/lush-front-lawn-great-lawn-program-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/lush-front-lawn-great-lawn-program-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "dense-healthy-lawn-beside-stone-wall",
+   "cat": "lawn-programs",
+   "alt": "Dense, healthy lawn running along a stone retaining wall and lavender bed",
+   "img": [
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/dense-healthy-lawn-beside-stone-wall-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/dense-healthy-lawn-beside-stone-wall-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "sloping-lawn-with-stepping-stones",
+   "cat": "lawn-programs",
+   "alt": "Bright green sloping lawn with stepping stones along a garden bed",
+   "img": [
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/sloping-lawn-with-stepping-stones-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/sloping-lawn-with-stepping-stones-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "side-lawn-with-brick-path",
+   "cat": "lawn-programs",
+   "alt": "Side lawn mown and edged alongside a red brick path",
+   "img": [
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/side-lawn-with-brick-path-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/side-lawn-with-brick-path-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "backyard-lawn-with-brick-paving",
+   "cat": "lawn-programs",
+   "alt": "Backyard lawn edged neatly against curved brick paving",
+   "img": [
+    {
+     "w": 960,
+     "h": 720,
+     "src": "/img/work/backyard-lawn-with-brick-paving-960.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/backyard-lawn-with-brick-paving-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/backyard-lawn-with-brick-paving-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "front-lawn-maintenance-north-east-melbourne",
+   "cat": "lawn-programs",
+   "alt": "Even front lawn with tidy edges along the footpath",
+   "img": [
+    {
+     "w": 960,
+     "h": 720,
+     "src": "/img/work/front-lawn-maintenance-north-east-melbourne-960.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/front-lawn-maintenance-north-east-melbourne-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/front-lawn-maintenance-north-east-melbourne-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "lawn-edge-along-timber-fence",
+   "cat": "lawn-programs",
+   "alt": "Lawn mown and edged along a timber fence and concrete path",
+   "img": [
+    {
+     "w": 960,
+     "h": 720,
+     "src": "/img/work/lawn-edge-along-timber-fence-960.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/lawn-edge-along-timber-fence-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/lawn-edge-along-timber-fence-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "lawn-and-garden-beds-rock-wall",
+   "cat": "garden",
+   "alt": "Curved lawn below a rock wall with established garden beds",
+   "img": [
+    {
+     "w": 960,
+     "h": 720,
+     "src": "/img/work/lawn-and-garden-beds-rock-wall-960.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/lawn-and-garden-beds-rock-wall-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/lawn-and-garden-beds-rock-wall-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "garden-bed-edge-and-lawn",
+   "cat": "garden",
+   "alt": "Lawn edge running beside a well-kept native garden bed",
+   "img": [
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/garden-bed-edge-and-lawn-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/garden-bed-edge-and-lawn-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "brick-path-garden-lawn",
+   "cat": "garden",
+   "alt": "Misty morning lawn and garden either side of a red brick path",
+   "img": [
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/brick-path-garden-lawn-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/brick-path-garden-lawn-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "brick-path-garden-maintenance-eltham",
+   "cat": "garden",
+   "alt": "Lawn and garden beds along a brick path in Eltham",
+   "suburb": "Eltham",
+   "img": [
+    {
+     "w": 720,
+     "h": 720,
+     "src": "/img/work/brick-path-garden-maintenance-eltham-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 420,
+     "src": "/img/work/brick-path-garden-maintenance-eltham-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "front-lawn-and-clipped-hedge",
+   "cat": "hedging",
+   "alt": "Front lawn in front of a tall, square-clipped hedge",
+   "img": [
+    {
+     "w": 960,
+     "h": 720,
+     "src": "/img/work/front-lawn-and-clipped-hedge-960.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/front-lawn-and-clipped-hedge-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/front-lawn-and-clipped-hedge-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "mulched-garden-beds-front-lawn-rosanna",
+   "cat": "mulching",
+   "alt": "Freshly mulched garden beds with steel edging around a front lawn in Rosanna",
+   "suburb": "Rosanna",
+   "img": [
+    {
+     "w": 810,
+     "h": 540,
+     "src": "/img/work/mulched-garden-beds-front-lawn-rosanna-810.webp"
+    },
+    {
+     "w": 720,
+     "h": 480,
+     "src": "/img/work/mulched-garden-beds-front-lawn-rosanna-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 280,
+     "src": "/img/work/mulched-garden-beds-front-lawn-rosanna-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "mulched-bed-and-curved-lawn-edge-rosanna",
+   "cat": "mulching",
+   "alt": "Curved lawn edge against a dark mulched garden bed in Rosanna",
+   "suburb": "Rosanna",
+   "img": [
+    {
+     "w": 810,
+     "h": 540,
+     "src": "/img/work/mulched-bed-and-curved-lawn-edge-rosanna-810.webp"
+    },
+    {
+     "w": 720,
+     "h": 480,
+     "src": "/img/work/mulched-bed-and-curved-lawn-edge-rosanna-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 280,
+     "src": "/img/work/mulched-bed-and-curved-lawn-edge-rosanna-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "native-garden-bed-and-lawn-watsonia-north",
+   "cat": "garden",
+   "alt": "Native garden bed with rocks and a freshly mown front lawn in Watsonia North",
+   "suburb": "Watsonia North",
+   "img": [
+    {
+     "w": 634,
+     "h": 540,
+     "src": "/img/work/native-garden-bed-and-lawn-watsonia-north-634.webp"
+    },
+    {
+     "w": 420,
+     "h": 358,
+     "src": "/img/work/native-garden-bed-and-lawn-watsonia-north-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "nature-strip-mowing-eltham",
+   "cat": "mowing",
+   "alt": "Nature strip mown and edged along a sloping street in Eltham",
+   "suburb": "Eltham",
+   "img": [
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/nature-strip-mowing-eltham-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/nature-strip-mowing-eltham-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "crisp-lawn-boundary-lines",
+   "cat": "mowing",
+   "alt": "Crisp lawn boundary lines along a driveway and white picket fence",
+   "img": [
+    {
+     "w": 720,
+     "h": 768,
+     "src": "/img/work/crisp-lawn-boundary-lines-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 448,
+     "src": "/img/work/crisp-lawn-boundary-lines-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "lawn-renovation-scalping-front-yard",
+   "cat": "lawn-renovation",
+   "alt": "Front lawn scalped low as the first stage of a lawn renovation",
+   "img": [
+    {
+     "w": 1200,
+     "h": 900,
+     "src": "/img/work/lawn-renovation-scalping-front-yard-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/lawn-renovation-scalping-front-yard-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/lawn-renovation-scalping-front-yard-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "scalped-lawn-ready-for-renovation",
+   "cat": "lawn-renovation",
+   "alt": "Front lawn scalped and cleaned up, ready for coring and topdressing",
+   "img": [
+    {
+     "w": 1200,
+     "h": 900,
+     "src": "/img/work/scalped-lawn-ready-for-renovation-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/scalped-lawn-ready-for-renovation-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/scalped-lawn-ready-for-renovation-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "dethatching-backyard-lawn-renovation",
+   "cat": "lawn-renovation",
+   "alt": "Dethatching a backyard lawn during a full lawn renovation",
+   "img": [
+    {
+     "w": 1200,
+     "h": 1600,
+     "src": "/img/work/dethatching-backyard-lawn-renovation-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/dethatching-backyard-lawn-renovation-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/dethatching-backyard-lawn-renovation-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "lawn-renovation-dethatch-passes",
+   "cat": "lawn-renovation",
+   "alt": "Dethatcher passes across a backyard lawn mid-renovation",
+   "img": [
+    {
+     "w": 1200,
+     "h": 1600,
+     "src": "/img/work/lawn-renovation-dethatch-passes-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/lawn-renovation-dethatch-passes-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/lawn-renovation-dethatch-passes-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "lawn-after-dethatch-renovation",
+   "cat": "lawn-renovation",
+   "alt": "Backyard lawn opened up after dethatching, before topdressing",
+   "img": [
+    {
+     "w": 1200,
+     "h": 1600,
+     "src": "/img/work/lawn-after-dethatch-renovation-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/lawn-after-dethatch-renovation-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/lawn-after-dethatch-renovation-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "backyard-lawn-renovation-aeration",
+   "cat": "lawn-renovation",
+   "alt": "Long backyard lawn being worked over during a renovation",
+   "img": [
+    {
+     "w": 1200,
+     "h": 1248,
+     "src": "/img/work/backyard-lawn-renovation-aeration-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 749,
+     "src": "/img/work/backyard-lawn-renovation-aeration-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 437,
+     "src": "/img/work/backyard-lawn-renovation-aeration-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "nature-strip-renovation-dethatched",
+   "cat": "lawn-renovation",
+   "alt": "Nature strip lawn freshly dethatched as part of a renovation",
+   "img": [
+    {
+     "w": 1200,
+     "h": 1600,
+     "src": "/img/work/nature-strip-renovation-dethatched-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/nature-strip-renovation-dethatched-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/nature-strip-renovation-dethatched-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "commercial-lawn-maintenance-doncaster",
+   "cat": "commercial",
+   "alt": "Commercial property lawn maintained beside a concrete driveway in Doncaster",
+   "suburb": "Doncaster",
+   "img": [
+    {
+     "w": 810,
+     "h": 810,
+     "src": "/img/work/commercial-lawn-maintenance-doncaster-810.webp"
+    },
+    {
+     "w": 720,
+     "h": 720,
+     "src": "/img/work/commercial-lawn-maintenance-doncaster-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 420,
+     "src": "/img/work/commercial-lawn-maintenance-doncaster-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "lawn-edging-under-stairs-rosanna",
+   "cat": "mowing",
+   "alt": "Lawn trimmed neatly under timber stairs in Rosanna",
+   "suburb": "Rosanna",
+   "img": [
+    {
+     "w": 810,
+     "h": 540,
+     "src": "/img/work/lawn-edging-under-stairs-rosanna-810.webp"
+    },
+    {
+     "w": 720,
+     "h": 480,
+     "src": "/img/work/lawn-edging-under-stairs-rosanna-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 280,
+     "src": "/img/work/lawn-edging-under-stairs-rosanna-420.webp"
+    }
+   ]
+  }
+ ],
+ "hero": {
+  "alt": "Freshly mown and striped front lawn with crisp edges after a Great Lawn Program visit",
+  "img": [
+   {
+    "w": 1920,
+    "h": 1080,
+    "src": "/img/work/hero-striped-front-lawn-1920.webp"
+   },
+   {
+    "w": 1600,
+    "h": 900,
+    "src": "/img/work/hero-striped-front-lawn-1600.webp"
+   },
+   {
+    "w": 1200,
+    "h": 675,
+    "src": "/img/work/hero-striped-front-lawn-1200.webp"
+   },
+   {
+    "w": 800,
+    "h": 450,
+    "src": "/img/work/hero-striped-front-lawn-800.webp"
+   }
+  ]
+ }
+}
