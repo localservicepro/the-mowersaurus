@@ -1,6 +1,7 @@
 import { SITE, SERVICES, svc } from '../data.mjs';
 import { layout } from '../layout.mjs';
-import { icon, picture, work, workImg, baSlider, quoteForm, tierSection, areaMap, suburbList, faqBlock, faqSchema, ctaBand, grassEdge, esc } from '../ui.mjs';
+import { icon, picture, work, workImg, baSlider, quoteForm, tierSection, areaMap, suburbList, faqBlock, faqSchema, ctaBand, grassEdge, esc, fbTile } from '../ui.mjs';
+import { videos } from '../videos.mjs';
 import media from '../media.json' with { type: 'json' };
 
 export const HOME_FAQ = [
@@ -19,6 +20,7 @@ export const HOME_FAQ = [
 ];
 
 export default function home() {
+  const { featured } = videos();
   const hero = media.hero;
   const lawn = svc('lawn-care-programs');
   const garden = svc('garden-maintenance-programs');
@@ -90,7 +92,10 @@ export default function home() {
       ${baSlider('backyard-lawn-transformation-templestowe')}
       ${baSlider('backyard-lawn-transformation-mill-park')}
     </div>
-    <div class="reel teaser" style="margin-top:36px">
+    ${featured ? `<div class="reel teaser"><div class="teaser-video">
+      <div><span class="eyebrow" style="color:var(--tan)">Watch our work</span><p style="font-family:var(--head);font-size:1.7rem;color:#fff;line-height:1.15;margin:0 0 10px">Stripes, edges, hedges and big transformations</p><p style="color:#D6E6D1">Real Mowersaurus jobs, filmed on site.</p><a class="btn btn-light" href="/projects/">See all our projects</a></div>
+      ${fbTile(featured, { label: 'Play our highlight video' })}
+    </div></div>` : `<div class="reel teaser" style="margin-top:36px">
       <div class="reel-placeholder">
         <div>
           <span class="pending">Highlight reel coming soon</span>
@@ -99,7 +104,7 @@ export default function home() {
           <a class="btn btn-light" href="/projects/" style="margin-top:12px">See our work</a>
         </div>
       </div>
-    </div>
+    </div>`}
   </div>
 </section>
 

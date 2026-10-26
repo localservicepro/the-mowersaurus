@@ -1,18 +1,10 @@
 import { SITE, SERVICES, SUBURBS, svc } from '../data.mjs';
-import { icon, picture, workImg, baSlider, quoteSection, faqBlock, faqSchema, pageHero, related, suburbList, areaMap, ctaBand, esc, grassEdge } from '../ui.mjs';
+import { icon, picture, workImg, baSlider, quoteSection, faqBlock, faqSchema, pageHero, related, suburbList, areaMap, ctaBand, esc, grassEdge, fbFeatured, fbTile } from '../ui.mjs';
+import { videos } from '../videos.mjs';
 import { HOME_FAQ } from './home.mjs';
 import media from '../media.json' with { type: 'json' };
 
 const HOME = { name: 'Home', href: '/' };
-
-// The highlight reel is not built yet: the client's clips could not be transferred.
-// When it exists, fill this in and the page switches from placeholder to the real reel
-// (and emits VideoObject schema).
-export const REEL = null; /* {
-  mp4: '/video/mowersaurus-highlight-reel.mp4', webm: '/video/mowersaurus-highlight-reel.webm',
-  poster: '/video/mowersaurus-highlight-reel-poster.webp', duration: 'PT1M10S', uploadDate: '2026-11-01',
-  clips: [{ mp4, webm, poster, caption }]
-} */
 
 const CATS = [
   ['all', 'All'], ['lawn-programs', 'Lawn Programs'], ['lawn-renovation', 'Lawn Renovation'], ['mowing', 'Mowing'],
@@ -29,9 +21,10 @@ function projects() {
   const items = media.gallery.filter((g) => !g.slug.startsWith('hero')).concat(extra);
   const gallery = items.map((g) => `<figure class="g-item" data-cat="${g.cat}"><button type="button" data-lightbox="${g.img[0].src}" data-caption="${esc(g.alt)}" aria-label="Enlarge photo: ${esc(g.alt)}">${picture(g.img, g.alt, { sizes: '(min-width:1200px) 290px, (min-width:520px) 34vw, 46vw' })}</button><figcaption>${esc(CATS.find((c) => c[0] === g.cat)[1])}${g.suburb ? ` · ${esc(g.suburb)}` : ''}</figcaption></figure>`).join('');
 
-  const reel = REEL
-    ? `<div class="reel" data-reel><video muted loop playsinline preload="none" poster="${REEL.poster}" data-lazy-video><source data-src="${REEL.webm}" type="video/webm"><source data-src="${REEL.mp4}" type="video/mp4"></video>
-        <button class="btn btn-primary play" data-video-lightbox="${REEL.mp4}">${icon('play')}Watch with sound</button></div>`
+  // Facebook video embeds from src/videos.mjs; a placeholder until any are added.
+  const { featured, rest } = videos();
+  const reel = featured
+    ? fbFeatured(featured)
     : `<div class="reel"><div class="reel-placeholder"><div>
         <img src="/img/brand/logo-on-dark.webp" alt="" width="340" height="243" loading="lazy">
         <span class="pending">Video placeholder: highlight reel in production</span>
@@ -48,7 +41,7 @@ ${pageHero({ trail, h1: 'Our Lawn &amp; Garden Projects', lead: 'Real jobs from 
     <h2 id="reel-h">See The Mowersaurus at work</h2>
     <p class="lead">Stripes going in, edges getting sharp, hedges taking shape, all on real north-east properties.</p>
     ${reel}
-    ${REEL && REEL.clips ? `<div class="clip-grid">${REEL.clips.map((c) => `<figure class="g-item"><button type="button" data-video-lightbox="${c.mp4}" data-caption="${esc(c.caption)}"><img src="${c.poster}" alt="${esc(c.caption)}" loading="lazy"></button><figcaption>${esc(c.caption)}</figcaption></figure>`).join('')}</div>` : ''}
+    ${rest.length ? `<div class="clip-grid">${rest.map((v) => fbTile(v)).join('')}</div>` : ''}
   </div>
 </section>
 
@@ -73,8 +66,9 @@ ${pageHero({ trail, h1: 'Our Lawn &amp; Garden Projects', lead: 'Real jobs from 
 ${ctaBand({ heading: 'Want results like these?', text: 'Get a free quote for your lawn or garden, or call us to talk it through.' })}
 ${quoteSection({ heading: 'Start your own before &amp; after' })}
 `;
-  const schema = REEL ? [{ '@context': 'https://schema.org', '@type': 'VideoObject', name: 'The Mowersaurus highlight reel', description: 'Real lawn and garden jobs across Melbourne\'s north east: mowing stripes, edging, hedging, renovations and finished lawns.', thumbnailUrl: [`${SITE.url}${REEL.poster}`], uploadDate: REEL.uploadDate, duration: REEL.duration, contentUrl: `${SITE.url}${REEL.mp4}` }] : [];
-  return { path: '/projects/', title: 'Lawn & Garden Projects | Before & After | The Mowersaurus', description: 'Real before & after lawn and garden projects across Melbourne\'s north east: lawn programs, renovations, hedging, mulching & commercial grounds.', body, trail, schema };
+  // No VideoObject schema: Facebook embeds don't give us a thumbnail or upload date,
+  // which Google requires, so the videos are indexed on Facebook instead.
+  return { path: '/projects/', title: 'Lawn & Garden Projects | Before & After | The Mowersaurus', description: 'Real before & after lawn and garden projects across Melbourne\'s north east: lawn programs, renovations, hedging, mulching & commercial grounds.', body, trail };
 }
 
 // ------------------------------------------------------------------ service areas
@@ -357,6 +351,7 @@ ${pageHero({ trail, h1: 'Privacy Policy', lead: 'How The Mowersaurus collects an
 <h2>What we collect</h2><p>When you request a quote, we collect the details you enter: your name, email address, phone number, property address, property size, the service you need and any job notes.</p>
 <h2>How we use it</h2><p>We use your details only to respond to your enquiry, prepare a quote and book and carry out work. We don't sell your information.</p>
 <h2>Website analytics &amp; tracking</h2><p>This website uses a tracking script from our customer-management platform to record enquiries and understand how visitors use the site. It may use cookies.</p>
+<h2>Facebook videos</h2><p>Some videos on this site are embedded from our Facebook page. When a video loads, Facebook may set cookies and collect usage data under its own privacy policy.</p>
 <h2>Photos of our work</h2><p>Project photos on this site are labelled by service and suburb only. We don't publish client names, street addresses or house numbers.</p>
 <h2>Access &amp; contact</h2><p>To ask about, update or delete the information we hold about you, email <a href="mailto:${SITE.email}">${SITE.email}</a> or call ${SITE.phone}.</p>
 </div></section>`;

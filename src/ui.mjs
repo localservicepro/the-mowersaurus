@@ -417,3 +417,23 @@ export function faqSchema(items) {
 export function breadcrumbSchema(trail) {
   return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: trail.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, item: `${SITE.url}${t.href}` })) };
 }
+
+// ------------------------------------------------------------------ Facebook video embeds
+const FB_ALLOW = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+// Featured player: the iframe only gets its src when it nears the viewport (see site.js).
+export function fbFeatured(v) {
+  return `<div class="fb-frame${v.vertical ? ' vertical' : ''}" style="aspect-ratio:${v.w}/${v.h}">
+    <iframe data-src="${esc(v.player)}" title="${esc(v.caption || 'The Mowersaurus video')}" allow="${FB_ALLOW}" allowfullscreen loading="lazy"></iframe>
+  </div>
+  ${v.caption ? `<p class="fb-cap">${esc(v.caption)}</p>` : ''}`;
+}
+// Click-to-play tile: nothing loads from Facebook until it's clicked.
+export function fbTile(v, { label = 'Play video' } = {}) {
+  return `<figure class="g-item fb-tile">
+    <button type="button" data-fb-embed="${esc(v.player)}" data-aspect="${v.w}/${v.h}" data-caption="${esc(v.caption || '')}" aria-label="${esc(label)}: ${esc(v.caption || 'The Mowersaurus video')}">
+      ${v.poster ? `<img src="${esc(v.poster)}" alt="" loading="lazy">` : '<span class="fb-tile-bg"><img src="/img/brand/logo-on-dark.webp" alt="" width="340" height="243" loading="lazy"></span>'}
+      <span class="fb-play">${icon('play')}</span>
+    </button>
+    ${v.caption ? `<figcaption>${esc(v.caption)}</figcaption>` : ''}
+  </figure>`;
+}

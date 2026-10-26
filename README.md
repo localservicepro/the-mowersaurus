@@ -54,7 +54,7 @@ Kept at the same path: `/lawn-mowing`, `/types-of-turf`, `/weed-control`, `/fert
 
 ## Open items
 
-- **Highlight reel:** the client clips are 29–180 MB and couldn't be transferred into the build environment. `/projects/` shows a marked placeholder. To switch it on, fill in `REEL` in `src/pages/other.mjs`, which also enables the VideoObject schema.
+- **Videos (Facebook embeds):** paste Facebook embed codes, or plain video URLs, into `src/videos.mjs` and rebuild. The first video (or the one marked `featured: true`) plays at the top of `/projects/` and gets a click-to-play teaser on the homepage. The rest form a click-to-play grid that opens in a pop-up. Each video must be Public on Facebook. Until any are added, a marked placeholder shows. There's no VideoObject schema because Facebook embeds don't provide the thumbnail and upload date Google needs.
 - **Per-tier inclusions:** marked "Awaiting client confirmation" on every tier card.
 - **Indicative pricing** ($300–$700/month for 350 m²) is copied from the current site and needs the client's confirmation.
 - **Privacy policy:** a draft for client review.
