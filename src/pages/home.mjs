@@ -94,20 +94,6 @@ export default function home() {
       ${baSlider('backyard-lawn-transformation-templestowe')}
       ${baSlider('backyard-lawn-transformation-mill-park')}
     </div>
-    <div class="reel teaser" style="margin-top:36px">
-      <div class="teaser-video">
-        <div>
-          <span class="eyebrow" style="color:var(--tan)">Highlight reel</span>
-          <p style="font-family:var(--head);font-size:1.7rem;color:#fff;line-height:1.15;margin:0 0 10px">Stripes, edges, hedges and a wave from the team</p>
-          <p style="color:#D6E6D1">22 seconds of real Mowersaurus jobs. Turn the sound on.</p>
-          <a class="btn btn-light" href="/projects/">See all our projects</a>
-        </div>
-        <button type="button" class="reel-tile" data-video-lightbox="${REEL.full.mp4}" data-video-webm="${REEL.full.webm}" data-caption="${esc(REEL.name)}" aria-label="Play the highlight reel with sound">
-          <img src="${REEL.poster[640]}" srcset="${REEL.poster[640]} 640w, ${REEL.poster[1280]} 1280w" sizes="(min-width:900px) 560px, 100vw" width="1280" height="720" alt="" loading="lazy">
-          <span class="play-badge">${icon("play")}</span>
-        </button>
-      </div>
-    </div>
   </div>
 </section>
 

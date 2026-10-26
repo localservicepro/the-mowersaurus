@@ -68,6 +68,6 @@ Two forms share the same GHL field names: the in-page form (`#quote`, on every p
 ## Open items
 
 - **More video clips:** the individual raw clips in Drive (29–180 MB) are still untransferred. The site currently uses the 22-second highlight reel supplied separately.
-- **Per-tier inclusions:** marked "Awaiting client confirmation" on every tier card.
+- **Per-tier inclusions:** not shown on the tier cards yet; add them once Dan supplies the list.
 - **Indicative pricing** ($300–$700/month for 350 m²) is copied from the current site and needs the client's confirmation.
 - **Privacy policy:** a draft for client review.

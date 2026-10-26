@@ -229,7 +229,6 @@ export function tierSection(kind, { headingLevel = 2, intro = true } = {}) {
     <div class="meter" aria-hidden="true"><i style="width:${t.meter}%"></i></div>
     <p class="pos">${t.pos}</p>
     ${isLawn ? `<p class="price">Indicative: <b>${LAWN_PRICING[t.key]}</b> / month<br><span class="note">for an average 350 m² lawn</span></p>` : ''}
-    <div class="incl"><strong>What's included</strong>Full inclusions for this level are being finalised. <span class="pending">Awaiting client confirmation</span></div>
     <a class="btn ${t.featured ? 'btn-primary' : 'btn-ghost'}" href="#quote" data-quote data-service="${esc(s.option)}" data-tier="${t.name} ${what} Program">Get a Quote</a>
   </article>`).join('');
   const scope = (isLawn ? TIER_SCOPE.lawn : TIER_SCOPE.garden).map((x) => `<li>${icon('check')}${x}</li>`).join('');
@@ -457,7 +456,7 @@ export function areaPanel({ listHeading = 'Every suburb we service' } = {}) {
     <div class="area-col-list">
       <h3 class="area-list-h">${listHeading}</h3>
       <ol class="area-list" data-area-list aria-label="Suburbs we service">${items}</ol>
-      <p class="note area-list-note">Lights up as the mower reaches each suburb. Click a suburb to find it on the map.</p>
+      <p class="note area-list-note">Each suburb lights up as the mower reaches it. Click one to find it on the map.</p>
     </div>
   </div>`;
 }
