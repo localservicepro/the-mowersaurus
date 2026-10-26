@@ -123,7 +123,7 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   const pos = await fr.evaluate((e) => e.style.getPropertyValue('--pos'));
   ok('Before/after slider drags on touch', pos && parseFloat(pos) < 40, pos);
   await m.tap('.mbar [data-quote]');
-  await m.waitForTimeout(800);
+  await m.waitForTimeout(2500);
   ok('Mobile quote button scrolls to form', await m.$eval('#quote', (e) => { const r = e.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }));
   await mc.close();
   await b.close();

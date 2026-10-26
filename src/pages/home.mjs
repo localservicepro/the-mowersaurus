@@ -1,6 +1,6 @@
 import { SITE, SERVICES, REEL, svc } from '../data.mjs';
 import { layout } from '../layout.mjs';
-import { icon, picture, work, workImg, baSlider, quoteForm, tierSection, areaMap, suburbList, faqBlock, faqSchema, ctaBand, grassEdge, esc, reelMedia, reelSoundButton, reelSchema } from '../ui.mjs';
+import { icon, picture, work, workImg, baSlider, quoteSection, tierSection, areaMap, suburbList, faqBlock, faqSchema, ctaBand, grassEdge, esc, reelMedia, reelSoundButton, reelSchema } from '../ui.mjs';
 import media from '../media.json' with { type: 'json' };
 
 export const HOME_FAQ = [
@@ -26,7 +26,7 @@ export default function home() {
   const cardImg = { 'lawn-mowing': 'front-lawn-mow-and-edge-in-progress', 'gardening': 'front-lawn-and-clipped-hedge', 'mulching-landscaping': 'mulched-garden-beds-front-lawn-rosanna', 'lawn-renovation': 'dethatching-backyard-lawn-renovation' };
 
   const body = `
-<section class="hero has-reel">
+<section class="hero has-reel solo">
   <div class="hero-media">${reelMedia({ eager: true })}</div>
   <div class="wrap">
     <div>
@@ -35,16 +35,20 @@ export default function home() {
       <p class="lead">Looking for lawn care in Melbourne that looks after the whole lawn, not just the mow? Our qualified horticulturalists run all-inclusive lawn and garden programs across the north east, from Watsonia North to Doncaster and Templestowe. You pick the result. We handle the rest.</p>
       <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote>Get a Free Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
       <p class="hero-watch">${reelSoundButton('btn-link-light')}</p>
-      <ul class="trust">
-        <li>${icon('cap')}Qualified horticulturalists</li>
-        <li>${icon('shield')}Fully insured</li>
-        <li>${icon('building')}Residential &amp; commercial</li>
-        <li>${icon('calendar')}Local since ${SITE.founded}</li>
-      </ul>
     </div>
-    <div id="quote">${quoteForm({ title: 'Get a free quote', idPrefix: 'hq' })}</div>
   </div>
   <div class="hero-edge">${grassEdge('#fff')}</div>
+</section>
+
+<section class="trust-bar" aria-label="Why choose The Mowersaurus">
+  <div class="wrap">
+    <ul class="trust-list">
+      <li>${icon('cap')}<span><strong>Qualified horticulturalists</strong>Experienced, not just enthusiastic</span></li>
+      <li>${icon('shield')}<span><strong>Fully insured</strong>Residential &amp; commercial</span></li>
+      <li>${icon('star')}<span><strong>Good, Great or Amazing</strong>You choose the result</span></li>
+      <li>${icon('pin')}<span><strong>Local since ${SITE.founded}</strong>Based in Watsonia North</span></li>
+    </ul>
+  </div>
 </section>
 
 <section class="section" aria-labelledby="programs-h">
@@ -160,6 +164,8 @@ export default function home() {
     <p style="margin-top:18px"><a class="link-arrow" href="/service-areas/">View all service areas</a></p>
   </div>
 </section>
+
+${quoteSection()}
 
 ${faqBlock(HOME_FAQ, { heading: 'Lawn care questions, answered' })}
 

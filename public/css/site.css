@@ -481,3 +481,16 @@ h4{font-size:1.1rem}
 .play-badge svg{width:30px;height:30px;margin-left:4px}
 .reel-tile:hover .play-badge{transform:scale(1.08)}
 .reel.teaser{aspect-ratio:auto;background:none;box-shadow:none;border-radius:0;overflow:visible}
+
+/* Homepage hero without the form: single column, badges moved to a trust bar below */
+.hero.solo .wrap{grid-template-columns:1fr;min-height:min(72vh,720px);align-content:center;padding-top:clamp(56px,9vw,120px);padding-bottom:clamp(88px,11vw,140px)}
+.hero.solo h1{max-width:16ch}
+.hero.solo .lead{max-width:58ch}
+.hero.solo::before{background:linear-gradient(100deg,rgba(20,42,23,.88) 0%,rgba(20,42,23,.66) 40%,rgba(20,42,23,.22) 72%,rgba(20,42,23,.08) 100%)}
+.trust-bar{background:#fff;position:relative;z-index:3;margin-top:-2px}
+.trust-list{list-style:none;margin:0;padding:22px 0 0;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.trust-list li{display:flex;gap:14px;align-items:center;padding:18px 20px;border-radius:16px;background:var(--bg-tint);border:1px solid var(--line)}
+.trust-list svg{flex:none;width:40px;height:40px;padding:9px;box-sizing:border-box;border-radius:12px;background:rgba(89,181,72,.16);color:var(--green-deep)}
+.trust-list strong{display:block;font-size:.98rem;color:var(--green-deep)}
+.trust-list span{font-size:.88rem;color:var(--muted);line-height:1.35}
+@media(max-width:1023px){.hero.solo .wrap{min-height:0;padding-top:24px;padding-bottom:72px}}
