@@ -229,7 +229,7 @@ export function tierSection(kind, { headingLevel = 2, intro = true } = {}) {
     <div class="meter" aria-hidden="true"><i style="width:${t.meter}%"></i></div>
     <p class="pos">${t.pos}</p>
     ${isLawn ? `<p class="price">Indicative: <b>${LAWN_PRICING[t.key]}</b> / month<br><span class="note">for an average 350 m² lawn</span></p>` : ''}
-    <a class="btn ${t.featured ? 'btn-primary' : 'btn-ghost'}" href="#quote" data-quote data-service="${esc(s.option)}" data-tier="${t.name} ${what} Program">Get a Quote</a>
+    <a class="btn ${t.featured ? 'btn-primary' : 'btn-ghost'}" href="#quote" data-quote-modal data-service="${esc(s.option)}" data-tier="${t.name} ${what} Program">Get a Quote</a>
   </article>`).join('');
   const scope = (isLawn ? TIER_SCOPE.lawn : TIER_SCOPE.garden).map((x) => `<li>${icon('check')}${x}</li>`).join('');
   return `<section class="tiers-wrap" aria-labelledby="tiers-${kind}">
@@ -272,7 +272,7 @@ export function faqBlock(items, { heading = 'Frequently asked questions', id = '
 export function ctaBand({ heading = 'Want results like these?', text = 'Get a free quote for your lawn or garden, or give us a call.', service = '' } = {}) {
   return `<section class="cta-band"><div class="wrap">
     <div><h2>${heading}</h2><p>${text}</p></div>
-    <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote${service ? ` data-service="${esc(service)}"` : ''}>Get a Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
+    <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote-modal${service ? ` data-service="${esc(service)}"` : ''}>Get a Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
   </div></section>`;
 }
 
@@ -288,7 +288,7 @@ export function pageHero({ trail, h1, lead, img, cta = true, service = '', bylin
     ${crumbs(trail)}
     <h1>${h1}</h1>
     ${lead ? `<p class="lead">${lead}</p>` : ''}
-    ${cta ? `<div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote${service ? ` data-service="${esc(service)}"` : ''}>Get a Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}Call ${SITE.phone}</a></div>` : ''}
+    ${cta ? `<div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote-modal${service ? ` data-service="${esc(service)}"` : ''}>Get a Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}Call ${SITE.phone}</a></div>` : ''}
     ${byline ? `<p class="byline">${icon('cap')}Written by ${SITE.founder}, qualified horticulturalist and founder of The Mowersaurus</p>` : ''}
   </div>
   <div class="hero-edge">${grassEdge('#fff')}</div>

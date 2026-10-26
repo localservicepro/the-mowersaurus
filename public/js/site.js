@@ -84,17 +84,17 @@
   // Pop-up form (header + hero buttons)
   var modal = $('#quote-modal');
   var modalForm = modal && modal.querySelector('[data-quote-form]');
-  var openModal = function (service) {
+  var openModal = function (service, tier) {
     if (!modal || typeof modal.showModal !== 'function') { var t = $('#quote'); if (t) t.scrollIntoView(); return; }
     // carry over the service already chosen on the page, if any
     var pageSel = mainForm && mainForm.querySelector('select[name="service_needed"]');
-    preselect(modalForm, service || (pageSel && pageSel.value) || '');
+    preselect(modalForm, service || (pageSel && pageSel.value) || '', tier);
     modal.showModal();
     var first = modalForm.querySelector('input[name="full_name"]');
     if (first && window.matchMedia('(min-width: 600px)').matches) first.focus();
   };
   $$('[data-quote-modal]').forEach(function (a) {
-    a.addEventListener('click', function (e) { e.preventDefault(); openModal(a.getAttribute('data-service')); });
+    a.addEventListener('click', function (e) { e.preventDefault(); openModal(a.getAttribute('data-service'), a.getAttribute('data-tier')); });
   });
   if (modal) {
     $('[data-close-modal]', modal).addEventListener('click', function () { modal.close(); });

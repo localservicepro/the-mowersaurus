@@ -20,26 +20,31 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   ok('Dropdown closes on Escape', !(await d.$eval('.nav-dropdown', (e) => e.classList.contains('open'))));
   ok('Dropdown lists All Services + 6 services', (await d.$$('.dropdown-panel .dd-item')).length === 7);
 
-  // tier CTA pre-selects service + tier
-  await d.click('#panel-lawn .tier.featured [data-quote]');
-  await d.waitForTimeout(700);
-  ok('Great Lawn CTA pre-selects Lawn Care Programs', (await d.$eval('#quote-form select', (s) => s.value)) === 'Lawn Care Programs (Good, Great & Amazing)');
-  ok('Great Lawn CTA notes tier', (await d.$eval('#quote-form textarea', (t) => t.value)).includes('Great Lawn Program'));
+  // tier CTA opens the pop-up with service + tier pre-filled
+  await d.click('#panel-lawn .tier.featured [data-quote-modal]');
+  await d.waitForTimeout(500);
+  ok('Great Lawn CTA opens pop-up', await d.$eval('#quote-modal', (x) => x.open));
+  ok('Great Lawn CTA pre-selects Lawn Care Programs', (await d.$eval('#quote-form-modal select', (s) => s.value)) === 'Lawn Care Programs (Good, Great & Amazing)');
+  ok('Great Lawn CTA notes tier', (await d.$eval('#quote-form-modal textarea', (t) => t.value)).includes('Great Lawn Program'));
+  await d.keyboard.press('Escape'); await d.waitForTimeout(200);
   await d.click('#tab-garden');
   ok('Garden tab shows garden tiers', await d.$eval('#panel-garden', (e) => !e.hidden));
-  await d.click('#panel-garden .tier [data-quote]');
-  ok('Garden CTA pre-selects Garden Maintenance Programs', (await d.$eval('#quote-form select', (s) => s.value)) === 'Garden Maintenance Programs');
+  await d.click('#panel-garden .tier [data-quote-modal]'); await d.waitForTimeout(400);
+  ok('Garden CTA pre-selects Garden Maintenance Programs', (await d.$eval('#quote-form-modal select', (s) => s.value)) === 'Garden Maintenance Programs');
+  await d.keyboard.press('Escape'); await d.waitForTimeout(200);
+  await d.evaluate(() => { document.querySelector('#quote-form-modal').reset(); });
 
   // form validation + submit + redirect
   await d.fill('#quote-form textarea', '');
   await d.click('#quote-form button[type=submit]');
   ok('Empty submit blocked with errors', (await d.$$('#quote-form .field.invalid')).length >= 3 && d.url().endsWith('/') || d.url().includes('#quote'));
-  await d.fill('[name=full_name]', 'Test Person');
-  await d.fill('[name=phone]', '0400 000 000');
-  await d.fill('[name=email]', 'test@example.com');
-  await d.fill('[name=property_address]', 'Templestowe VIC');
-  await d.fill('[name=property_size]', '350 m2');
-  await d.fill('[name=job_notes]', 'Browser test');
+  await d.fill('#quote-form [name=full_name]', 'Test Person');
+  await d.fill('#quote-form [name=phone]', '0400 000 000');
+  await d.fill('#quote-form [name=email]', 'test@example.com');
+  await d.fill('#quote-form [name=property_address]', 'Templestowe VIC');
+  await d.fill('#quote-form [name=property_size]', '350 m2');
+  await d.selectOption('#quote-form [name=service_needed]', { label: 'Lawn Mowing & Overgrown Lawn Cuts' });
+  await d.fill('#quote-form [name=job_notes]', 'Browser test');
   const names = await d.$$eval('#quote-form [name]', (els) => els.map((e) => e.name));
   ok('GHL field names present', ['full_name', 'email', 'phone', 'property_address', 'property_size', 'service_needed', 'job_notes'].every((n) => names.includes(n)), names.join(','));
   let submitEvent = false;

@@ -48,7 +48,7 @@ Kept at the same path: `/lawn-mowing`, `/types-of-turf`, `/weed-control`, `/fert
 
 ## Quote forms
 
-Two forms share the same GHL field names: the in-page form (`#quote`, on every page) and a pop-up (`#quote-modal`) opened by the header and hero "Get a Quote" buttons (on phones the header keeps a call icon and the quote button at every width; there is no sticky bottom bar). Tier cards and service CTAs scroll to the in-page form and pre-select the service; the pop-up pre-selects whatever the page's form has chosen. Both redirect to `/thank-you/` on submit. The GHL tracking script sits at the end of `<body>` so it never blocks rendering.
+Two forms share the same GHL field names: the in-page form (`#quote`, on every page) and a pop-up (`#quote-modal`) opened by every "Get a Quote" button on the site: header, hero, tier cards, CTA bands and service-page heroes (on phones the header keeps a call icon and the quote button at every width; there is no sticky bottom bar). Buttons with a `data-service` / `data-tier` pre-fill the pop-up; otherwise it picks up whatever the in-page form has chosen. Both redirect to `/thank-you/` on submit. The GHL tracking script sits at the end of `<body>` so it never blocks rendering.
 
 ## Highlight reel
 

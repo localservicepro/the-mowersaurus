@@ -273,7 +273,7 @@ ${pageHero({ trail, h1, lead, img, cta: false })}
 <section class="section"><div class="wrap grid-2 top">
   <article class="prose">${html}</article>
   <aside class="stack">
-    <div class="feature-item"><h3>Need a hand?</h3><p>${cta}</p><a class="btn btn-primary" href="#quote" data-quote style="margin-top:10px">Get a Quote</a></div>
+    <div class="feature-item"><h3>Need a hand?</h3><p>${cta}</p><a class="btn btn-primary" href="#quote" data-quote-modal style="margin-top:10px">Get a Quote</a></div>
     <div class="feature-item"><h3>More yard tips</h3><ul class="checks"><li>${icon('check')}<a href="/types-of-turf/">Common types of turf</a></li><li>${icon('check')}<a href="/weed-control/">Weed control</a></li><li>${icon('check')}<a href="/fertilizing/">Fertilising your lawn</a></li></ul></div>
   </aside>
 </div></section>
