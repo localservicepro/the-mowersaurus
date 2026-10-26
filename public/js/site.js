@@ -193,24 +193,6 @@
       $$('.lb-nav', lb).forEach(function (n) { n.hidden = lbList.length < 2; });
       showImg(b); lb.showModal(); return;
     }
-    var fb = e.target.closest('[data-fb-embed]');
-    if (fb) {
-      buildLb(); lbList = [];
-      $$('.lb-nav', lb).forEach(function (n) { n.hidden = true; });
-      var src = fb.getAttribute('data-fb-embed');
-      lbBody.innerHTML = '';
-      var frame = document.createElement('div');
-      frame.className = 'lb-frame';
-      frame.style.setProperty('--ar', fb.getAttribute('data-aspect'));
-      var ifr = document.createElement('iframe');
-      ifr.src = src + (src.indexOf('autoplay') < 0 ? '&autoplay=true' : '');
-      ifr.title = fb.getAttribute('data-caption') || 'The Mowersaurus video';
-      ifr.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
-      ifr.allowFullscreen = true;
-      frame.appendChild(ifr); lbBody.appendChild(frame);
-      lbCap.textContent = fb.getAttribute('data-caption') || '';
-      lb.showModal(); return;
-    }
     var v = e.target.closest('[data-video-lightbox]');
     if (v) {
       buildLb(); lbList = [];
@@ -232,14 +214,6 @@
       if (en[0].isIntersecting) { io.disconnect(); load(); }
     }, { rootMargin: '300px' });
     io.observe(v);
-  });
-
-  /* ---------------- Facebook featured video: set src only near the viewport ---------------- */
-  $$('.fb-frame iframe[data-src]').forEach(function (f) {
-    var go = function () { f.src = f.getAttribute('data-src'); f.removeAttribute('data-src'); };
-    if (!('IntersectionObserver' in window)) return go();
-    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); go(); } }, { rootMargin: '400px' });
-    io.observe(f);
   });
 
   /* ---------------- reveal on scroll ---------------- */
