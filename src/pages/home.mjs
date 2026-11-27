@@ -23,7 +23,7 @@ export default function home() {
   const lawn = svc('lawn-care-programs');
   const garden = svc('garden-maintenance-programs');
   const others = SERVICES.filter((s) => !['lawn-care-programs', 'garden-maintenance-programs'].includes(s.key));
-  const cardImg = { 'lawn-mowing': 'front-lawn-mow-and-edge-in-progress', 'gardening': 'front-lawn-and-clipped-hedge', 'mulching-landscaping': 'mulched-garden-beds-front-lawn-rosanna', 'lawn-renovation': 'dethatching-backyard-lawn-renovation' };
+  const cardImg = { 'lawn-mowing': 'front-lawn-mow-and-edge-in-progress', 'gardening': 'garden-bed-tidy-up-watsonia-after', 'mulching-landscaping': 'mulched-beds-exposed-aggregate-path', 'lawn-renovation': 'dethatching-backyard-lawn-renovation' };
 
   const body = `
 <section class="hero has-reel solo">

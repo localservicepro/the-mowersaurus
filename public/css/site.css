@@ -304,7 +304,8 @@ h4{font-size:1.1rem}
 .photo-pair img:nth-child(2){margin-top:36px}
 
 /* ---------- before / after ---------- */
-.ba-grid{display:grid;gap:26px;grid-template-columns:1fr;margin-top:34px}
+.ba-grid{display:grid;gap:26px;grid-template-columns:1fr;margin-top:34px;align-items:start}
+.ba-frame.tall{aspect-ratio:3/4}
 @media(min-width:760px){.ba-grid{grid-template-columns:1fr 1fr}}
 @media(min-width:1100px){.ba-grid.three{grid-template-columns:repeat(3,1fr)}}
 .ba{margin:0}

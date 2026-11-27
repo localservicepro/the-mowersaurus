@@ -15,7 +15,7 @@ function projects() {
   const trail = [HOME, { name: 'Projects', href: '/projects/' }];
   // Before/after pairs also feed the gallery filters (hedging + commercial would otherwise be thin).
   const pairCat = { 'gardening': 'hedging', 'lawn-mowing': 'mowing', 'lawn-renovation': 'lawn-renovation', 'lawn-care-programs': 'lawn-programs', 'garden-maintenance-programs': 'garden' };
-  const extra = media.pairs.filter((p) => ['hedge-and-lawn-tidy-rosanna', 'hedge-trimming-footpath-rosanna', 'commercial-grounds-tidy-up-doncaster'].includes(p.slug))
+  const extra = media.pairs.filter((p) => ['hedge-and-lawn-tidy-rosanna', 'hedge-trimming-footpath-rosanna', 'commercial-grounds-tidy-up-doncaster', 'side-garden-tidy-up-macleod', 'side-path-tidy-up-macleod'].includes(p.slug))
     .map((p) => ({ slug: p.slug + '-after', cat: p.slug.startsWith('commercial') ? 'commercial' : pairCat[p.service], alt: `${p.title}, ${p.suburb} (after)`, img: p.after_img }));
   const items = media.gallery.filter((g) => !g.slug.startsWith('hero')).concat(extra);
   const gallery = items.map((g) => `<figure class="g-item" data-cat="${g.cat}"><button type="button" data-lightbox="${g.img[0].src}" data-caption="${esc(g.alt)}" aria-label="Enlarge photo: ${esc(g.alt)}">${picture(g.img, g.alt, { sizes: '(min-width:1200px) 290px, (min-width:520px) 34vw, 46vw' })}</button><figcaption>${esc(CATS.find((c) => c[0] === g.cat)[1])}${g.suburb ? ` · ${esc(g.suburb)}` : ''}</figcaption></figure>`).join('');
@@ -212,7 +212,7 @@ ${pageHero({ trail, h1: 'About The Mowersaurus', lead: 'A horticulture business 
 ${ctaBand({ heading: 'Let\'s talk about your lawn', text: 'Get a free quote, or give us a call during business hours.' })}
 ${quoteSection()}
 `;
-  return { path: '/about/', title: 'About Us | Horticulturalist-Run Lawn Care | The Mowersaurus', description: 'The Mowersaurus was founded in 2021 by qualified horticulturalist Dan Travassaros to offer all-inclusive lawn & garden programs in Melbourne\'s north east.', body, trail, schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'About The Mowersaurus', about: { '@id': `${SITE.url}/#business` } }] };
+  return { path: '/about/', title: 'About Us | Horticulturalist-Run Lawn Care | The Mowersaurus', description: 'The Mowersaurus was founded in 2021 by qualified horticulturalist Dan to offer all-inclusive lawn & garden programs in Melbourne\'s north east.', body, trail, schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'About The Mowersaurus', about: { '@id': `${SITE.url}/#business` } }] };
 }
 
 // ------------------------------------------------------------------ contact

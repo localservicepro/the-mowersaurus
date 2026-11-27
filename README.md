@@ -63,7 +63,9 @@ Two forms share the same GHL field names: the in-page form (`#quote`, on every p
 
 - No street address anywhere. Schema is a service-area business (`Watsonia North VIC 3087`, no `streetAddress`, no `geo`).
 - The client's photo file names contain customer first names, so the slug → source-file mapping lives in the git-ignored `scripts/media-sources.local.json` (see the `.example.json`). Exported images are named by service and suburb.
-- The timestamp-camera overlay (date and street address) is cropped off every photo, and all EXIF/GPS metadata is stripped.
+- The timestamp-camera overlay (date and street address) is cropped off every photo, number plates and mailbox numbers are blurred (`blur=` boxes in `process_media.py`), and all EXIF/GPS metadata is stripped.
+- The pipeline is incremental: it only (re)builds entries whose source files are present in the raw folder and keeps every other export and `media.json` record, so new client photos can be added without the original batch.
+- The owner is referred to as "Dan" only (no surname anywhere, including schema), at the client's request.
 
 ## Open items
 

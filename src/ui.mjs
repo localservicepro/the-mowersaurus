@@ -65,7 +65,7 @@ export function baSlider(slug, { heading = 'h3' } = {}) {
   const sizes = '(min-width: 1100px) 380px, (min-width: 760px) 50vw, 48vw'; // mobile: capped so 3x screens don't pull 960px images
   const s = svc(p.service);
   return `<figure class="ba reveal">
-  <div class="ba-frame">
+  <div class="ba-frame${p.tall ? ' tall' : ''}">
     ${picture(p.after_img, `After: ${p.alt} (${p.suburb})`, { sizes, cls: 'ba-after' })}
     <div class="ba-before">${picture(p.before_img, `Before: ${p.alt} (${p.suburb})`, { sizes })}</div>
     <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
@@ -381,7 +381,6 @@ export function businessSchema() {
     additionalType: ['https://en.wikipedia.org/wiki/Lawn', 'https://en.wikipedia.org/wiki/Landscaping'],
     '@id': `${SITE.url}/#business`,
     name: SITE.name,
-    legalName: SITE.legalName,
     taxID: `ABN ${SITE.abn}`,
     description: "Horticulturalist-run lawn care and garden maintenance programs (Good, Great & Amazing) for residential and commercial properties across Melbourne's north east.",
     url: `${SITE.url}/`,

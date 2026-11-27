@@ -13,9 +13,8 @@ export const SITE = {
   postcode: '3087',
   locationLine: 'Watsonia North VIC 3087',
   abn: '49 341 320 766',
-  legalName: 'TRAVASSAROS, DANIEL WILLIAM',
   founded: '2021',
-  founder: 'Dan Travassaros',
+  founder: 'Dan',  // first name only, at the client's request
   hours: 'Monday – Friday, 8am – 5pm',
   facebook: 'https://www.facebook.com/TheMowersaurus/',
   instagram: 'https://www.instagram.com/the_mowersaurus/',
