@@ -122,18 +122,21 @@
       var fields = $$('input[required],select[required]', form);
       var bad = fields.filter(function (f) { return !validate(f); });
       if (bad.length) { bad[0].focus(); return; }
-      if (form.querySelector('input[name="website"]').value) return; // honeypot
+      if (form.querySelector('input[name="_hp_url"]').value) return; // honeypot
       var btn = form.querySelector('button[type="submit"]');
       btn.disabled = true; btn.textContent = 'Sending…';
-      // The GHL external tracking script listens for this submit event and captures the
-      // text fields. Photos can't travel that way, so the whole submission (fields +
-      // downscaled photos) is also posted to /api/quote, which forwards it to the CRM
-      // webhook. Either way we move to the thank-you page once both have had a moment.
-      var done = false;
-      var go = function () { if (!done) { done = true; window.location.href = '/thank-you/'; } };
-      var fallback = setTimeout(go, photos.files.length ? 15000 : 900);
-      sendQuote(form, photos.files).then(function () { setTimeout(go, 300); }, function () { setTimeout(go, 300); });
-      void fallback;
+      // Post to Sales Brain (it puts the lead into the CRM), then go to the thank-you page.
+      // On a network error, fall back to a normal post, which redirects there itself.
+      var first = (form.querySelector('input[name="full_name"]').value || '').trim().split(/\s+/)[0] || '';
+      try { sessionStorage.setItem('lead_name', first); } catch (err) { /* private mode */ }
+      var fd = new FormData(form); fd.delete('photos');
+      photos.files.forEach(function (f) { fd.append('photos', f, f.name); });
+      fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } })
+        .then(function (r) {
+          if (!r.ok) throw new Error('lead ' + r.status);
+          window.location.href = '/thank-you/' + (first ? '?name=' + encodeURIComponent(first) : '');
+        })
+        .catch(function () { HTMLFormElement.prototype.submit.call(form); });
     });
   });
 
@@ -153,7 +156,7 @@
         var img = document.createElement('img'); img.alt = f.name; img.src = URL.createObjectURL(f);
         img.onload = function () { URL.revokeObjectURL(img.src); };
         var rm = document.createElement('button'); rm.type = 'button'; rm.setAttribute('aria-label', 'Remove ' + f.name); rm.textContent = '×';
-        rm.addEventListener('click', function () { state.files.splice(i, 1); render(); fail(''); });
+        rm.addEventListener('click', function () { state.files.splice(i, 1); render(); sync(); fail(''); });
         li.appendChild(img); li.appendChild(rm); list.appendChild(li);
       });
     };
@@ -168,43 +171,18 @@
       });
       fail(msg); render();
     };
-    input.addEventListener('change', function () { add(input.files); input.value = ''; });
+    // Keep the real input in sync so a plain (no-fetch) post carries the photos too.
+    var sync = function () {
+      try { var dt = new DataTransfer(); state.files.forEach(function (f) { dt.items.add(f); }); input.files = dt.files; } catch (e) { /* old browsers */ }
+    };
+    input.addEventListener('change', function () { add(input.files); sync(); });
     ['dragenter', 'dragover'].forEach(function (ev) { box.addEventListener(ev, function (e) { e.preventDefault(); box.classList.add('drag'); }); });
     ['dragleave', 'drop'].forEach(function (ev) { box.addEventListener(ev, function (e) { e.preventDefault(); box.classList.remove('drag'); }); });
-    box.addEventListener('drop', function (e) { if (e.dataTransfer && e.dataTransfer.files) add(e.dataTransfer.files); });
+    box.addEventListener('drop', function (e) { if (e.dataTransfer && e.dataTransfer.files) { add(e.dataTransfer.files); sync(); } });
     form.addEventListener('reset', function () { state.files = []; render(); fail(''); });
     return state;
   }
 
-  // Downscale a photo to max 1600px JPEG so six photos stay a few MB in total.
-  function shrink(file) {
-    return new Promise(function (resolve) {
-      var give = function () { resolve(null); };
-      try {
-        var img = new Image(); var url = URL.createObjectURL(file);
-        img.onload = function () {
-          URL.revokeObjectURL(url);
-          var s = Math.min(1, 1600 / Math.max(img.width, img.height));
-          var c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
-          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-          resolve({ name: file.name.replace(/\.[^.]+$/, '') + '.jpg', type: 'image/jpeg', data: c.toDataURL('image/jpeg', 0.82) });
-        };
-        img.onerror = give; img.src = url;
-      } catch (e) { give(); }
-    });
-  }
-
-  function sendQuote(form, files) {
-    if (!window.fetch || !window.Promise) return Promise.reject();
-    var fields = {};
-    $$('input[name],select[name],textarea[name]', form).forEach(function (f) { if (f.type !== 'file' && f.name !== 'website') fields[f.name] = f.value; });
-    return Promise.all(files.map(shrink)).then(function (photos) {
-      return fetch('/api/quote', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fields: fields, page: location.pathname, photos: photos.filter(Boolean) })
-      });
-    });
-  }
 
   /* ---------------- before / after sliders ---------------- */
   $$('.ba-frame').forEach(function (f) {

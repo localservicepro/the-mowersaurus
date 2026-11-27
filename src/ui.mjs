@@ -171,13 +171,17 @@ export function footer() {
 }
 
 // ------------------------------------------------------------------ quote form
+// Leads post to Sales Brain, which puts them into the client's CRM (see inputs/lead-form.json).
+export const LEAD_ACTION = 'https://app.salesbrain.com.au/api/lead/1954af86-49da-4845-b5db-0cded1d56575';
 export function quoteForm({ preselect = '', title = 'Get a free quote', idPrefix = 'q', formId = 'quote-form' } = {}) {
   const opts = SERVICE_OPTIONS.map((o) => `<option${o === preselect ? ' selected' : ''}>${esc(o)}</option>`).join('');
   const f = (id) => `${idPrefix}-${id}`;
   return `<div class="quote-card">
   <h2>${title}</h2>
   <p class="note">Tell us about your property and we'll be in touch, usually within 2 hours on business days.</p>
-  <form class="qf" id="${formId}" action="/thank-you/" method="post" novalidate data-quote-form>
+  <form class="qf" id="${formId}" action="${LEAD_ACTION}" method="post" enctype="multipart/form-data" novalidate data-quote-form>
+    <input type="hidden" name="source_page" value="__SOURCE_PAGE__">
+    <input type="hidden" name="redirect" value="${SITE.url}/thank-you/">
     <div class="field"><label for="${f('name')}">Name <span class="req">*</span></label><input id="${f('name')}" name="full_name" autocomplete="name" required><p class="err">Please enter your name.</p></div>
     <div class="field"><label for="${f('phone')}">Phone <span class="req">*</span></label><input id="${f('phone')}" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="[0-9 +()-]{8,}"><p class="err">Please enter a phone number we can call.</p></div>
     <div class="field full"><label for="${f('email')}">Email <span class="req">*</span></label><input id="${f('email')}" name="email" type="email" autocomplete="email" required><p class="err">Please enter a valid email.</p></div>
@@ -192,7 +196,7 @@ export function quoteForm({ preselect = '', title = 'Get a free quote', idPrefix
       <ul class="photo-list" aria-live="polite"></ul>
       <p class="err"></p>
     </div>
-    <div class="hp" aria-hidden="true"><label for="${f('website')}">Website</label><input id="${f('website')}" name="website" tabindex="-1" autocomplete="off"></div>
+    <div class="hp" aria-hidden="true"><label for="${f('hp')}">Leave this empty</label><input id="${f('hp')}" name="_hp_url" tabindex="-1" autocomplete="off"></div>
     <div class="full"><button class="btn btn-primary" type="submit">Request my free quote</button></div>
     <p class="form-foot full">${icon('shield')}<span>We only use your details to quote and book your job. See our <a href="/privacy-policy/">privacy policy</a>.</span></p>
   </form>
