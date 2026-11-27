@@ -1,6 +1,6 @@
 # The Mowersaurus website
 
-Rebuild of themowersaurus.com.au (previously Wix) as a fast static site. No frameworks and no runtime dependencies: `node build.mjs` writes plain HTML to `dist/`.
+Rebuild of themowersaurus.com.au (previously Wix) as a fast static site. No frameworks and no runtime dependencies: `node build.mjs` writes plain HTML to `dist/` (run `npm install` once first; esbuild minifies the CSS and JS at build time).
 
 ## Commands
 
@@ -9,7 +9,7 @@ Rebuild of themowersaurus.com.au (previously Wix) as a fast static site. No fram
 | `node build.mjs` | Builds every page into `dist/`, plus `sitemap.xml`, `robots.txt`, `_redirects` and `vercel.json` |
 | `node scripts/serve.mjs` | Local server on :8080 that applies the 301s like Netlify does |
 | `python3 scripts/process_media.py <raw-folder>` | Re-exports the client photos to WebP (needs Pillow and `scripts/media-sources.local.json`) |
-| `node scripts/check.cjs` | Browser checks: nav, quote form → thank-you, sliders (touch), gallery, lightbox, map, reduced motion |
+| `node scripts/check.cjs` | Browser checks: nav, quote form and pop-up → thank-you, sliders (touch), gallery, lightbox, map, reduced motion, page-ready time |
 | `node scripts/weight.cjs /projects/` | Page weight, first view vs fully scrolled |
 
 The last two need Playwright and a running `serve.mjs`.
@@ -46,15 +46,30 @@ Kept at the same path: `/lawn-mowing`, `/types-of-turf`, `/weed-control`, `/fert
 | `/book-online`, `/service-page/*`, `/inquiry-services-page` | `/contact/` |
 | `/terms-conditions` | `/privacy-policy/` |
 
+## Quote forms
+
+Two forms share the same GHL field names: the in-page form (`#quote`, on every page) and a pop-up (`#quote-modal`) opened by every "Get a Quote" button on the site: header, hero, tier cards, CTA bands and service-page heroes (on phones the header keeps a call icon and the quote button at every width; there is no sticky bottom bar). Buttons with a `data-service` / `data-tier` pre-fill the pop-up; otherwise it picks up whatever the in-page form has chosen. Both redirect to `/thank-you/` on submit. The GHL tracking script sits at the end of `<body>` so it never blocks rendering.
+
+## Highlight reel
+
+`public/video/` holds the client-supplied 22-second reel, configured as `REEL` in `src/data.mjs`. House numbers visible at 0:15–0:21 are blurred.
+
+- **Silent loops** (`*-loop-720` and `*-loop-360`, WebM and MP4) autoplay in the homepage hero and the Projects hero. They load after the page does, only while on screen, and never under reduced motion or Save-Data.
+- **The full version with sound** (`mowersaurus-highlight-reel.*`) loads only when someone presses "Watch with sound".
+- **The poster frame** paints first.
+- The Projects page carries VideoObject schema.
+
 ## Privacy rules baked into the build
 
 - No street address anywhere. Schema is a service-area business (`Watsonia North VIC 3087`, no `streetAddress`, no `geo`).
 - The client's photo file names contain customer first names, so the slug → source-file mapping lives in the git-ignored `scripts/media-sources.local.json` (see the `.example.json`). Exported images are named by service and suburb.
-- The timestamp-camera overlay (date and street address) is cropped off every photo, and all EXIF/GPS metadata is stripped.
+- The timestamp-camera overlay (date and street address) is cropped off every photo, number plates and mailbox numbers are blurred (`blur=` boxes in `process_media.py`), and all EXIF/GPS metadata is stripped.
+- The pipeline is incremental: it only (re)builds entries whose source files are present in the raw folder and keeps every other export and `media.json` record, so new client photos can be added without the original batch.
+- The owner is referred to as "Dan" only (no surname anywhere, including schema), at the client's request.
 
 ## Open items
 
-- **Highlight reel:** the client clips are 29–180 MB and couldn't be transferred into the build environment. `/projects/` shows a marked placeholder. To switch it on, fill in `REEL` in `src/pages/other.mjs`, which also enables the VideoObject schema.
-- **Per-tier inclusions:** marked "Awaiting client confirmation" on every tier card.
+- **More video clips:** the individual raw clips in Drive (29–180 MB) are still untransferred. The site currently uses the 22-second highlight reel supplied separately.
+- **Per-tier inclusions:** not shown on the tier cards yet; add them once Dan supplies the list.
 - **Indicative pricing** ($300–$700/month for 350 m²) is copied from the current site and needs the client's confirmation.
 - **Privacy policy:** a draft for client review.

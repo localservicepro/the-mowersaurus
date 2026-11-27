@@ -90,6 +90,24 @@ PAIRS = [
          crop=(0, 0.12, 1, 0.78), aspect=(1, 1), service="lawn-mowing", suburb="Rosanna",
          title="Nature strip mow & edge",
          alt="long nature strip between the footpath and the kerb"),
+    # Added 26 Nov at the client's request (photos in the Drive "Before & After" folder).
+    # Watsonia: house number in the top-right corner is cropped off.
+    dict(slug="garden-bed-tidy-up-watsonia", crop=(0, 0.12, 1, 1), aspect=(4, 3), service="gardening", suburb="Watsonia",
+         title="Front garden bed weeded, planted & mulched",
+         alt="front garden bed along a weatherboard house, edged with brick"),
+    dict(slug="side-garden-tidy-up-macleod", crop=(0, 0, 1, 1), aspect=(3, 4), tall=True, service="gardening", suburb="Macleod",
+         title="Overgrown side garden cleared",
+         alt="narrow side garden between a timber house and a fence, under a camellia"),
+    dict(slug="side-path-tidy-up-macleod", crop=(0, 0, 1, 1), aspect=(3, 4), tall=True, service="gardening", suburb="Macleod",
+         title="Side path cleared of weeds and overgrowth",
+         alt="concrete side path between a fence and a shed"),
+    # Added 27 Nov from the client's updated "Before After" folder.
+    dict(slug="magnolia-screen-pruning-watsonia", crop=(0.08, 0, 1, 1), aspect=(4, 3), service="gardening", suburb="Watsonia",
+         title="Overgrown magnolia screen pruned back into shape",
+         alt="row of magnolias along a timber fence beside a small lawn"),
+    dict(slug="side-passage-tidy-up", crop=(0, 0, 1, 1), aspect=(3, 4), tall=True, service="gardening", suburb="North east Melbourne",
+         title="Overgrown side passage cleared",
+         alt="narrow side passage between a brick wall and a brick house"),
     dict(slug="front-lawn-and-garden-rosanna",
          crop=STAMP, aspect=(4, 3), service="garden-maintenance-programs", suburb="Rosanna",
          title="Front lawn & native garden upkeep",
@@ -163,6 +181,32 @@ GALLERY = [
       "Lawn trimmed neatly under timber stairs in Rosanna", suburb="Rosanna"),
 ]
 
+GALLERY += [
+    # Added 26 Nov at the client's request. Overlays with street addresses are cropped off;
+    # a mailbox number and a number plate are blurred (fractions of the ORIGINAL image).
+    G("native-garden-maintenance-yallambie", "garden",
+      "Established native front garden with clipped shrubs, rocks and fresh mulch, maintained in Yallambie",
+      crop=(0, 0, 0.93, 0.77), blur=[(0.73, 0.39, 0.77, 0.45)], suburb="Yallambie"),
+    G("native-garden-driveway-yallambie", "garden",
+      "Native grasses and mulched beds beside a driveway, maintained in Yallambie",
+      crop=(0, 0, 1, 0.77), suburb="Yallambie"),
+    G("topdressing-completed-south-morang", "lawn-renovation",
+      "Backyard lawn freshly topdressed with sand after a renovation in South Morang",
+      crop=(0, 0, 1, 0.75), suburb="South Morang"),
+    G("mulched-beds-exposed-aggregate-path", "mulching",
+      "Freshly mulched garden beds curving around an exposed-aggregate path",
+      crop=(0, 0, 1, 1), blur=[(0.93, 0.385, 0.985, 0.425)]),
+    G("lomandra-pruning-garden-beds", "garden",
+      "Lomandras and native beds pruned and shaped along a curved gabion wall",
+      crop=(0, 0, 1, 1)),
+    G("side-passage-tidy-up-in-progress", "garden",
+      "Side passage part way through a garden tidy-up, weeds cut and ferns trimmed",
+      crop=(0, 0, 1, 1)),
+    G("garden-bed-tidy-up-watsonia-after", "garden",
+      "Front garden bed weeded, planted and mulched after a garden tidy-up in Watsonia",
+      crop=(0.12, 0.12, 1, 1), suburb="Watsonia"),  # exact 4:3 so the card keeps the client's watermark whole
+]
+
 HERO = dict(slug="hero-striped-front-lawn",
             alt="Freshly mown and striped front lawn with crisp edges after a Great Lawn Program visit")
 
@@ -191,6 +235,23 @@ def fit_aspect(im, aspect, focus_y=0.5):
     return im.crop((0, y, w, y + nh))
 
 
+def blur_boxes(im, boxes):
+    """Blur fractional boxes (x0, y0, x1, y1) of the image: number plates, house numbers."""
+    from PIL import ImageFilter
+    w, h = im.size
+    for x0, y0, x1, y1 in boxes or ():
+        box = (round(x0 * w), round(y0 * h), round(x1 * w), round(y1 * h))
+        region = im.crop(box).filter(ImageFilter.GaussianBlur(max(6, (box[2] - box[0]) // 6)))
+        im.paste(region, box)
+    return im
+
+
+def have(raw, key, *fields):
+    """True if every source file for this slug exists in raw/ (sources can be added later)."""
+    src = SRC.get(key)
+    return bool(src) and all(os.path.exists(os.path.join(raw, src[f])) for f in fields)
+
+
 def save_webp(im, path_noext, widths, q=52):
     out = []
     for w in widths:
@@ -205,34 +266,52 @@ def save_webp(im, path_noext, widths, q=52):
 
 
 def main(raw):
+    """Incremental: entries whose source files are present in raw/ are (re)built and merged
+    into src/media.json; everything else keeps its existing export and record."""
     for d in ("ba", "work", "brand"):
         os.makedirs(os.path.join(OUT, d), exist_ok=True)
-    media = dict(pairs=[], gallery=[], hero=None)
+    mpath = os.path.join(ROOT, "src", "media.json")
+    media = json.load(open(mpath)) if os.path.exists(mpath) else dict(pairs=[], gallery=[], hero=None)
+    by_slug = lambda lst: {r["slug"]: r for r in lst}
+    pairs, gallery = by_slug(media["pairs"]), by_slug(media["gallery"])
+    skipped = []
 
     for p in PAIRS:
+        if not have(raw, p["slug"], "before", "after"):
+            skipped.append(p["slug"]); continue
         b = fit_aspect(crop_frac(load(raw, SRC[p["slug"]]["before"]), p["crop"]), p["aspect"])
         a = fit_aspect(crop_frac(load(raw, SRC[p["slug"]]["after"]), p.get("crop_after", p["crop"])), p["aspect"])
         rec = {k: v for k, v in p.items() if k not in ("crop", "crop_after")}
         rec["aspect"] = list(p["aspect"])
         rec["before_img"] = save_webp(b, os.path.join(OUT, "ba", p["slug"] + "-before"), (960, 640, 420))
         rec["after_img"] = save_webp(a, os.path.join(OUT, "ba", p["slug"] + "-after"), (960, 640, 420))
-        media["pairs"].append(rec)
+        pairs[p["slug"]] = rec
         print("pair", p["slug"])
 
     for g in GALLERY:
-        im = crop_frac(load(raw, SRC[g["slug"]]["file"]), g["crop"])
+        if not have(raw, g["slug"], "file"):
+            skipped.append(g["slug"]); continue
+        im = blur_boxes(load(raw, SRC[g["slug"]]["file"]), g.get("blur"))
+        im = crop_frac(im, g["crop"])
         if im.width > im.height * 1.5:
             im = fit_aspect(im, (3, 2))
-        rec = {k: v for k, v in g.items() if k != "crop"}
+        rec = {k: v for k, v in g.items() if k not in ("crop", "blur")}
         rec["img"] = save_webp(im, os.path.join(OUT, "work", g["slug"]), (1200, 720, 420))
-        media["gallery"].append(rec)
+        gallery[g["slug"]] = rec
         print("gallery", g["slug"])
 
-    im = fit_aspect(load(raw, SRC[HERO["slug"]]["file"]), (16, 9), focus_y=0.62)
-    media["hero"] = dict(alt=HERO["alt"], img=save_webp(im, os.path.join(OUT, "work", HERO["slug"]), (1920, 1600, 1200, 800), q=50))
+    if have(raw, HERO["slug"], "file"):
+        im = fit_aspect(load(raw, SRC[HERO["slug"]]["file"]), (16, 9), focus_y=0.62)
+        media["hero"] = dict(alt=HERO["alt"], img=save_webp(im, os.path.join(OUT, "work", HERO["slug"]), (1920, 1600, 1200, 800), q=50))
 
-    json.dump(media, open(os.path.join(ROOT, "src", "media.json"), "w"), indent=1)
-    brand(raw)
+    # keep definition order
+    media["pairs"] = [pairs[p["slug"]] for p in PAIRS if p["slug"] in pairs]
+    media["gallery"] = [gallery[g["slug"]] for g in GALLERY if g["slug"] in gallery]
+    json.dump(media, open(mpath, "w"), indent=1)
+    if have(raw, "_logo_light", "file") and have(raw, "_logo_dark", "file"):
+        brand(raw)
+    if skipped:
+        print(f"kept existing exports for {len(skipped)} entries whose sources aren't in {raw}")
 
 
 def brand(raw):

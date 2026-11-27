@@ -1,19 +1,19 @@
-import { SITE, SERVICES, svc } from '../data.mjs';
+import { SITE, SERVICES, REEL, svc } from '../data.mjs';
 import { layout } from '../layout.mjs';
-import { icon, picture, work, workImg, baSlider, quoteForm, tierSection, areaMap, suburbList, faqBlock, faqSchema, ctaBand, grassEdge, esc } from '../ui.mjs';
+import { icon, picture, work, workImg, baSlider, quoteSection, tierSection, areaPanel, suburbList, faqBlock, faqSchema, ctaBand, grassEdge, esc, reelMedia, reelSchema } from '../ui.mjs';
 import media from '../media.json' with { type: 'json' };
 
 export const HOME_FAQ = [
   ['How much does lawn care cost in Melbourne\'s north east?',
     '<p>Every property is quoted on its size, condition and access. As a guide, our indicative pricing for an average 350 m² lawn is around <strong>$300–$350 a month</strong> on the Good Lawn Program, <strong>$375–$425</strong> on the Great Lawn Program and <strong>$650–$700</strong> on the Amazing Lawn Program. <a href="#quote">Request a quote</a> for an exact figure for your place.</p>'],
   ['What\'s the difference between the Good, Great and Amazing lawn programs?',
-    '<p>All three are all-inclusive lawn care programs. The difference is the result you want. <strong>Good</strong> keeps a lawn at a healthy, tidy 7/10 on a sensible budget. <strong>Great</strong> is our specialty, a 9/10 lawn for house-proud homeowners. <strong>Amazing</strong> is golf-course quality, which we jokingly call a "12 out of 10". The higher the level, the more attention and treatment your lawn gets through the year.</p>'],
+    '<p>Each one is an all-inclusive lawn care program. The difference is the result you want. <strong>Good</strong> keeps a lawn at a healthy, tidy 7/10 on a sensible budget. <strong>Great</strong> is our specialty, a 9/10 lawn for house-proud homeowners. <strong>Amazing</strong> is golf-course quality, which we jokingly call a "12 out of 10". The higher the level, the more attention and treatment your lawn gets through the year.</p>'],
   ['Do you service Doncaster, Templestowe and Lower Templestowe?',
     '<p>Yes. Lower Templestowe, Templestowe, Doncaster East and Doncaster are some of our busiest suburbs for lawn care in Melbourne\'s north east, alongside the rest of Melbourne\'s north east, from Epping and Mill Park through to Eltham, Diamond Creek and Rosanna. See every suburb on our <a href="/service-areas/">service areas</a> page.</p>'],
   ['When is the best time to renovate a lawn in Melbourne?',
     '<p>For the warm-season grasses most Melbourne homes have (couch, kikuyu, buffalo and zoysia), the best window is mid-spring into early summer, once the lawn is actively growing and can recover quickly. We don\'t renovate in winter, when the grass is dormant. Read more about <a href="/lawn-renovation/">lawn renovation</a>.</p>'],
   ['Can I combine a lawn program with a garden maintenance program in Eltham or Greensborough?',
-    '<p>Absolutely, and lots of our clients do. Lawn and garden programs are chosen separately, so you can mix and match levels. A popular combination is the Great Lawn Program with the Good Garden Program. This works anywhere we service, including Eltham and Greensborough.</p>'],
+    '<p>Absolutely, and lots of our clients do. A lawn care program and a garden maintenance program are chosen separately, so you can mix and match levels. A popular combination is the Great Lawn Program with the Good Garden Program. This works anywhere we service, including Eltham and Greensborough.</p>'],
   ['Do you look after commercial and body corporate gardens in Doncaster?',
     '<p>Yes. We\'re fully insured and maintain commercial, strata and body corporate grounds as well as homes, in Doncaster and right across our service area. Our programs suit commercial sites well because the grounds are looked after on a schedule without anyone needing to chase it.</p>'],
 ];
@@ -23,27 +23,31 @@ export default function home() {
   const lawn = svc('lawn-care-programs');
   const garden = svc('garden-maintenance-programs');
   const others = SERVICES.filter((s) => !['lawn-care-programs', 'garden-maintenance-programs'].includes(s.key));
-  const cardImg = { 'lawn-mowing': 'front-lawn-mow-and-edge-in-progress', 'gardening': 'front-lawn-and-clipped-hedge', 'mulching-landscaping': 'mulched-garden-beds-front-lawn-rosanna', 'lawn-renovation': 'dethatching-backyard-lawn-renovation' };
+  const cardImg = { 'lawn-mowing': 'front-lawn-mow-and-edge-in-progress', 'gardening': 'garden-bed-tidy-up-watsonia-after', 'mulching-landscaping': 'mulched-beds-exposed-aggregate-path', 'lawn-renovation': 'dethatching-backyard-lawn-renovation' };
 
   const body = `
-<section class="hero">
-  <div class="hero-media">${picture(hero.img, hero.alt, { sizes: '100vw', eager: true })}</div>
+<section class="hero has-reel solo">
+  <div class="hero-media">${reelMedia({ eager: true })}</div>
   <div class="wrap">
     <div>
-      <span class="eyebrow">Lawn care · Garden maintenance · Since ${SITE.founded}</span>
+      <span class="eyebrow">Lawn care · Garden maintenance<span class="hide-sm"> · Since ${SITE.founded}</span></span>
       <h1>Lawn Care in Melbourne's North East, Built by Horticulturalists</h1>
       <p class="lead">Looking for lawn care in Melbourne that looks after the whole lawn, not just the mow? Our qualified horticulturalists run all-inclusive lawn and garden programs across the north east, from Watsonia North to Doncaster and Templestowe. You pick the result. We handle the rest.</p>
-      <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote>Get a Free Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
-      <ul class="trust">
-        <li>${icon('cap')}Qualified horticulturalists</li>
-        <li>${icon('shield')}Fully insured</li>
-        <li>${icon('building')}Residential &amp; commercial</li>
-        <li>${icon('calendar')}Local since ${SITE.founded}</li>
-      </ul>
+      <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote-modal>Get a Free Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
     </div>
-    <div id="quote">${quoteForm({ title: 'Get a free quote', idPrefix: 'hq' })}</div>
   </div>
   <div class="hero-edge">${grassEdge('#fff')}</div>
+</section>
+
+<section class="trust-bar" aria-label="Why choose The Mowersaurus">
+  <div class="wrap">
+    <ul class="trust-list">
+      <li>${icon('cap')}<span><strong>Qualified horticulturalists</strong>Experienced, not just enthusiastic</span></li>
+      <li>${icon('shield')}<span><strong>Fully insured</strong>Residential &amp; commercial</span></li>
+      <li>${icon('star')}<span><strong>Good, Great or Amazing</strong>You choose the result</span></li>
+      <li>${icon('pin')}<span><strong>Local since ${SITE.founded}</strong>Based in Watsonia North</span></li>
+    </ul>
+  </div>
 </section>
 
 <section class="section" aria-labelledby="programs-h">
@@ -89,16 +93,6 @@ export default function home() {
       ${baSlider('dry-lawn-revival-watsonia')}
       ${baSlider('backyard-lawn-transformation-templestowe')}
       ${baSlider('backyard-lawn-transformation-mill-park')}
-    </div>
-    <div class="reel teaser" style="margin-top:36px">
-      <div class="reel-placeholder">
-        <div>
-          <span class="pending">Highlight reel coming soon</span>
-          <p style="font-family:var(--head);font-size:1.6rem;color:#fff">Stripes, edges, hedges and big transformations</p>
-          <p>Our job-site highlight reel is on its way. In the meantime, browse the full project gallery.</p>
-          <a class="btn btn-light" href="/projects/" style="margin-top:12px">See our work</a>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -147,14 +141,14 @@ export default function home() {
         <span class="eyebrow">Service areas</span>
         <h2 id="areas-h">Lawn care across Melbourne's north east</h2>
       </div>
-      <p class="lead">From our base in Watsonia North we provide lawn care in Melbourne's north east across roughly a 10 km radius, with regular rounds through Lower Templestowe, Templestowe, Doncaster East and Doncaster. Watch the mower do its rounds.</p>
+      <p class="lead">From our base in Watsonia North we provide lawn care in Melbourne's north east across roughly a 10 km radius, with regular rounds through Lower Templestowe, Templestowe, Doncaster East and Doncaster, and lawn mowing in Epping, Mill Park and South Morang to the north. Watch the mower do its rounds.</p>
     </div>
-    <div style="margin-top:28px">${areaMap()}</div>
-    <h3 style="margin-top:40px">Every suburb we service</h3>
-    ${suburbList({ wide: true })}
-    <p style="margin-top:18px"><a class="link-arrow" href="/service-areas/">View all service areas</a></p>
+    <div style="margin-top:28px">${areaPanel()}</div>
+    <p style="margin-top:22px"><a class="link-arrow" href="/service-areas/">View all service areas</a></p>
   </div>
 </section>
+
+${quoteSection()}
 
 ${faqBlock(HOME_FAQ, { heading: 'Lawn care questions, answered' })}
 
@@ -165,7 +159,7 @@ ${ctaBand({ heading: 'Want a lawn like these?', text: `Get a free quote from a q
     title: 'Lawn Care Melbourne North East | The Mowersaurus',
     description: 'Lawn care Melbourne homeowners rate 9/10. Horticulturalist-run lawn & garden programs from Watsonia North to Doncaster & Templestowe. Get a free quote.',
     body,
-    schema: [faqSchema(HOME_FAQ)],
-    preload: `<link rel="preload" as="image" href="${hero.img[1].src}" imagesrcset="${hero.img.map((s) => `${s.src} ${s.w}w`).join(', ')}" imagesizes="100vw" fetchpriority="high">`,
+    schema: [faqSchema(HOME_FAQ), reelSchema()],
+    preload: `<link rel="preload" as="image" href="${REEL.poster[1280]}" imagesrcset="${REEL.poster[640]} 640w, ${REEL.poster[1280]} 1280w" imagesizes="100vw" fetchpriority="high">`,
   };
 }

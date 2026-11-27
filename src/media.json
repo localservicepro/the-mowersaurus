@@ -596,6 +596,234 @@
    ]
   },
   {
+   "slug": "garden-bed-tidy-up-watsonia",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "gardening",
+   "suburb": "Watsonia",
+   "title": "Front garden bed weeded, planted & mulched",
+   "alt": "front garden bed along a weatherboard house, edged with brick",
+   "before_img": [
+    {
+     "w": 960,
+     "h": 720,
+     "src": "/img/ba/garden-bed-tidy-up-watsonia-before-960.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/garden-bed-tidy-up-watsonia-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/garden-bed-tidy-up-watsonia-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 960,
+     "h": 720,
+     "src": "/img/ba/garden-bed-tidy-up-watsonia-after-960.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/garden-bed-tidy-up-watsonia-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/garden-bed-tidy-up-watsonia-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "side-garden-tidy-up-macleod",
+   "aspect": [
+    3,
+    4
+   ],
+   "tall": true,
+   "service": "gardening",
+   "suburb": "Macleod",
+   "title": "Overgrown side garden cleared",
+   "alt": "narrow side garden between a timber house and a fence, under a camellia",
+   "before_img": [
+    {
+     "w": 810,
+     "h": 1080,
+     "src": "/img/ba/side-garden-tidy-up-macleod-before-810.webp"
+    },
+    {
+     "w": 640,
+     "h": 853,
+     "src": "/img/ba/side-garden-tidy-up-macleod-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/ba/side-garden-tidy-up-macleod-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 810,
+     "h": 1080,
+     "src": "/img/ba/side-garden-tidy-up-macleod-after-810.webp"
+    },
+    {
+     "w": 640,
+     "h": 853,
+     "src": "/img/ba/side-garden-tidy-up-macleod-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/ba/side-garden-tidy-up-macleod-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "side-path-tidy-up-macleod",
+   "aspect": [
+    3,
+    4
+   ],
+   "tall": true,
+   "service": "gardening",
+   "suburb": "Macleod",
+   "title": "Side path cleared of weeds and overgrowth",
+   "alt": "concrete side path between a fence and a shed",
+   "before_img": [
+    {
+     "w": 810,
+     "h": 1080,
+     "src": "/img/ba/side-path-tidy-up-macleod-before-810.webp"
+    },
+    {
+     "w": 640,
+     "h": 853,
+     "src": "/img/ba/side-path-tidy-up-macleod-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/ba/side-path-tidy-up-macleod-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 810,
+     "h": 1080,
+     "src": "/img/ba/side-path-tidy-up-macleod-after-810.webp"
+    },
+    {
+     "w": 640,
+     "h": 853,
+     "src": "/img/ba/side-path-tidy-up-macleod-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/ba/side-path-tidy-up-macleod-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "magnolia-screen-pruning-watsonia",
+   "aspect": [
+    4,
+    3
+   ],
+   "service": "gardening",
+   "suburb": "Watsonia",
+   "title": "Overgrown magnolia screen pruned back into shape",
+   "alt": "row of magnolias along a timber fence beside a small lawn",
+   "before_img": [
+    {
+     "w": 960,
+     "h": 720,
+     "src": "/img/ba/magnolia-screen-pruning-watsonia-before-960.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/magnolia-screen-pruning-watsonia-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/magnolia-screen-pruning-watsonia-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 960,
+     "h": 720,
+     "src": "/img/ba/magnolia-screen-pruning-watsonia-after-960.webp"
+    },
+    {
+     "w": 640,
+     "h": 480,
+     "src": "/img/ba/magnolia-screen-pruning-watsonia-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/ba/magnolia-screen-pruning-watsonia-after-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "side-passage-tidy-up",
+   "aspect": [
+    3,
+    4
+   ],
+   "tall": true,
+   "service": "gardening",
+   "suburb": "North east Melbourne",
+   "title": "Overgrown side passage cleared",
+   "alt": "narrow side passage between a brick wall and a brick house",
+   "before_img": [
+    {
+     "w": 960,
+     "h": 1280,
+     "src": "/img/ba/side-passage-tidy-up-before-960.webp"
+    },
+    {
+     "w": 640,
+     "h": 853,
+     "src": "/img/ba/side-passage-tidy-up-before-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/ba/side-passage-tidy-up-before-420.webp"
+    }
+   ],
+   "after_img": [
+    {
+     "w": 960,
+     "h": 1280,
+     "src": "/img/ba/side-passage-tidy-up-after-960.webp"
+    },
+    {
+     "w": 640,
+     "h": 853,
+     "src": "/img/ba/side-passage-tidy-up-after-640.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/ba/side-passage-tidy-up-after-420.webp"
+    }
+   ]
+  },
+  {
    "slug": "front-lawn-and-garden-rosanna",
    "aspect": [
     4,
@@ -1261,6 +1489,164 @@
      "w": 420,
      "h": 280,
      "src": "/img/work/lawn-edging-under-stairs-rosanna-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "native-garden-maintenance-yallambie",
+   "cat": "garden",
+   "alt": "Established native front garden with clipped shrubs, rocks and fresh mulch, maintained in Yallambie",
+   "suburb": "Yallambie",
+   "img": [
+    {
+     "w": 936,
+     "h": 624,
+     "src": "/img/work/native-garden-maintenance-yallambie-936.webp"
+    },
+    {
+     "w": 720,
+     "h": 480,
+     "src": "/img/work/native-garden-maintenance-yallambie-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 280,
+     "src": "/img/work/native-garden-maintenance-yallambie-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "native-garden-driveway-yallambie",
+   "cat": "garden",
+   "alt": "Native grasses and mulched beds beside a driveway, maintained in Yallambie",
+   "suburb": "Yallambie",
+   "img": [
+    {
+     "w": 936,
+     "h": 624,
+     "src": "/img/work/native-garden-driveway-yallambie-936.webp"
+    },
+    {
+     "w": 720,
+     "h": 480,
+     "src": "/img/work/native-garden-driveway-yallambie-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 280,
+     "src": "/img/work/native-garden-driveway-yallambie-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "topdressing-completed-south-morang",
+   "cat": "lawn-renovation",
+   "alt": "Backyard lawn freshly topdressed with sand after a renovation in South Morang",
+   "suburb": "South Morang",
+   "img": [
+    {
+     "w": 810,
+     "h": 540,
+     "src": "/img/work/topdressing-completed-south-morang-810.webp"
+    },
+    {
+     "w": 720,
+     "h": 480,
+     "src": "/img/work/topdressing-completed-south-morang-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 280,
+     "src": "/img/work/topdressing-completed-south-morang-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "mulched-beds-exposed-aggregate-path",
+   "cat": "mulching",
+   "alt": "Freshly mulched garden beds curving around an exposed-aggregate path",
+   "img": [
+    {
+     "w": 1200,
+     "h": 800,
+     "src": "/img/work/mulched-beds-exposed-aggregate-path-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 480,
+     "src": "/img/work/mulched-beds-exposed-aggregate-path-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 280,
+     "src": "/img/work/mulched-beds-exposed-aggregate-path-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "lomandra-pruning-garden-beds",
+   "cat": "garden",
+   "alt": "Lomandras and native beds pruned and shaped along a curved gabion wall",
+   "img": [
+    {
+     "w": 1200,
+     "h": 800,
+     "src": "/img/work/lomandra-pruning-garden-beds-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 480,
+     "src": "/img/work/lomandra-pruning-garden-beds-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 280,
+     "src": "/img/work/lomandra-pruning-garden-beds-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "side-passage-tidy-up-in-progress",
+   "cat": "garden",
+   "alt": "Side passage part way through a garden tidy-up, weeds cut and ferns trimmed",
+   "img": [
+    {
+     "w": 1200,
+     "h": 1600,
+     "src": "/img/work/side-passage-tidy-up-in-progress-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 960,
+     "src": "/img/work/side-passage-tidy-up-in-progress-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 560,
+     "src": "/img/work/side-passage-tidy-up-in-progress-420.webp"
+    }
+   ]
+  },
+  {
+   "slug": "garden-bed-tidy-up-watsonia-after",
+   "cat": "garden",
+   "alt": "Front garden bed weeded, planted and mulched after a garden tidy-up in Watsonia",
+   "suburb": "Watsonia",
+   "img": [
+    {
+     "w": 1200,
+     "h": 900,
+     "src": "/img/work/garden-bed-tidy-up-watsonia-after-1200.webp"
+    },
+    {
+     "w": 720,
+     "h": 540,
+     "src": "/img/work/garden-bed-tidy-up-watsonia-after-720.webp"
+    },
+    {
+     "w": 420,
+     "h": 315,
+     "src": "/img/work/garden-bed-tidy-up-watsonia-after-420.webp"
     }
    ]
   }

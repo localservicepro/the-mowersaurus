@@ -1,18 +1,9 @@
-import { SITE, SERVICES, SUBURBS, svc } from '../data.mjs';
-import { icon, picture, workImg, baSlider, quoteSection, faqBlock, faqSchema, pageHero, related, suburbList, areaMap, ctaBand, esc, grassEdge } from '../ui.mjs';
+import { SITE, SERVICES, SUBURBS, REEL, svc } from '../data.mjs';
+import { icon, picture, workImg, baSlider, quoteSection, faqBlock, faqSchema, pageHero, related, suburbList, areaPanel, ctaBand, esc, grassEdge, crumbs, reelMedia, reelSoundButton, reelSchema } from '../ui.mjs';
 import { HOME_FAQ } from './home.mjs';
 import media from '../media.json' with { type: 'json' };
 
 const HOME = { name: 'Home', href: '/' };
-
-// The highlight reel is not built yet: the client's clips could not be transferred.
-// When it exists, fill this in and the page switches from placeholder to the real reel
-// (and emits VideoObject schema).
-export const REEL = null; /* {
-  mp4: '/video/mowersaurus-highlight-reel.mp4', webm: '/video/mowersaurus-highlight-reel.webm',
-  poster: '/video/mowersaurus-highlight-reel-poster.webp', duration: 'PT1M10S', uploadDate: '2026-11-01',
-  clips: [{ mp4, webm, poster, caption }]
-} */
 
 const CATS = [
   ['all', 'All'], ['lawn-programs', 'Lawn Programs'], ['lawn-renovation', 'Lawn Renovation'], ['mowing', 'Mowing'],
@@ -24,32 +15,23 @@ function projects() {
   const trail = [HOME, { name: 'Projects', href: '/projects/' }];
   // Before/after pairs also feed the gallery filters (hedging + commercial would otherwise be thin).
   const pairCat = { 'gardening': 'hedging', 'lawn-mowing': 'mowing', 'lawn-renovation': 'lawn-renovation', 'lawn-care-programs': 'lawn-programs', 'garden-maintenance-programs': 'garden' };
-  const extra = media.pairs.filter((p) => ['hedge-and-lawn-tidy-rosanna', 'hedge-trimming-footpath-rosanna', 'commercial-grounds-tidy-up-doncaster'].includes(p.slug))
+  const extra = media.pairs.filter((p) => ['hedge-and-lawn-tidy-rosanna', 'hedge-trimming-footpath-rosanna', 'commercial-grounds-tidy-up-doncaster', 'side-garden-tidy-up-macleod', 'side-path-tidy-up-macleod', 'magnolia-screen-pruning-watsonia', 'side-passage-tidy-up'].includes(p.slug))
     .map((p) => ({ slug: p.slug + '-after', cat: p.slug.startsWith('commercial') ? 'commercial' : pairCat[p.service], alt: `${p.title}, ${p.suburb} (after)`, img: p.after_img }));
   const items = media.gallery.filter((g) => !g.slug.startsWith('hero')).concat(extra);
   const gallery = items.map((g) => `<figure class="g-item" data-cat="${g.cat}"><button type="button" data-lightbox="${g.img[0].src}" data-caption="${esc(g.alt)}" aria-label="Enlarge photo: ${esc(g.alt)}">${picture(g.img, g.alt, { sizes: '(min-width:1200px) 290px, (min-width:520px) 34vw, 46vw' })}</button><figcaption>${esc(CATS.find((c) => c[0] === g.cat)[1])}${g.suburb ? ` · ${esc(g.suburb)}` : ''}</figcaption></figure>`).join('');
 
-  const reel = REEL
-    ? `<div class="reel" data-reel><video muted loop playsinline preload="none" poster="${REEL.poster}" data-lazy-video><source data-src="${REEL.webm}" type="video/webm"><source data-src="${REEL.mp4}" type="video/mp4"></video>
-        <button class="btn btn-primary play" data-video-lightbox="${REEL.mp4}">${icon('play')}Watch with sound</button></div>`
-    : `<div class="reel"><div class="reel-placeholder"><div>
-        <img src="/img/brand/logo-on-dark.webp" alt="" width="340" height="243" loading="lazy">
-        <span class="pending">Video placeholder: highlight reel in production</span>
-        <p>A 60-second, sound-optional highlight reel of real Mowersaurus jobs (mowing stripes, edging lines, hedges and renovations) will play here.</p>
-        <p class="note" style="color:#B8CDB3">Prefer to talk now? Call <a href="${SITE.phoneHref}" style="color:#fff">${SITE.phone}</a></p>
-      </div></div></div>`;
-
   const body = `
-${pageHero({ trail, h1: 'Our Lawn &amp; Garden Projects', lead: 'Real jobs from across Melbourne\'s north east: lawn programs, renovations, hedging, garden makeovers and commercial grounds. No stock photos.', img: 'lush-front-lawn-great-lawn-program', byline: false })}
-
-<section class="video-band" aria-labelledby="reel-h">
+<section class="reel-hero" aria-labelledby="reel-h">
   <div class="wrap">
-    <span class="eyebrow" style="color:var(--tan)">Highlight reel</span>
-    <h2 id="reel-h">See The Mowersaurus at work</h2>
-    <p class="lead">Stripes going in, edges getting sharp, hedges taking shape, all on real north-east properties.</p>
-    ${reel}
-    ${REEL && REEL.clips ? `<div class="clip-grid">${REEL.clips.map((c) => `<figure class="g-item"><button type="button" data-video-lightbox="${c.mp4}" data-caption="${esc(c.caption)}"><img src="${c.poster}" alt="${esc(c.caption)}" loading="lazy"></button><figcaption>${esc(c.caption)}</figcaption></figure>`).join('')}</div>` : ''}
+    ${crumbs(trail)}
+    <h1 id="reel-h">Our Lawn &amp; Garden Projects</h1>
+    <p class="lead">Real jobs from across Melbourne's north east: lawn programs, renovations, hedging, garden makeovers and commercial grounds. No stock photos. Here's the team at work.</p>
+    <div class="reel reel-main">
+      ${reelMedia({ eager: true })}
+      <div class="reel-actions">${reelSoundButton('btn-primary')}</div>
+    </div>
   </div>
+  <div class="hero-edge">${grassEdge('#fff')}</div>
 </section>
 
 <section class="section" aria-labelledby="ba-h">
@@ -73,8 +55,8 @@ ${pageHero({ trail, h1: 'Our Lawn &amp; Garden Projects', lead: 'Real jobs from 
 ${ctaBand({ heading: 'Want results like these?', text: 'Get a free quote for your lawn or garden, or call us to talk it through.' })}
 ${quoteSection({ heading: 'Start your own before &amp; after' })}
 `;
-  const schema = REEL ? [{ '@context': 'https://schema.org', '@type': 'VideoObject', name: 'The Mowersaurus highlight reel', description: 'Real lawn and garden jobs across Melbourne\'s north east: mowing stripes, edging, hedging, renovations and finished lawns.', thumbnailUrl: [`${SITE.url}${REEL.poster}`], uploadDate: REEL.uploadDate, duration: REEL.duration, contentUrl: `${SITE.url}${REEL.mp4}` }] : [];
-  return { path: '/projects/', title: 'Lawn & Garden Projects | Before & After | The Mowersaurus', description: 'Real before & after lawn and garden projects across Melbourne\'s north east: lawn programs, renovations, hedging, mulching & commercial grounds.', body, trail, schema };
+  const schema = [reelSchema()];
+  return { preload: `<link rel="preload" as="image" href="${REEL.poster[1280]}" imagesrcset="${REEL.poster[640]} 640w, ${REEL.poster[1280]} 1280w" imagesizes="100vw" fetchpriority="high">`, path: '/projects/', title: 'Lawn & Garden Projects | Before & After | The Mowersaurus', description: 'Real before & after lawn and garden projects across Melbourne\'s north east: lawn programs, renovations, hedging, mulching & commercial grounds.', body, trail, schema };
 }
 
 // ------------------------------------------------------------------ service areas
@@ -84,13 +66,9 @@ function areas() {
   const body = `
 ${pageHero({ trail, h1: 'Lawn Care &amp; Garden Maintenance Service Areas', lead: 'Based in Watsonia North and working within about a 10 km radius across Melbourne\'s north east.', img: 'nature-strip-mowing-eltham', byline: false })}
 <section class="section"><div class="wrap">
-  ${areaMap()}
+  ${areaPanel({ listHeading: 'Suburbs we service' })}
+  <p class="note" style="margin-top:14px">Listed in order of where we're busiest. Orange marks our priority suburbs. Lawn programs are busiest in Templestowe, Lower Templestowe and Doncaster; lawn mowing in Epping, Mill Park and South Morang; garden maintenance in Eltham and Montmorency.</p>
   <div class="grid-2 top" style="margin-top:48px">
-    <div>
-      <h2>Suburbs we service</h2>
-      <p class="lead">Listed in order of where we're busiest. Orange dots mark our priority suburbs.</p>
-      ${suburbList()}
-    </div>
     <div>
       <h2>Local lawn care pages</h2>
       <div class="related">${pages.map((s) => `<a href="${s.page}"><span class="dd-icon">${icon('pin')}</span>Lawn care ${s.name}</a>`).join('')}
@@ -99,7 +77,9 @@ ${pageHero({ trail, h1: 'Lawn Care &amp; Garden Maintenance Service Areas', lead
         <a href="/garden-maintenance-programs/"><span class="dd-icon">${icon('pin')}</span>Garden maintenance Eltham</a>
         <a href="/gardening/"><span class="dd-icon">${icon('pin')}</span>Gardener Doncaster</a>
       </div>
-      <div class="callout"><strong>Just outside the list?</strong> If you're close to one of these suburbs, ask anyway. If your property is in range, we'll happily quote.</div>
+    </div>
+    <div>
+      <div class="callout" style="margin-top:0"><strong>Just outside the list?</strong> If you're close to one of these suburbs, ask anyway. If your property is in range, we'll happily quote.</div>
     </div>
   </div>
 </div></section>
@@ -160,22 +140,22 @@ const lowerTemplestowe = () => suburbPage({
 
 const doncaster = () => suburbPage({
   name: 'Doncaster', path: '/service-areas/doncaster/',
-  title: 'Lawn Care Doncaster | Garden Maintenance | The Mowersaurus',
-  description: 'Lawn care, lawn mowing, garden maintenance & landscaping in Doncaster by qualified horticulturalists. Homes, townhouses & commercial. Free quote.',
-  h1: 'Lawn Care &amp; Garden Maintenance in Doncaster',
+  title: 'Landscaping & Lawn Care Doncaster | The Mowersaurus',
+  description: 'Landscaping Doncaster, lawn mowing & garden maintenance in Doncaster by qualified horticulturalists. Homes, townhouses & commercial. Free quote.',
+  h1: 'Lawn Care, Garden Maintenance &amp; Landscaping in Doncaster',
   lead: 'From family homes to townhouse courtyards and commercial grounds, we keep Doncaster lawns and gardens in top shape.',
   heroImg: 'commercial-lawn-maintenance-doncaster', eyebrow: 'Lawn care Doncaster',
   h2: 'Big blocks, small courtyards, and everything between',
   copy: `<p>Doncaster has changed a lot. Established family homes with big front lawns now sit alongside subdivided blocks, townhouses with compact courtyard gardens, and apartments and commercial sites around Doncaster Hill. We look after all of them.</p>
 <p>For houses with a proper lawn, our <a href="/lawn-care-programs/">lawn care programs</a> handle everything: lawn mowing in Doncaster, edging, fertilising, weed and grub control and soil amendments, on a schedule. For smaller townhouse gardens, a <a href="/garden-maintenance-programs/">garden maintenance program</a> keeps hedges, beds and courtyard lawns neat without you lifting a finger.</p>
-<p>We also take on landscaping in Doncaster, from fresh mulch and new garden beds to planting and footpaths through our <a href="/mulching-landscaping/">mulching and small landscaping</a> service. For one-off jobs, our <a href="/gardening/">gardeners</a> handle weeding, pruning and hedge trimming.</p>
+<p>We also take on landscaping in Doncaster, from fresh mulch and new garden beds to planting and footpaths, through our <a href="/mulching-landscaping/">mulching and small landscaping</a> service. Small landscaping in Doncaster is a good fit for the newer townhouse blocks, where a tidy, low-maintenance garden adds a lot. For one-off jobs, our <a href="/gardening/">gardeners</a> handle weeding, pruning and hedge trimming, and we offer regular garden maintenance in Doncaster for anyone who'd rather not think about it.</p>
 <p>We're fully insured and maintain commercial and body corporate grounds in Doncaster too. Our commercial clients like that the grounds simply stay looked after, without needing to be chased.</p>`,
   pair: 'commercial-grounds-tidy-up-doncaster',
   popular: [['lawn-care-programs', 'all-inclusive lawn care'], ['garden-maintenance-programs', 'townhouse & body corporate gardens'], ['mulching-landscaping', 'mulch, planting & paths']],
   nearby: 'We also service <a href="/service-areas/doncaster-east/">Doncaster East</a>, <a href="/service-areas/lower-templestowe/">Lower Templestowe</a>, <a href="/lawn-care-programs/">Templestowe</a> and the wider north east.',
   faqs: [
     ['Do you maintain body corporate gardens in Doncaster?', '<p>Yes. We\'re fully insured and maintain strata, body corporate and commercial grounds on a regular schedule.</p>'],
-    ['Do you mow small townhouse lawns?', '<p>Yes. Small lawns and courtyards are a big part of what we do in Doncaster, often as part of a garden program.</p>'],
+    ['Do you mow small townhouse lawns?', '<p>Yes. Lawn mowing in Doncaster covers everything from big family front lawns to small courtyards, often as part of a garden program.</p>'],
     ['Do you do landscaping in Doncaster?', '<p>We do small landscaping: mulching, planting, garden bed rejuvenation and footpaths.</p>'],
   ],
 });
@@ -232,7 +212,7 @@ ${pageHero({ trail, h1: 'About The Mowersaurus', lead: 'A horticulture business 
 ${ctaBand({ heading: 'Let\'s talk about your lawn', text: 'Get a free quote, or give us a call during business hours.' })}
 ${quoteSection()}
 `;
-  return { path: '/about/', title: 'About Us | Horticulturalist-Run Lawn Care | The Mowersaurus', description: 'The Mowersaurus was founded in 2021 by qualified horticulturalist Dan Travassaros to offer all-inclusive lawn & garden programs in Melbourne\'s north east.', body, trail, schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'About The Mowersaurus', about: { '@id': `${SITE.url}/#business` } }] };
+  return { path: '/about/', title: 'About Us | Horticulturalist-Run Lawn Care | The Mowersaurus', description: 'The Mowersaurus was founded in 2021 by qualified horticulturalist Dan to offer all-inclusive lawn & garden programs in Melbourne\'s north east.', body, trail, schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'About The Mowersaurus', about: { '@id': `${SITE.url}/#business` } }] };
 }
 
 // ------------------------------------------------------------------ contact
@@ -293,7 +273,7 @@ ${pageHero({ trail, h1, lead, img, cta: false })}
 <section class="section"><div class="wrap grid-2 top">
   <article class="prose">${html}</article>
   <aside class="stack">
-    <div class="feature-item"><h3>Need a hand?</h3><p>${cta}</p><a class="btn btn-primary" href="#quote" data-quote style="margin-top:10px">Get a Quote</a></div>
+    <div class="feature-item"><h3>Need a hand?</h3><p>${cta}</p><a class="btn btn-primary" href="#quote" data-quote-modal style="margin-top:10px">Get a Quote</a></div>
     <div class="feature-item"><h3>More yard tips</h3><ul class="checks"><li>${icon('check')}<a href="/types-of-turf/">Common types of turf</a></li><li>${icon('check')}<a href="/weed-control/">Weed control</a></li><li>${icon('check')}<a href="/fertilizing/">Fertilising your lawn</a></li></ul></div>
   </aside>
 </div></section>
@@ -307,7 +287,7 @@ const turf = () => tip({
   description: 'Common types of turf in Australian yards (buffalo, zoysia, couch and kikuyu) and how to look after each one. Yard tips from a horticulturalist.',
   h1: 'Common Types of Turf in Australian Yards', lead: 'Buffalo, zoysia, couch or kikuyu? How to recognise your lawn and look after it.', img: 'dense-healthy-lawn-beside-stone-wall',
   cta: 'Not sure what grass you have? We\'ll identify it and recommend the right care when we quote.',
-  html: `<p>Australian residential yards suit a handful of hardy, mostly warm-season grasses. Knowing which one you have makes a big difference to how you mow, water and feed it.</p>
+  html: `<p>The most common types of turf in Australia are a handful of hardy, mostly warm-season grasses. Knowing which one you have makes a big difference to how you mow, water and feed it. The couch vs kikuyu question comes up most, so we've covered that below.</p>
 <h2>Buffalo grass</h2><p>A warm-season favourite with a soft, luxurious feel and good tolerance of dry conditions. Buffalo does best in well-drained soil and doesn't like being overwatered. Mow it at roughly 5–7.5 cm (2–3 inches) to keep it tidy and prevent thatch. Feed it in spring and aerate occasionally to keep the soil healthy.</p>
 <h2>Zoysia grass</h2><p>Another warm-season option, prized for its dense turf and adaptability. Mowing at about 2.5–5 cm (1–2 inches) encourages sideways growth and discourages thatch. Water consistently but let it dry out between waterings to reduce the risk of disease. Fertilise in late spring and early summer, and dethatch occasionally.</p>
 <h2>Couch grass</h2><p>Also known as Bermuda grass, couch is popular for its fine texture and toughness. Mow it at about 2.5–5 cm for a manicured look and good thatch control. It's drought-tolerant, but regular watering keeps it looking its best. Fertilise in late spring and early summer for strong colour, and aerate to keep it vigorous.</p>
@@ -321,7 +301,7 @@ const weeds = () => tip({
   description: 'Practical mulching and weed control tips for Melbourne gardens and lawns: mulching, hand weeding, herbicides, soil health and watering.',
   h1: 'Mulching &amp; Weed Control Tips', lead: 'Keeping a garden and lawn weed-free comes down to a few good habits.', img: 'mulched-garden-beds-front-lawn-rosanna',
   cta: 'We handle weed control as part of every lawn and garden program, and mulch beds through our mulching service.',
-  html: `<p>Keeping your garden and lawn weed-free is crucial for their health and appearance. Here's how we approach it.</p>
+  html: `<p>Keeping your garden and lawn weed-free is crucial for their health and appearance. Mulching and weed control go hand in hand, so here's how we approach both.</p>
 <h2>Mulching</h2><p>Apply a thick layer of natural mulch such as wood chips, bark or straw to garden beds. Mulch is a barrier against weeds: it stops seeds reaching the soil and sprouting. It also holds moisture in and keeps soil temperatures even, which makes life harder for weeds. See our <a href="/mulching-landscaping/">mulching service</a>.</p>
 <h2>Know your weeds</h2><p>Learn the common weeds in your area so you can deal with them early. Removing weeds before they set seed is the key to keeping them under control. Inspect the garden regularly and act quickly.</p>
 <h2>Plant placement</h2><p>Space plants so there are fewer gaps for weeds to take root. A healthy, well-planted garden shades the soil and naturally outcompetes weeds for light and nutrients.</p>

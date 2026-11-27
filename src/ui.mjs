@@ -1,4 +1,4 @@
-import { SITE, SERVICES, SERVICE_OPTIONS, SUBURBS, MAP_ROUTE, TIER_SCOPE, LAWN_PRICING, svc } from './data.mjs';
+import { SITE, SERVICES, SERVICE_OPTIONS, SUBURBS, MAP_ROUTE, TIER_SCOPE, LAWN_PRICING, REEL, svc } from './data.mjs';
 import media from './media.json' with { type: 'json' };
 
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -65,7 +65,7 @@ export function baSlider(slug, { heading = 'h3' } = {}) {
   const sizes = '(min-width: 1100px) 380px, (min-width: 760px) 50vw, 48vw'; // mobile: capped so 3x screens don't pull 960px images
   const s = svc(p.service);
   return `<figure class="ba reveal">
-  <div class="ba-frame">
+  <div class="ba-frame${p.tall ? ' tall' : ''}">
     ${picture(p.after_img, `After: ${p.alt} (${p.suburb})`, { sizes, cls: 'ba-after' })}
     <div class="ba-before">${picture(p.before_img, `Before: ${p.alt} (${p.suburb})`, { sizes })}</div>
     <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
@@ -113,13 +113,13 @@ export function header(path) {
     <nav class="nav-main" aria-label="Main navigation">${links}</nav>
     <div class="nav-actions">
       <a href="${SITE.phoneHref}" class="nav-phone" data-track="call">${icon('phone')}<span class="num">${SITE.phone}</span><span class="sr-only">Call ${SITE.phone}</span></a>
-      <a href="#quote" class="btn btn-primary" data-quote>Get a Quote</a>
+      <a href="#quote" class="btn btn-primary" data-quote-modal>Get a Quote</a>
     </div>
     <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 <nav class="mobile-panel" id="mobile-menu" aria-label="Mobile navigation">${mobile}
-  <a class="btn btn-primary" href="#quote" data-quote>Get a Quote</a>
+  <a class="btn btn-primary" href="#quote" data-quote-modal>Get a Quote</a>
   <a class="btn btn-ghost" href="${SITE.phoneHref}">${icon('phone')} Call ${SITE.phone}</a>
 </nav>`;
 }
@@ -166,18 +166,17 @@ export function footer() {
     <span>© ${new Date().getFullYear()} The Mowersaurus · ABN ${SITE.abn}</span>
     <span><a href="/privacy-policy/">Privacy policy</a></span>
   </div>
-</footer>
-<div class="mbar"><a class="btn btn-ghost" href="${SITE.phoneHref}" data-track="call">${icon('phone')}Call</a><a class="btn btn-primary" href="#quote" data-quote>Get a Quote</a></div>`;
+</footer>`;
 }
 
 // ------------------------------------------------------------------ quote form
-export function quoteForm({ preselect = '', title = 'Get a free quote', idPrefix = 'q' } = {}) {
+export function quoteForm({ preselect = '', title = 'Get a free quote', idPrefix = 'q', formId = 'quote-form' } = {}) {
   const opts = SERVICE_OPTIONS.map((o) => `<option${o === preselect ? ' selected' : ''}>${esc(o)}</option>`).join('');
   const f = (id) => `${idPrefix}-${id}`;
   return `<div class="quote-card">
   <h2>${title}</h2>
   <p class="note">Tell us about your property and we'll be in touch, usually within 2 hours on business days.</p>
-  <form class="qf" id="quote-form" action="/thank-you/" method="post" novalidate data-quote-form>
+  <form class="qf" id="${formId}" action="/thank-you/" method="post" novalidate data-quote-form>
     <div class="field"><label for="${f('name')}">Name <span class="req">*</span></label><input id="${f('name')}" name="full_name" autocomplete="name" required><p class="err">Please enter your name.</p></div>
     <div class="field"><label for="${f('phone')}">Phone <span class="req">*</span></label><input id="${f('phone')}" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="[0-9 +()-]{8,}"><p class="err">Please enter a phone number we can call.</p></div>
     <div class="field full"><label for="${f('email')}">Email <span class="req">*</span></label><input id="${f('email')}" name="email" type="email" autocomplete="email" required><p class="err">Please enter a valid email.</p></div>
@@ -230,8 +229,7 @@ export function tierSection(kind, { headingLevel = 2, intro = true } = {}) {
     <div class="meter" aria-hidden="true"><i style="width:${t.meter}%"></i></div>
     <p class="pos">${t.pos}</p>
     ${isLawn ? `<p class="price">Indicative: <b>${LAWN_PRICING[t.key]}</b> / month<br><span class="note">for an average 350 m² lawn</span></p>` : ''}
-    <div class="incl"><strong>What's included</strong>Full inclusions for this level are being finalised. <span class="pending">Awaiting client confirmation</span></div>
-    <a class="btn ${t.featured ? 'btn-primary' : 'btn-ghost'}" href="#quote" data-quote data-service="${esc(s.option)}" data-tier="${t.name} ${what} Program">Get a Quote</a>
+    <a class="btn ${t.featured ? 'btn-primary' : 'btn-ghost'}" href="#quote" data-quote-modal data-service="${esc(s.option)}" data-tier="${t.name} ${what} Program">Get a Quote</a>
   </article>`).join('');
   const scope = (isLawn ? TIER_SCOPE.lawn : TIER_SCOPE.garden).map((x) => `<li>${icon('check')}${x}</li>`).join('');
   return `<section class="tiers-wrap" aria-labelledby="tiers-${kind}">
@@ -274,7 +272,7 @@ export function faqBlock(items, { heading = 'Frequently asked questions', id = '
 export function ctaBand({ heading = 'Want results like these?', text = 'Get a free quote for your lawn or garden, or give us a call.', service = '' } = {}) {
   return `<section class="cta-band"><div class="wrap">
     <div><h2>${heading}</h2><p>${text}</p></div>
-    <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote${service ? ` data-service="${esc(service)}"` : ''}>Get a Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
+    <div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote-modal${service ? ` data-service="${esc(service)}"` : ''}>Get a Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}${SITE.phone}</a></div>
   </div></section>`;
 }
 
@@ -290,7 +288,7 @@ export function pageHero({ trail, h1, lead, img, cta = true, service = '', bylin
     ${crumbs(trail)}
     <h1>${h1}</h1>
     ${lead ? `<p class="lead">${lead}</p>` : ''}
-    ${cta ? `<div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote${service ? ` data-service="${esc(service)}"` : ''}>Get a Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}Call ${SITE.phone}</a></div>` : ''}
+    ${cta ? `<div class="btn-row"><a class="btn btn-primary" href="#quote" data-quote-modal${service ? ` data-service="${esc(service)}"` : ''}>Get a Quote</a><a class="btn btn-outline-light" href="${SITE.phoneHref}" data-track="call">${icon('phone')}Call ${SITE.phone}</a></div>` : ''}
     ${byline ? `<p class="byline">${icon('cap')}Written by ${SITE.founder}, qualified horticulturalist and founder of The Mowersaurus</p>` : ''}
   </div>
   <div class="hero-edge">${grassEdge('#fff')}</div>
@@ -383,7 +381,6 @@ export function businessSchema() {
     additionalType: ['https://en.wikipedia.org/wiki/Lawn', 'https://en.wikipedia.org/wiki/Landscaping'],
     '@id': `${SITE.url}/#business`,
     name: SITE.name,
-    legalName: SITE.legalName,
     taxID: `ABN ${SITE.abn}`,
     description: "Horticulturalist-run lawn care and garden maintenance programs (Good, Great & Amazing) for residential and commercial properties across Melbourne's north east.",
     url: `${SITE.url}/`,
@@ -416,4 +413,49 @@ export function faqSchema(items) {
 }
 export function breadcrumbSchema(trail) {
   return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: trail.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, item: `${SITE.url}${t.href}` })) };
+}
+
+// ------------------------------------------------------------------ highlight reel
+// Poster image paints first (LCP); site.js then attaches the right-sized silent loop and
+// autoplays it while on screen. Skipped for reduced motion and Save-Data.
+export function reelMedia({ eager = false, alt = 'The Mowersaurus team mowing, edging and hedge trimming on local jobs' } = {}) {
+  const p = REEL.poster;
+  return `<img class="reel-poster" src="${p[1280]}" srcset="${p[640]} 640w, ${p[1280]} 1280w" sizes="100vw" width="1280" height="720" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+    <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-reel-video
+      data-720-webm="${REEL.loop[720].webm}" data-720-mp4="${REEL.loop[720].mp4}" data-360-webm="${REEL.loop[360].webm}" data-360-mp4="${REEL.loop[360].mp4}"></video>`;
+}
+export const reelSoundButton = (cls = 'btn-light') =>
+  `<button type="button" class="btn ${cls}" data-video-lightbox="${REEL.full.mp4}" data-video-webm="${REEL.full.webm}" data-caption="${esc(REEL.name)}">${icon('play')}Watch with sound</button>`;
+export function reelSchema() {
+  return { '@context': 'https://schema.org', '@type': 'VideoObject', name: REEL.name, description: REEL.description,
+    thumbnailUrl: [`${SITE.url}${REEL.poster[1280]}`], uploadDate: REEL.uploadDate, duration: REEL.duration,
+    contentUrl: `${SITE.url}${REEL.full.mp4}`, publisher: { '@id': `${SITE.url}/#business` } };
+}
+
+// ------------------------------------------------------------------ quote pop-up
+// One per page, opened by the header / hero "Get a Quote" buttons. Same fields as the
+// in-page form, so the GHL tracking script captures it the same way.
+export function quoteModal() {
+  return `<dialog class="quote-modal" id="quote-modal" aria-labelledby="mq-title">
+  <button type="button" class="qm-close" data-close-modal aria-label="Close">×</button>
+  ${quoteForm({ title: 'Get a free quote', idPrefix: 'mq', formId: 'quote-form-modal' }).replace('<h2>', '<h2 id="mq-title">')}
+</dialog>`;
+}
+
+// Map + suburb list side by side. The list is kept in sync with the map by site.js:
+// each suburb highlights (and scrolls into view) as the mower reaches it.
+export function areaPanel({ listHeading = 'Every suburb we service' } = {}) {
+  const items = SUBURBS.map((s, i) => `<li data-name="${s.name}" class="${s.base ? 'base' : ''}${i < 4 ? ' prio' : ''}" tabindex="0">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="name">${s.page ? `<a href="${s.page}">${s.name}</a>` : s.name}</span>
+      ${s.base ? '<span class="tag">Home base</span>' : i < 4 ? '<span class="tag prio">Priority</span>' : ''}
+    </li>`).join('');
+  return `<div class="area-section" data-area-section>
+    <div class="area-col-map">${areaMap()}</div>
+    <div class="area-col-list">
+      <h3 class="area-list-h">${listHeading}</h3>
+      <ol class="area-list" data-area-list aria-label="Suburbs we service">${items}</ol>
+      <p class="note area-list-note">Each suburb lights up as the mower reaches it. Click one to find it on the map.</p>
+    </div>
+  </div>`;
 }
