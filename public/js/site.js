@@ -121,12 +121,19 @@
       var fields = $$('input[required],select[required]', form);
       var bad = fields.filter(function (f) { return !validate(f); });
       if (bad.length) { bad[0].focus(); return; }
-      if (form.querySelector('input[name="website"]').value) return; // honeypot
+      if (form.querySelector('input[name="_hp_url"]').value) return; // honeypot
       var btn = form.querySelector('button[type="submit"]');
       btn.disabled = true; btn.textContent = 'Sending…';
-      // The GHL external tracking script listens for this submit event and captures the
-      // fields. Give its request a moment to leave before moving to the thank-you page.
-      setTimeout(function () { window.location.href = '/thank-you/'; }, 900);
+      // Post to Sales Brain (it puts the lead into the CRM), then go to the thank-you page.
+      // On a network error, fall back to a normal post, which redirects there itself.
+      var first = (form.querySelector('input[name="full_name"]').value || '').trim().split(/\s+/)[0] || '';
+      try { sessionStorage.setItem('lead_name', first); } catch (err) { /* private mode */ }
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+        .then(function (r) {
+          if (!r.ok) throw new Error('lead ' + r.status);
+          window.location.href = '/thank-you/' + (first ? '?name=' + encodeURIComponent(first) : '');
+        })
+        .catch(function () { HTMLFormElement.prototype.submit.call(form); });
     });
   });
 

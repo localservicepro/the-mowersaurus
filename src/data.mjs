@@ -20,7 +20,6 @@ export const SITE = {
   instagram: 'https://www.instagram.com/the_mowersaurus/',
   // Google Business Profile, from the CID in the supplied map embed (0x1f581ba04b608a80).
   gbp: 'https://maps.google.com/?cid=2258585588399639168',
-  trackingId: 'tk_19d668aabd334c46b09cdc8c3191e2a6',
 };
 
 // Service Needed dropdown — this exact list and order.

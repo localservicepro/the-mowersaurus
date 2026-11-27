@@ -1,18 +1,11 @@
 import { SITE } from './data.mjs';
 import { header, footer, quoteModal, esc, businessSchema, breadcrumbSchema } from './ui.mjs';
 
-// The GHL tracking snippet, exactly as supplied by the client. Placed at the end of <body>
-// so it doesn't block rendering; it captures form submissions the same way from there.
-const TRACKING = `<script
-  src="https://link.msgsndr.com/js/external-tracking.js"
-  data-tracking-id="tk_19d668aabd334c46b09cdc8c3191e2a6">
-</script>`;
-
 export function layout({ path, title, description, body, schema = [], trail, noindex = false, ogImage, preload = '' }) {
   const canonical = `${SITE.url}${path}`;
   const og = ogImage ? `${SITE.url}${ogImage}` : `${SITE.url}/img/brand/og-image.jpg`;
   const graphs = [businessSchema(), ...(trail ? [breadcrumbSchema(trail)] : []), ...schema];
-  return `<!doctype html>
+  return (`<!doctype html>
 <html lang="en-AU">
 <head>
 <meta charset="utf-8">
@@ -51,8 +44,7 @@ ${body}
 ${footer()}
 ${quoteModal()}
 <script src="/js/site.js" defer></script>
-${TRACKING}
 </body>
 </html>
-`;
+`).replaceAll('__SOURCE_PAGE__', esc(path));
 }

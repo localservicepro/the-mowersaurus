@@ -5,7 +5,12 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
 
 (async () => {
   const b = await chromium.launch();
-  const block = (p) => p.route(/^https?:\/\/(?!localhost)/, (r) => r.abort());
+  // Leads post to Sales Brain: answer that endpoint locally, block every other external request.
+  const leads = [];
+  const block = async (p) => {
+    await p.route(/^https?:\/\/(?!localhost)/, (r) => r.abort());
+    await p.route('https://app.salesbrain.com.au/api/lead/**', (r) => { leads.push(r.request().postData() || ''); r.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }); });
+  };
 
   // ---------- desktop
   const d = await b.newPage({ viewport: { width: 1440, height: 900 } }); await block(d);
@@ -46,13 +51,14 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   await d.selectOption('#quote-form [name=service_needed]', { label: 'Lawn Mowing & Overgrown Lawn Cuts' });
   await d.fill('#quote-form [name=job_notes]', 'Browser test');
   const names = await d.$$eval('#quote-form [name]', (els) => els.map((e) => e.name));
-  ok('GHL field names present', ['full_name', 'email', 'phone', 'property_address', 'property_size', 'service_needed', 'job_notes'].every((n) => names.includes(n)), names.join(','));
+  ok('Quote field names present', ['source_page', 'redirect', '_hp_url', 'full_name', 'email', 'phone', 'property_address', 'property_size', 'service_needed', 'job_notes'].every((n) => names.includes(n)), names.join(','));
   let submitEvent = false;
   await d.exposeFunction('__sub', () => { submitEvent = true; });
   await d.evaluate(() => document.querySelector('#quote-form').addEventListener('submit', () => window.__sub()));
-  await Promise.all([d.waitForURL('**/thank-you/', { timeout: 5000 }), d.click('#quote-form button[type=submit]')]);
-  ok('Valid submit fires submit event (for tracking script)', submitEvent);
-  ok('Valid submit redirects to /thank-you/', d.url().endsWith('/thank-you/'));
+  await Promise.all([d.waitForURL('**/thank-you/?name=Test', { timeout: 5000 }), d.click('#quote-form button[type=submit]')]);
+  ok('Valid submit fires submit event', submitEvent);
+  ok('Valid submit posts the lead to Sales Brain once', leads.length === 1 && leads[0].includes('name="full_name"'));
+  ok('Valid submit redirects to /thank-you/', d.url().includes('/thank-you/'));
   ok('Thank-you page is noindex', (await d.$eval('meta[name=robots]', (m) => m.content)).includes('noindex'));
 
   // quote pop-up (header + hero buttons)
@@ -70,8 +76,8 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   ok('Pop-up pre-selects the page service', (await d.$eval('#quote-form-modal select', (s) => s.value)) === 'Lawn Renovation & Aeration');
   await d.fill('#quote-form-modal [name=full_name]', 'Test'); await d.fill('#quote-form-modal [name=phone]', '0400000000');
   await d.fill('#quote-form-modal [name=email]', 't@example.com'); await d.fill('#quote-form-modal [name=property_address]', 'Eltham VIC');
-  await Promise.all([d.waitForURL('**/thank-you/', { timeout: 5000 }), d.click('#quote-form-modal button[type=submit]')]);
-  ok('Pop-up submit redirects to /thank-you/', d.url().endsWith('/thank-you/'));
+  await Promise.all([d.waitForURL('**/thank-you/?name=Test', { timeout: 5000 }), d.click('#quote-form-modal button[type=submit]')]);
+  ok('Pop-up submit redirects to /thank-you/', d.url().includes('/thank-you/'));
   // page-ready time: main thread must not be blocked by the map pre-computation
   await d.goto(BASE + '/');
   const dcl = await d.evaluate(() => Math.round(performance.getEntriesByType('navigation')[0].domContentLoadedEventEnd));

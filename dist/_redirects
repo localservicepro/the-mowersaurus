@@ -1,0 +1,24 @@
+# Old Wix URLs → new pages (301)
+/home  /  301
+/home/  /  301
+/copy-of-lawn-mowing  /  301
+/copy-of-lawn-mowing/  /  301
+/copy-of-pressure-washing-x-window-was-1  /  301
+/copy-of-pressure-washing-x-window-was-1/  /  301
+/copy-of-pressure-washing-x-window-was  /  301
+/copy-of-pressure-washing-x-window-was/  /  301
+/hedging  /gardening/  301
+/hedging/  /gardening/  301
+/gardening-x-landscaping  /gardening/  301
+/gardening-x-landscaping/  /gardening/  301
+/book-online  /contact/  301
+/book-online/  /contact/  301
+/service-page/quote-request  /contact/  301
+/service-page/quote-request/  /contact/  301
+/service-page/*  /contact/  301
+/inquiry-services-page  /contact/  301
+/inquiry-services-page/  /contact/  301
+/terms-conditions  /privacy-policy/  301
+/terms-conditions/  /privacy-policy/  301
+/blank  /  301
+/blank/  /  301
