@@ -332,13 +332,28 @@ function privacy() {
   const body = `
 ${pageHero({ trail, h1: 'Privacy Policy', lead: 'How The Mowersaurus collects and uses your information.', cta: false, byline: false })}
 <section class="section"><div class="wrap prose">
-<p class="pending">Draft for client review</p>
-<p>The Mowersaurus (ABN ${SITE.abn}) respects your privacy. This policy explains what information we collect through this website and how we use it.</p>
-<h2>What we collect</h2><p>When you request a quote, we collect the details you enter: your name, email address, phone number, property address, property size, the service you need and any job notes.</p>
-<h2>How we use it</h2><p>We use your details only to respond to your enquiry, prepare a quote and book and carry out work. We don't sell your information.</p>
-<h2>Website analytics &amp; tracking</h2><p>This website uses a tracking script from our customer-management platform to record enquiries and understand how visitors use the site. It may use cookies.</p>
-<h2>Photos of our work</h2><p>Project photos on this site are labelled by service and suburb only. We don't publish client names, street addresses or house numbers.</p>
-<h2>Access &amp; contact</h2><p>To ask about, update or delete the information we hold about you, email <a href="mailto:${SITE.email}">${SITE.email}</a> or call ${SITE.phone}.</p>
+<p><em>Last updated: November 2026</em></p>
+<p>The Mowersaurus (ABN ${SITE.abn}) is a lawn and garden maintenance business based in Watsonia North, Victoria. We respect your privacy and handle your personal information in line with the Australian Privacy Principles under the Privacy Act 1988 (Cth). This policy explains what we collect through this website and how we use it.</p>
+<h2>What we collect</h2>
+<p>When you request a quote or contact us, we collect the details you provide: your name, email address, phone number, property address, approximate property size, the service you need and any notes about the job.</p>
+<p>When you browse the site, we also collect standard technical information such as your IP address, browser type, device, the pages you visit and how you arrived at the site.</p>
+<h2>How we use your information</h2>
+<p>We use your details to respond to your enquiry, prepare a quote, schedule and carry out work, send invoices and reminders, and follow up on jobs. We may also use them to let you know about seasonal services you've asked about. We don't sell or rent your information to anyone.</p>
+<h2>Who we share it with</h2>
+<p>Your details are stored in our customer-management and booking platform, which processes them on our behalf. We only share information with service providers we need to run the business (such as our CRM, email and payment providers) and where the law requires it. We don't share your details with third parties for their own marketing.</p>
+<h2>Cookies, analytics &amp; tracking</h2>
+<p>This website uses a tracking script from our customer-management platform to record enquiries, remember form details and understand how visitors use the site. It may set cookies in your browser. You can block or delete cookies in your browser settings; the site will still work, although some forms may not pre-fill.</p>
+<p>The Contact page embeds a Google map, which is subject to <a href="https://policies.google.com/privacy" rel="noopener" target="_blank">Google's privacy policy</a>.</p>
+<h2>Photos of our work</h2>
+<p>Project photos on this site show real Mowersaurus jobs. We label them by service and suburb only and never publish client names, street addresses or house numbers. If a photo of your property appears on the site and you'd like it removed, contact us and we'll take it down.</p>
+<h2>How we keep it secure</h2>
+<p>This site is served over HTTPS. Your details are held in password-protected systems with access limited to the people who need them to do their job. We keep your information only as long as we need it to provide our services and meet our legal and tax obligations.</p>
+<h2>Access, correction &amp; deletion</h2>
+<p>You can ask to see, correct or delete the personal information we hold about you at any time. Email <a href="mailto:${SITE.email}">${SITE.email}</a> or call ${SITE.phone} and we'll respond within a reasonable time.</p>
+<h2>Complaints</h2>
+<p>If you have a concern about how we've handled your information, contact us first using the details above and we'll do our best to resolve it. If you're not satisfied, you can lodge a complaint with the Office of the Australian Information Commissioner at <a href="https://www.oaic.gov.au" rel="noopener" target="_blank">oaic.gov.au</a>.</p>
+<h2>Changes to this policy</h2>
+<p>We may update this policy from time to time. The latest version will always be published on this page with the date it was last updated.</p>
 </div></section>`;
   return { path: '/privacy-policy/', title: 'Privacy Policy | The Mowersaurus', description: 'How The Mowersaurus collects, uses and protects the information you provide through our website.', body, trail };
 }
