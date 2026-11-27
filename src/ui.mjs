@@ -18,6 +18,7 @@ const P = {
   pin: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   shield: '<path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/>',
+  camera: '<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
   cap: '<path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/>',
   check: '<path d="m5 12 4.5 4.5L19 7"/>',
   star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/>',
@@ -188,6 +189,13 @@ export function quoteForm({ preselect = '', title = 'Get a free quote', idPrefix
     <div class="field"><label for="${f('size')}">Property size</label><input id="${f('size')}" name="property_size" placeholder="e.g. 350 m² or quarter-acre"></div>
     <div class="field"><label for="${f('svc')}">Service needed <span class="req">*</span></label><select id="${f('svc')}" name="service_needed" required><option value=""${preselect ? '' : ' selected'} disabled>Choose a service</option>${opts}</select><p class="err">Please choose a service.</p></div>
     <div class="field full"><label for="${f('notes')}">Job notes</label><textarea id="${f('notes')}" name="job_notes" placeholder="Anything we should know: lawn type, access, how often, what's bugging you about the yard…"></textarea></div>
+    <div class="field full photo-field" data-photos>
+      <label for="${f('photos')}">Photos of the job <span class="opt">(optional)</span></label>
+      <input id="${f('photos')}" name="photos" type="file" accept="image/*" multiple>
+      <label class="photo-drop" for="${f('photos')}">${icon('camera')}<span><strong>Add photos</strong> of the lawn or garden so we can quote more accurately.<br><small>Up to 6 photos, 10 MB each.</small></span></label>
+      <ul class="photo-list" aria-live="polite"></ul>
+      <p class="err"></p>
+    </div>
     <div class="hp" aria-hidden="true"><label for="${f('hp')}">Leave this empty</label><input id="${f('hp')}" name="_hp_url" tabindex="-1" autocomplete="off"></div>
     <div class="full"><button class="btn btn-primary" type="submit">Request my free quote</button></div>
     <p class="form-foot full">${icon('shield')}<span>We only use your details to quote and book your job. See our <a href="/privacy-policy/">privacy policy</a>.</span></p>

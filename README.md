@@ -50,6 +50,8 @@ Kept at the same path: `/lawn-mowing`, `/types-of-turf`, `/weed-control`, `/fert
 
 Two forms share the same GHL field names: the in-page form (`#quote`, on every page) and a pop-up (`#quote-modal`) opened by every "Get a Quote" button on the site: header, hero, tier cards, CTA bands and service-page heroes (on phones the header keeps a call icon and the quote button at every width; there is no sticky bottom bar). Buttons with a `data-service` / `data-tier` pre-fill the pop-up; otherwise it picks up whatever the in-page form has chosen. Both post (`multipart/form-data`, hidden `source_page` and `redirect`, honeypot `_hp_url`) to the Sales Brain lead endpoint (`LEAD_ACTION` in `src/ui.mjs`), which puts each lead into the client's CRM. With JS the form is sent with `fetch` and the visitor goes to `/thank-you/?name=<first name>`; without JS (or on a network error) the plain post redirects there. The CRM's external tracking script was removed (November 2026): leads reach the CRM once, through Sales Brain.
 
+**Photos of the job (optional):** both forms take up to 6 photos (10 MB each) with thumbnails, remove buttons and drag-and-drop. They are sent as `photos` file parts of the same multipart post to Sales Brain (both with `fetch` and on the plain-post fallback), so Sales Brain needs to accept a repeated `photos` file field for them to reach the CRM.
+
 ## Highlight reel
 
 `public/video/` holds the client-supplied 22-second reel, configured as `REEL` in `src/data.mjs`. House numbers visible at 0:15–0:21 are blurred.

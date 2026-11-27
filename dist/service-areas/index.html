@@ -225,6 +225,13 @@
     <div class="field"><label for="q-size">Property size</label><input id="q-size" name="property_size" placeholder="e.g. 350 m² or quarter-acre"></div>
     <div class="field"><label for="q-svc">Service needed <span class="req">*</span></label><select id="q-svc" name="service_needed" required><option value="" selected disabled>Choose a service</option><option>Lawn Care Programs (Good, Great &amp; Amazing)</option><option>Lawn Mowing &amp; Overgrown Lawn Cuts</option><option>Garden Tidy-Ups &amp; General Gardening</option><option>Garden Maintenance Programs</option><option>Mulching &amp; Small Landscaping</option><option>Lawn Renovation &amp; Aeration</option><option>Other</option></select><p class="err">Please choose a service.</p></div>
     <div class="field full"><label for="q-notes">Job notes</label><textarea id="q-notes" name="job_notes" placeholder="Anything we should know: lawn type, access, how often, what's bugging you about the yard…"></textarea></div>
+    <div class="field full photo-field" data-photos>
+      <label for="q-photos">Photos of the job <span class="opt">(optional)</span></label>
+      <input id="q-photos" name="photos" type="file" accept="image/*" multiple>
+      <label class="photo-drop" for="q-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span><strong>Add photos</strong> of the lawn or garden so we can quote more accurately.<br><small>Up to 6 photos, 10 MB each.</small></span></label>
+      <ul class="photo-list" aria-live="polite"></ul>
+      <p class="err"></p>
+    </div>
     <div class="hp" aria-hidden="true"><label for="q-hp">Leave this empty</label><input id="q-hp" name="_hp_url" tabindex="-1" autocomplete="off"></div>
     <div class="full"><button class="btn btn-primary" type="submit">Request my free quote</button></div>
     <p class="form-foot full"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>We only use your details to quote and book your job. See our <a href="/privacy-policy/">privacy policy</a>.</span></p>
@@ -288,6 +295,13 @@
     <div class="field"><label for="mq-size">Property size</label><input id="mq-size" name="property_size" placeholder="e.g. 350 m² or quarter-acre"></div>
     <div class="field"><label for="mq-svc">Service needed <span class="req">*</span></label><select id="mq-svc" name="service_needed" required><option value="" selected disabled>Choose a service</option><option>Lawn Care Programs (Good, Great &amp; Amazing)</option><option>Lawn Mowing &amp; Overgrown Lawn Cuts</option><option>Garden Tidy-Ups &amp; General Gardening</option><option>Garden Maintenance Programs</option><option>Mulching &amp; Small Landscaping</option><option>Lawn Renovation &amp; Aeration</option><option>Other</option></select><p class="err">Please choose a service.</p></div>
     <div class="field full"><label for="mq-notes">Job notes</label><textarea id="mq-notes" name="job_notes" placeholder="Anything we should know: lawn type, access, how often, what's bugging you about the yard…"></textarea></div>
+    <div class="field full photo-field" data-photos>
+      <label for="mq-photos">Photos of the job <span class="opt">(optional)</span></label>
+      <input id="mq-photos" name="photos" type="file" accept="image/*" multiple>
+      <label class="photo-drop" for="mq-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span><strong>Add photos</strong> of the lawn or garden so we can quote more accurately.<br><small>Up to 6 photos, 10 MB each.</small></span></label>
+      <ul class="photo-list" aria-live="polite"></ul>
+      <p class="err"></p>
+    </div>
     <div class="hp" aria-hidden="true"><label for="mq-hp">Leave this empty</label><input id="mq-hp" name="_hp_url" tabindex="-1" autocomplete="off"></div>
     <div class="full"><button class="btn btn-primary" type="submit">Request my free quote</button></div>
     <p class="form-foot full"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>We only use your details to quote and book your job. See our <a href="/privacy-policy/">privacy policy</a>.</span></p>

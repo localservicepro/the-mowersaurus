@@ -116,6 +116,7 @@
       f.addEventListener('blur', function () { if (f.value) validate(f); });
       f.addEventListener('change', function () { validate(f); });
     });
+    var photos = setupPhotos(form);
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var fields = $$('input[required],select[required]', form);
@@ -128,7 +129,9 @@
       // On a network error, fall back to a normal post, which redirects there itself.
       var first = (form.querySelector('input[name="full_name"]').value || '').trim().split(/\s+/)[0] || '';
       try { sessionStorage.setItem('lead_name', first); } catch (err) { /* private mode */ }
-      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+      var fd = new FormData(form); fd.delete('photos');
+      photos.files.forEach(function (f) { fd.append('photos', f, f.name); });
+      fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } })
         .then(function (r) {
           if (!r.ok) throw new Error('lead ' + r.status);
           window.location.href = '/thank-you/' + (first ? '?name=' + encodeURIComponent(first) : '');
@@ -136,6 +139,50 @@
         .catch(function () { HTMLFormElement.prototype.submit.call(form); });
     });
   });
+
+  function setupPhotos(form) {
+    var state = { files: [] };
+    var box = form.querySelector('[data-photos]');
+    if (!box) return state;
+    var input = box.querySelector('input[type=file]');
+    var list = box.querySelector('.photo-list');
+    var err = box.querySelector('.err');
+    var MAX = 6, MAX_MB = 10;
+    var fail = function (msg) { err.textContent = msg; box.classList.toggle('invalid', !!msg); };
+    var render = function () {
+      list.innerHTML = '';
+      state.files.forEach(function (f, i) {
+        var li = document.createElement('li');
+        var img = document.createElement('img'); img.alt = f.name; img.src = URL.createObjectURL(f);
+        img.onload = function () { URL.revokeObjectURL(img.src); };
+        var rm = document.createElement('button'); rm.type = 'button'; rm.setAttribute('aria-label', 'Remove ' + f.name); rm.textContent = '×';
+        rm.addEventListener('click', function () { state.files.splice(i, 1); render(); sync(); fail(''); });
+        li.appendChild(img); li.appendChild(rm); list.appendChild(li);
+      });
+    };
+    var add = function (fileList) {
+      var msg = '';
+      Array.prototype.forEach.call(fileList, function (f) {
+        if (!/^image\//.test(f.type)) { msg = 'Only photos (JPG, PNG, HEIC) can be attached.'; return; }
+        if (f.size > MAX_MB * 1024 * 1024) { msg = f.name + ' is over ' + MAX_MB + ' MB.'; return; }
+        if (state.files.length >= MAX) { msg = 'You can attach up to ' + MAX + ' photos.'; return; }
+        if (state.files.some(function (x) { return x.name === f.name && x.size === f.size; })) return;
+        state.files.push(f);
+      });
+      fail(msg); render();
+    };
+    // Keep the real input in sync so a plain (no-fetch) post carries the photos too.
+    var sync = function () {
+      try { var dt = new DataTransfer(); state.files.forEach(function (f) { dt.items.add(f); }); input.files = dt.files; } catch (e) { /* old browsers */ }
+    };
+    input.addEventListener('change', function () { add(input.files); sync(); });
+    ['dragenter', 'dragover'].forEach(function (ev) { box.addEventListener(ev, function (e) { e.preventDefault(); box.classList.add('drag'); }); });
+    ['dragleave', 'drop'].forEach(function (ev) { box.addEventListener(ev, function (e) { e.preventDefault(); box.classList.remove('drag'); }); });
+    box.addEventListener('drop', function (e) { if (e.dataTransfer && e.dataTransfer.files) { add(e.dataTransfer.files); sync(); } });
+    form.addEventListener('reset', function () { state.files = []; render(); fail(''); });
+    return state;
+  }
+
 
   /* ---------------- before / after sliders ---------------- */
   $$('.ba-frame').forEach(function (f) {
