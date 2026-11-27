@@ -90,6 +90,7 @@
     var pageSel = mainForm && mainForm.querySelector('select[name="service_needed"]');
     preselect(modalForm, service || (pageSel && pageSel.value) || '', tier);
     modal.showModal();
+    if (modalForm.__steps) modalForm.__steps.reset();
     var first = modalForm.querySelector('input[name="full_name"]');
     if (first && window.matchMedia('(min-width: 600px)').matches) first.focus();
   };
@@ -117,11 +118,12 @@
       f.addEventListener('change', function () { validate(f); });
     });
     var photos = setupPhotos(form);
+    var stepper = setupSteps(form, validate);
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var fields = $$('input[required],select[required]', form);
       var bad = fields.filter(function (f) { return !validate(f); });
-      if (bad.length) { bad[0].focus(); return; }
+      if (bad.length) { stepper.reveal(bad[0]); bad[0].focus(); return; }
       if (form.querySelector('input[name="_hp_url"]').value) return; // honeypot
       var btn = form.querySelector('button[type="submit"]');
       btn.disabled = true; btn.textContent = 'Sending…';
@@ -139,6 +141,50 @@
         .catch(function () { HTMLFormElement.prototype.submit.call(form); });
     });
   });
+
+  // One step at a time for the pop-up on phones; everything at once elsewhere.
+  function setupSteps(form, validate) {
+    var steps = $$('.step', form);
+    var dots = $$('.qf-steps li', form);
+    var back = form.querySelector('.qf-back'), next = form.querySelector('.qf-next'), submit = form.querySelector('.qf-submit');
+    var api = { reveal: function () {}, reset: function () {} };
+    if (!steps.length || !back || !next) return api;
+    var inModal = !!form.closest('.quote-modal');
+    var mq = window.matchMedia('(max-width: 600px)');
+    var idx = 0;
+    var stepped = function () { return inModal && mq.matches; };
+    var show = function (i, focus) {
+      idx = Math.max(0, Math.min(steps.length - 1, i));
+      steps.forEach(function (s, k) { s.classList.toggle('on', k === idx); });
+      dots.forEach(function (d, k) { d.classList.toggle('on', k === idx); d.classList.toggle('done', k < idx); });
+      var last = idx === steps.length - 1;
+      back.hidden = idx === 0; next.hidden = last; submit.hidden = !last;
+      var body = form.querySelector('.qf-body'); if (body) body.scrollTop = 0;
+      if (focus) { var f = steps[idx].querySelector('input:not([type=file]),select,textarea'); if (f) f.focus({ preventScroll: true }); }
+    };
+    var apply = function () {
+      var on = stepped();
+      form.classList.toggle('stepped', on);
+      if (on) show(idx, false);
+      else { steps.forEach(function (s) { s.classList.add('on'); }); back.hidden = true; next.hidden = true; submit.hidden = false; }
+    };
+    next.addEventListener('click', function () {
+      var bad = $$('input[required],select[required]', steps[idx]).filter(function (f) { return !validate(f); });
+      if (bad.length) { bad[0].focus(); return; }
+      show(idx + 1, true);
+    });
+    back.addEventListener('click', function () { show(idx - 1, true); });
+    if (mq.addEventListener) mq.addEventListener('change', apply); else mq.addListener(apply);
+    form.addEventListener('reset', function () { idx = 0; apply(); });
+    api.reveal = function (field) {
+      if (!stepped()) return;
+      for (var k = 0; k < steps.length; k++) { if (steps[k].contains(field)) { show(k, false); return; } }
+    };
+    api.reset = function () { idx = 0; apply(); };
+    apply();
+    form.__steps = api;
+    return api;
+  }
 
   function setupPhotos(form) {
     var state = { files: [] };

@@ -176,6 +176,27 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   await m.tap('.nav-actions [data-quote-modal]');
   await m.waitForTimeout(600);
   ok('Mobile header quote button opens pop-up', await m.$eval('#quote-modal', (x) => x.open));
+  // stepped pop-up on phones: one step at a time, no scrolling, buttons on screen
+  ok('Mobile pop-up is stepped, step 1 visible only', await m.evaluate(() => { const f = document.querySelector('#quote-form-modal'); const on = [...f.querySelectorAll('.step')].map((s) => getComputedStyle(s).display !== 'none'); return f.classList.contains('stepped') && on.join() === 'true,false,false'; }));
+  ok('Mobile step 1 shows Next, hides submit', await m.evaluate(() => { const f = document.querySelector('#quote-form-modal'); return !f.querySelector('.qf-next').hidden && f.querySelector('.qf-submit').hidden && f.querySelector('.qf-back').hidden; }));
+  await m.tap('#quote-form-modal .qf-next'); await m.waitForTimeout(200);
+  ok('Mobile Next blocked until step 1 is valid', await m.evaluate(() => document.querySelector('#quote-form-modal .step[data-step="1"]').classList.contains('on') && document.querySelectorAll('#quote-form-modal .step[data-step="1"] .field.invalid').length >= 2));
+  await m.fill('#quote-form-modal [name=full_name]', 'Test Person'); await m.fill('#quote-form-modal [name=phone]', '0400000000'); await m.fill('#quote-form-modal [name=email]', 't@example.com');
+  await m.tap('#quote-form-modal .qf-next'); await m.waitForTimeout(200);
+  ok('Mobile advances to step 2', await m.evaluate(() => document.querySelector('#quote-form-modal .step[data-step="2"]').classList.contains('on') && !document.querySelector('#quote-form-modal .qf-back').hidden));
+  await m.fill('#quote-form-modal [name=property_address]', 'Eltham VIC'); await m.selectOption('#quote-form-modal select', { index: 1 });
+  await m.tap('#quote-form-modal .qf-next'); await m.waitForTimeout(200);
+  ok('Mobile step 3 shows submit, fits on screen', await m.evaluate(() => { const f = document.querySelector('#quote-form-modal'); const card = f.closest('.quote-card'); const b = f.querySelector('.qf-submit').getBoundingClientRect(); return !f.querySelector('.qf-submit').hidden && b.bottom <= innerHeight && card.scrollHeight <= card.clientHeight + 1; }));
+  await Promise.all([m.waitForURL('**/thank-you/?name=Test', { timeout: 8000 }), m.tap('#quote-form-modal .qf-submit')]);
+  ok('Mobile stepped submit reaches thank-you', m.url().includes('/thank-you/'));
   await mc.close();
+  // desktop pop-up fits without scrolling on common laptop heights
+  for (const h of [900, 768, 650]) {
+    const p = await b.newPage({ viewport: { width: 1366, height: h } }); await block(p);
+    await p.goto(BASE + '/'); await p.click('.nav-actions [data-quote-modal]'); await p.waitForTimeout(400);
+    const fit = await p.$eval('#quote-modal .quote-card', (c) => ({ sh: c.scrollHeight, ch: c.clientHeight, all: [...c.querySelectorAll('.step')].every((s) => getComputedStyle(s).display !== 'none') }));
+    ok(`Desktop pop-up fits without scroll at ${h}px tall (all steps shown)`, fit.sh <= fit.ch && fit.all, JSON.stringify(fit));
+    await p.close();
+  }
   await b.close();
 })();
