@@ -182,23 +182,36 @@ export function quoteForm({ preselect = '', title = 'Get a free quote', idPrefix
   <form class="qf" id="${formId}" action="${LEAD_ACTION}" method="post" enctype="multipart/form-data" novalidate data-quote-form>
     <input type="hidden" name="source_page" value="__SOURCE_PAGE__">
     <input type="hidden" name="redirect" value="${SITE.url}/thank-you/">
-    <div class="field"><label for="${f('name')}">Name <span class="req">*</span></label><input id="${f('name')}" name="full_name" autocomplete="name" required><p class="err">Please enter your name.</p></div>
-    <div class="field"><label for="${f('phone')}">Phone <span class="req">*</span></label><input id="${f('phone')}" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="[0-9 +()-]{8,}"><p class="err">Please enter a phone number we can call.</p></div>
-    <div class="field full"><label for="${f('email')}">Email <span class="req">*</span></label><input id="${f('email')}" name="email" type="email" autocomplete="email" required><p class="err">Please enter a valid email.</p></div>
-    <div class="field full"><label for="${f('addr')}">Property address <span class="req">*</span></label><input id="${f('addr')}" name="property_address" autocomplete="street-address" required><p class="err">We need the suburb at least, to check it's in our area.</p></div>
-    <div class="field"><label for="${f('size')}">Property size</label><input id="${f('size')}" name="property_size" placeholder="e.g. 350 m² or quarter-acre"></div>
-    <div class="field"><label for="${f('svc')}">Service needed <span class="req">*</span></label><select id="${f('svc')}" name="service_needed" required><option value=""${preselect ? '' : ' selected'} disabled>Choose a service</option>${opts}</select><p class="err">Please choose a service.</p></div>
-    <div class="field full"><label for="${f('notes')}">Job notes</label><textarea id="${f('notes')}" name="job_notes" placeholder="Anything we should know: lawn type, access, how often, what's bugging you about the yard…"></textarea></div>
-    <div class="field full photo-field" data-photos>
-      <label for="${f('photos')}">Photos of the job <span class="opt">(optional)</span></label>
-      <input id="${f('photos')}" name="photos" type="file" accept="image/*" multiple>
-      <label class="photo-drop" for="${f('photos')}">${icon('camera')}<span><strong>Add photos</strong> of the lawn or garden so we can quote more accurately.<br><small>Up to 6 photos, 10 MB each.</small></span></label>
-      <ul class="photo-list" aria-live="polite"></ul>
-      <p class="err"></p>
+    <ol class="qf-steps" aria-label="Form progress"><li class="on">About you</li><li>Your property</li><li>The job</li></ol>
+    <div class="qf-body">
+    <div class="step on" data-step="1">
+      <div class="field"><label for="${f('name')}">Name <span class="req">*</span></label><input id="${f('name')}" name="full_name" autocomplete="name" required><p class="err">Please enter your name.</p></div>
+      <div class="field"><label for="${f('phone')}">Phone <span class="req">*</span></label><input id="${f('phone')}" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="[0-9 +()-]{8,}"><p class="err">Please enter a phone number we can call.</p></div>
+      <div class="field full"><label for="${f('email')}">Email <span class="req">*</span></label><input id="${f('email')}" name="email" type="email" autocomplete="email" required><p class="err">Please enter a valid email.</p></div>
+    </div>
+    <div class="step" data-step="2">
+      <div class="field full"><label for="${f('addr')}">Property address <span class="req">*</span></label><input id="${f('addr')}" name="property_address" autocomplete="street-address" required><p class="err">We need the suburb at least, to check it's in our area.</p></div>
+      <div class="field"><label for="${f('size')}">Property size</label><input id="${f('size')}" name="property_size" placeholder="e.g. 350 m² or quarter-acre"></div>
+      <div class="field"><label for="${f('svc')}">Service needed <span class="req">*</span></label><select id="${f('svc')}" name="service_needed" required><option value=""${preselect ? '' : ' selected'} disabled>Choose a service</option>${opts}</select><p class="err">Please choose a service.</p></div>
+    </div>
+    <div class="step" data-step="3">
+      <div class="field full"><label for="${f('notes')}">Job notes</label><textarea id="${f('notes')}" name="job_notes" rows="3" placeholder="Anything we should know: lawn type, access, how often, what's bugging you about the yard…"></textarea></div>
+      <div class="field full photo-field" data-photos>
+        <label for="${f('photos')}">Photos of the job <span class="opt">(optional)</span></label>
+        <input id="${f('photos')}" name="photos" type="file" accept="image/*" multiple>
+        <label class="photo-drop" for="${f('photos')}">${icon('camera')}<span><strong>Add photos</strong> of the lawn or garden so we can quote more accurately. <small>Up to 6, 10 MB each.</small></span></label>
+        <ul class="photo-list" aria-live="polite"></ul>
+        <p class="err"></p>
+      </div>
+    </div>
     </div>
     <div class="hp" aria-hidden="true"><label for="${f('hp')}">Leave this empty</label><input id="${f('hp')}" name="_hp_url" tabindex="-1" autocomplete="off"></div>
-    <div class="full"><button class="btn btn-primary" type="submit">Request my free quote</button></div>
-    <p class="form-foot full">${icon('shield')}<span>We only use your details to quote and book your job. See our <a href="/privacy-policy/">privacy policy</a>.</span></p>
+    <div class="qf-nav">
+      <button type="button" class="btn btn-ghost qf-back" hidden>Back</button>
+      <button type="button" class="btn btn-primary qf-next" hidden>Next</button>
+      <button class="btn btn-primary qf-submit" type="submit">Request my free quote</button>
+    </div>
+    <p class="form-foot">${icon('shield')}<span>We only use your details to quote and book your job. See our <a href="/privacy-policy/">privacy policy</a>.</span></p>
   </form>
 </div>`;
 }
