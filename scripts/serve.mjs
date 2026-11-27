@@ -14,6 +14,14 @@ const rules = readFileSync(join(ROOT, '_redirects'), 'utf8').split('\n')
 createServer((req, res) => {
   const url = new URL(req.url, 'http://x');
   const path = decodeURIComponent(url.pathname);
+  if (path === '/api/quote') { // stand-in for the Vercel function: echoes how many photos arrived
+    let raw = ''; req.on('data', (c) => { raw += c; });
+    req.on('end', () => {
+      let n = 0; try { n = (JSON.parse(raw || '{}').photos || []).length; } catch { /* ignore */ }
+      res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ ok: true, forwarded: false, photos: n }));
+    });
+    return;
+  }
   for (const [from, to, code] of rules) {
     const hit = from.endsWith('/*') ? path.startsWith(from.slice(0, -1)) : path === from;
     if (hit) { res.writeHead(Number(code), { Location: to }); return res.end(); }

@@ -50,6 +50,8 @@ Kept at the same path: `/lawn-mowing`, `/types-of-turf`, `/weed-control`, `/fert
 
 Two forms share the same GHL field names: the in-page form (`#quote`, on every page) and a pop-up (`#quote-modal`) opened by every "Get a Quote" button on the site: header, hero, tier cards, CTA bands and service-page heroes (on phones the header keeps a call icon and the quote button at every width; there is no sticky bottom bar). Buttons with a `data-service` / `data-tier` pre-fill the pop-up; otherwise it picks up whatever the in-page form has chosen. Both redirect to `/thank-you/` on submit. The GHL tracking script sits at the end of `<body>` so it never blocks rendering.
 
+**Photos of the job (optional):** both forms take up to 6 photos (10 MB each) with thumbnails, remove buttons and drag-and-drop. The tracking script only captures text fields, so on submit the browser downscales each photo to a 1600 px JPEG and posts the whole submission as JSON to `/api/quote` (`api/quote.js`, a Vercel serverless function). That function forwards it to the URL in the `QUOTE_WEBHOOK_URL` environment variable (a GHL inbound-webhook trigger). **Until that variable is set in the Vercel project, photos are accepted but go nowhere**; the text fields still reach GHL through the tracking script. The payload fields are `full_name, email, phone, property_address, property_size, service_needed, job_notes, page, submitted_at, photo_count, photos[{name,type,data}]` where `data` is a JPEG data URL. `scripts/serve.mjs` stubs the endpoint locally.
+
 ## Highlight reel
 
 `public/video/` holds the client-supplied 22-second reel, configured as `REEL` in `src/data.mjs`. House numbers visible at 0:15–0:21 are blurred.

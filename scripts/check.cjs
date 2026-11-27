@@ -47,10 +47,28 @@ const ok = (name, cond, extra = '') => console.log(`${cond ? 'PASS' : 'FAIL'}  $
   await d.fill('#quote-form [name=job_notes]', 'Browser test');
   const names = await d.$$eval('#quote-form [name]', (els) => els.map((e) => e.name));
   ok('GHL field names present', ['full_name', 'email', 'phone', 'property_address', 'property_size', 'service_needed', 'job_notes'].every((n) => names.includes(n)), names.join(','));
+  // photos of the job
+  const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAD0lEQVQI12P4z8DwHwYZGAAt7gP9B7XDmgAAAABJRU5ErkJggg==', 'base64');
+  const mk = (n) => ({ name: 'job' + n + '.png', mimeType: 'image/png', buffer: png });
+  ok('Photo field present, accepts images, multiple', await d.$eval('#quote-form [data-photos] input[type=file]', (i) => i.accept === 'image/*' && i.multiple));
+  await d.setInputFiles('#quote-form [data-photos] input[type=file]', [mk(1), mk(2)]);
+  ok('Two photos show as thumbnails', (await d.$$('#quote-form .photo-list li')).length === 2);
+  await d.click('#quote-form .photo-list li:first-child button');
+  ok('Remove photo works', (await d.$$('#quote-form .photo-list li')).length === 1);
+  await d.setInputFiles('#quote-form [data-photos] input[type=file]', [3, 4, 5, 6, 7, 8].map(mk));
+  ok('Capped at 6 photos with message', (await d.$$('#quote-form .photo-list li')).length === 6 && (await d.$eval('#quote-form [data-photos] .err', (e) => e.textContent)).includes('up to 6'));
+  await d.setInputFiles('#quote-form [data-photos] input[type=file]', [{ name: 'big.jpg', mimeType: 'image/jpeg', buffer: Buffer.alloc(11 * 1024 * 1024) }]);
+  ok('Rejects photo over 10 MB', (await d.$eval('#quote-form [data-photos] .err', (e) => e.textContent)).includes('10 MB'));
   let submitEvent = false;
   await d.exposeFunction('__sub', () => { submitEvent = true; });
   await d.evaluate(() => document.querySelector('#quote-form').addEventListener('submit', () => window.__sub()));
-  await Promise.all([d.waitForURL('**/thank-you/', { timeout: 5000 }), d.click('#quote-form button[type=submit]')]);
+  const [apiReq] = await Promise.all([
+    d.waitForRequest((r) => r.url().endsWith('/api/quote'), { timeout: 8000 }),
+    d.waitForURL('**/thank-you/', { timeout: 20000 }),
+    d.click('#quote-form button[type=submit]'),
+  ]);
+  const sent = JSON.parse(apiReq.postData() || '{}');
+  ok('Submission posted to /api/quote with 6 JPEG photos + fields', sent.photos && sent.photos.length === 6 && sent.photos.every((p) => p.data.startsWith('data:image/jpeg')) && sent.fields.full_name === 'Test Person', JSON.stringify(Object.keys(sent)));
   ok('Valid submit fires submit event (for tracking script)', submitEvent);
   ok('Valid submit redirects to /thank-you/', d.url().endsWith('/thank-you/'));
   ok('Thank-you page is noindex', (await d.$eval('meta[name=robots]', (m) => m.content)).includes('noindex'));
